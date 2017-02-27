@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @problem.name %>
+</p>
+
+<p>
+  <strong>Basename:</strong>
+  <%= @problem.baseName %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @problem.color %>
+</p>
+
+<p>
+  <strong>Timelimit:</strong>
+  <%= @problem.timeLimit %>
+</p>
+
+<p>
+  <strong>Descriptionfile:</strong>
+  <%= @problem.descriptionFile %>
+</p>
+
+<p>
+  <strong>Inputfile:</strong>
+  <%= @problem.inputFile %>
+</p>
+
+<p>
+  <strong>Outputfile:</strong>
+  <%= @problem.outputFile %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @problem.language %>
+</p>
+
+<%= link_to 'Edit', edit_problem_path(@problem) %> |
+<%= link_to 'Back', problems_path %>

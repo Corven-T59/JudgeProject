@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Problems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Basename</th>
+      <th>Color</th>
+      <th>Timelimit</th>
+      <th>Descriptionfile</th>
+      <th>Inputfile</th>
+      <th>Outputfile</th>
+      <th>Language</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @problems.each do |problem| %>
+      <tr>
+        <td><%= problem.name %></td>
+        <td><%= problem.baseName %></td>
+        <td><%= problem.color %></td>
+        <td><%= problem.timeLimit %></td>
+        <td><%= problem.descriptionFile %></td>
+        <td><%= problem.inputFile %></td>
+        <td><%= problem.outputFile %></td>
+        <td><%= problem.language %></td>
+        <td><%= link_to 'Show', problem %></td>
+        <td><%= link_to 'Edit', edit_problem_path(problem) %></td>
+        <td><%= link_to 'Destroy', problem, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Problem', new_problem_path %>
