@@ -25,6 +25,9 @@ class ProblemsController < ApplicationController
   # POST /problems.json
   def create
     @problem = Problem.new(problem_params)
+    @problem.descriptionFile = params[:descriptionFile]
+    @problem.inputFile = params[:inputFile]
+    @problem.outputFile = params[:outputFile]
 
     respond_to do |format|
       if @problem.save
@@ -69,6 +72,6 @@ class ProblemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
-      params.require(:problem).permit(:name, :baseName, :color, :timeLimit, :descriptionFile, :inputFile, :outputFile, :language)
+      params.require(:problem).permit(:name, :baseName, :color, :timeLimit, {descriptionFile:[]}, {inputFile:[]}, {outputFile:[]}, :language)
     end
 end

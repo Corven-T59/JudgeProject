@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :executions, only: [:show, :index]
-  resources :solutions
-  resources :problems
+  authenticate :user do
+		resources :solutions, only: [:create, :new]
+		resources :problems, except: [:index, :show]
+  end
+  resources :solutions, only: [:index, :show]
+  resources :problems, only: [:index, :show]
+ 
   devise_for :users
   root 'welcome#index'
 

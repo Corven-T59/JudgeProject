@@ -1,4 +1,4 @@
-<%= form_for(problem) do |f| %>
+<%= form_for(problem, html: { multipart: true }) do |f| %>
   <% if problem.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
@@ -33,24 +33,23 @@
 
   <div class="field">
     <%= f.label :descriptionFile %>
-    <%= f.text_field :descriptionFile %>
+    <%= f.file_field :descriptionFile, multiple: true %>    
   </div>
 
   <div class="field">
     <%= f.label :inputFile %>
-    <%= f.text_field :inputFile %>
+    <%= f.file_field :inputFile, multiple: true %>
   </div>
 
   <div class="field">
     <%= f.label :outputFile %>
-    <%= f.text_field :outputFile %>
+    <%= f.file_field :outputFile, multiple: true %>
   </div>
 
   <div class="field">
     <%= f.label :language %>
     <%= f.text_field :language %>
   </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>
