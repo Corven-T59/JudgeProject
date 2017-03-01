@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= f.label :language %>
-    <%= f.text_field :language %>
+    <%= f.select :language, Solution.languages.keys %>
   </div>
 
   <div class="actions">
