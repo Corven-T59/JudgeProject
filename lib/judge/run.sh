@@ -108,7 +108,7 @@ C++)
 		echo "Compiling Error: $ret"
 		exit 1
 	else
-		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix"
+		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
                     ret=0
