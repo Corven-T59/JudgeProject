@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contests
   resources :executions, only: [:show, :index]
   authenticate :user do
 		resources :solutions, only: [:create, :new]
