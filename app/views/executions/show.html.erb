@@ -2,7 +2,7 @@
 
 <p>
   <strong>Solution:</strong>
-  <%= @execution.solution %>
+  <%= @execution.solution.id %>
 </p>
 
 <p>
@@ -15,5 +15,5 @@
   <%= @execution.runTime %>
 </p>
 
-<%= link_to 'Edit', edit_execution_path(@execution) %> |
+
 <%= link_to 'Back', executions_path %>
