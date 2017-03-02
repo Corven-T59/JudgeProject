@@ -2,12 +2,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @solution.user %>
+  <%= @solution.user.email %>
 </p>
 
 <p>
   <strong>Problem:</strong>
-  <%= @solution.problem %>
+  <%= @solution.problem.name %>
 </p>
 
 <p>
@@ -20,5 +20,4 @@
   <%= @solution.language %>
 </p>
 
-<%= link_to 'Edit', edit_solution_path(@solution) %> |
 <%= link_to 'Back', solutions_path %>

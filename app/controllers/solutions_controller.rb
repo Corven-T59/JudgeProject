@@ -24,7 +24,8 @@ class SolutionsController < ApplicationController
   # POST /solutions
   # POST /solutions.json
   def create
-    @solution = Solution.new(solution_params)
+    #@solution = Solution.new(solution_params)
+    @solution = current_user.solutions.create(solution_params)
 
     respond_to do |format|
       if @solution.save
@@ -69,6 +70,6 @@ class SolutionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def solution_params
-      params.require(:solution).permit(:user_id, :problem_id, :solutionFile, :language)
+      params.require(:solution).permit(:problem_id, :solutionFile, :language)
     end
 end
