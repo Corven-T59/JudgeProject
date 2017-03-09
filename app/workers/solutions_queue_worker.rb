@@ -10,7 +10,7 @@ require "open3"
 #                                  last line of standard output to the judge
 class SolutionsQueueWorker
   include Sidekiq::Worker
-
+  sidekiq_options retry: 0
   def perform(solution_id)
     begin
       solution = Solution.includes(:problem).find(solution_id)
@@ -38,14 +38,11 @@ class SolutionsQueueWorker
       cmd = "sudo #{run_sh} #{basename} #{source_code} #{input} C++ '#{name}' #{time_limit}"
       puts cmd
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
-        puts "\n\n\n stdout:\n"
-        puts stdout.gets
-        puts "\n\n\n stderr:\n"
-        puts stderr.gets
-        puts "\n\n\n exit:\n"
+        puts stderr.read
+        puts "exit of wait_thr:\n"
         puts wait_thr.value
       end
-
     end
+    return true;
   end
 end

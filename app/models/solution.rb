@@ -1,5 +1,5 @@
 class Solution < ApplicationRecord
-  after_save :run_async
+  after_create :run_async
 
   belongs_to :user
   belongs_to :problem
