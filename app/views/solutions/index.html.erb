@@ -9,6 +9,7 @@
       <th>Problem</th>
       <th>Solutionfile</th>
       <th>Language</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= solution.problem.name %></td>
         <td><%= solution.solutionFile %></td>
         <td><%= solution.language %></td>
+        <td><%= solution.execution.status if solution.execution%></td>
         <td><%= link_to 'Show', solution %></td>
         
       </tr>

@@ -38,11 +38,17 @@ class SolutionsQueueWorker
       cmd = "sudo #{run_sh} #{basename} #{source_code} #{input} C++ '#{name}' #{time_limit}"
       puts cmd
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
-        puts stderr.read
-        puts "exit of wait_thr:\n"
-        puts wait_thr.value
+        team_solution = stdout.read()
+        exit_code = wait_thr.value.exitstatus
+        puts "Exit code is: " + exit_code.to_s
+        if(exit_code != 0)
+          execution = solution.build_execution(status: exit_code, runTime: 0)
+          execution.save
+          puts "Execution saved"
+        end
+        # If the solution doesnt have an error still be wrong answer
+        File.open("Solution_id_#{solution.id}", 'w') { |file| file.write(team_solution) }
       end
     end
-    return true;
   end
 end
