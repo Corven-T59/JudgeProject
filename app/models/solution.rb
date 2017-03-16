@@ -1,4 +1,6 @@
 class Solution < ApplicationRecord
+  after_create :run_async
+
   belongs_to :user
   belongs_to :problem
   has_one :execution
@@ -6,4 +8,8 @@ class Solution < ApplicationRecord
   enum language: [:c, :cpp, :csharp, :py, :rb]
 
   mount_uploader :solutionFile, SolutionUploader
+
+  def run_async
+    SolutionsQueueWorker.perform_async(self.id)
+  end
 end
