@@ -21,9 +21,9 @@
     <%= f.text_area :description %>
   </div>
 
-  <div class="field">
+ <div class="field">
     <%= f.label :difficulty %>
-    <%= f.number_field :difficulty %>
+    <%= f.select :difficulty, Contest.difficulties.keys %>
   </div>
 
   <div class="field">
@@ -36,6 +36,11 @@
     <%= f.datetime_select :endDate %>
   </div>
   
+ 
+  <div class="field">
+    <%= collection_check_boxes(:contest, :problem_ids, Problem.all, :id, :name) %>
+  </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

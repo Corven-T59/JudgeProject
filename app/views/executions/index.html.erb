@@ -19,8 +19,6 @@
         <td><%= execution.status %></td>
         <td><%= execution.runTime %></td>
         <td><%= link_to 'Show', execution %></td>
-        <td><%= link_to 'Edit', edit_execution_path(execution) %></td>
-        <td><%= link_to 'Destroy', execution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Execution', new_execution_path %>
+

@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   before_action :set_problem, only: [:show, :edit, :update, :destroy]
-
+  before_action :is_admin, except: [:show, :index]
   # GET /problems
   # GET /problems.json
   def index
@@ -71,4 +71,5 @@ class ProblemsController < ApplicationController
     def problem_params
       params.require(:problem).permit(:name, :baseName, :color, :timeLimit, :descriptionFile, :inputFile, :outputFile, :language)
     end
+
 end
