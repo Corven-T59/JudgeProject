@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe]
+  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe]
   # GET /contests
   # GET /contests.json
   def index
@@ -15,6 +15,7 @@ class ContestsController < ApplicationController
   # GET /contests/new
   def new
     @contest = Contest.new
+    @problems = Problem.all
   end
 
   # GET /contests/1/edit
@@ -62,6 +63,40 @@ class ContestsController < ApplicationController
     end
   end
 
+  def subscribe
+    if @contest.users.exists? current_user
+      respond_to do |format|
+          format.html { redirect_to @contest, alert: 'Already subscribed to contest' }
+          format.json { render json: @contest.errors, status: :unprocessable_entity }
+      end
+
+    else
+      @contest.users << current_user
+
+      respond_to do |format|
+        format.html { redirect_to @contest, notice: 'Subscribed to contest successfully.' }
+        format.json { render :show, status: :ok, location: @contest }
+      end
+    end
+
+  end
+
+  def unsubscribe
+    if @contest.users.exists? current_user
+      @contest.users.delete(current_user)
+      respond_to do |format|
+        format.html { redirect_to @contest, notice: 'Unsubscribed to contest successfully.' }
+        format.json { render :show, status: :ok, location: @contest }
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to @contest, alert: 'You are not subscribed to this contest' }
+          format.json { render json: @contest.errors, status: :unprocessable_entity }
+      end
+      
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contest
@@ -70,6 +105,6 @@ class ContestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
-      params.require(:contest).permit(:title, :description, :difficulty, :startDate, :endDate, problems:[])
+      params.require(:contest).permit(:title, :description, :difficulty, :startDate, :endDate, problem_ids:[])
     end
 end
