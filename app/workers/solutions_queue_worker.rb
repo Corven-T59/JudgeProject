@@ -20,12 +20,31 @@ class SolutionsQueueWorker
       run_sh = File.join(project_directory,"lib","judge","run.sh")
       compare_sh = File.join(project_directory,"lib","judge","compare.sh")
       path_temp = "/tmp/solution_#{solution_id}"
-      cp = %x(which cp) || "/bin/cp"
-      basename = problem.baseName
       source_code = File.join(project_directory,"public",solution.solutionFile.url)
-      input = File.join(project_directory,"public",problem.inputFile.url)
+      input_file = File.join(project_directory,"public",problem.inputFile.url)
+      output_file = File.join(project_directory,"public",problem.outputFile.url)
+      setup_command = <<END
+        mkdir #{path_temp}
+        cp #{source_code} #{path_temp}
+        cp #{input_file} #{path_temp}
+        cp #{output_file} #{path_temp}
+END
+
+      res = system(setup_command)
+      if !res
+        execution = solution.build_execution(status: 1, runTime: 0)
+        execution.save
+        return;
+      end
+
+      source_code = File.join(path_temp,solution.solutionFile.sanitized_file.original_filename)
+      input_file= File.join(path_temp,problem.inputFile.sanitized_file.original_filename)
+      output_file = File.join(path_temp,problem.outputFile.sanitized_file.original_filename)
+      team_solution_name = "team_solution.txt"
+      basename = problem.baseName
       name = problem.name
       time_limit = problem.timeLimit
+      lang_name = "C++"
 
       # parameters are:
       # $1 base_filename
@@ -35,7 +54,13 @@ class SolutionsQueueWorker
       # $5 problemname
       # $6 timelimit
 
-      cmd = "sudo #{run_sh} #{basename} #{source_code} #{input} C++ '#{name}' #{time_limit}"
+      cmd =<<END
+      cd #{path_temp}
+      dos2unix #{source_code}
+      dos2unix #{input_file}
+      dos2unix #{output_file}
+      #{run_sh} #{basename} #{source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}
+END
       puts cmd
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         team_solution = stdout.read()
@@ -45,9 +70,20 @@ class SolutionsQueueWorker
           execution = solution.build_execution(status: exit_code, runTime: 0)
           execution.save
           puts "Execution saved"
+          return;
         end
-        # If the solution doesnt have an error still be wrong answer
-        File.open("Solution_id_#{solution.id}", 'w') { |file| file.write(team_solution) }
+        File.open(File.join(path_temp,team_solution_name), 'w') { |file| file.write(team_solution) }
+        compare =<<END
+        cd #{path_temp}
+        #{compare_sh} #{team_solution_name} #{output_file} #{lang_name}
+END
+        Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
+          puts stdout.read()
+          exit_code = wait_thr.value.exitstatus
+          execution = solution.build_execution(status: exit_code, runTime: 0)
+          execution.save
+          puts "Execution saved"
+        end
       end
     end
   end
