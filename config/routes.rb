@@ -5,12 +5,16 @@ Rails.application.routes.draw do
     resources :contests, except: [:index, :show] do
       post 'subscribe', on: :member
       post 'unsubscribe', on: :member
+      get 'submit', on: :member
+      resources :solutions, only: [:create, :new]
     end
-		resources :solutions, only: [:create, :new]
+		
 		resources :problems, except: [:index, :show]
     
   end
-  resources :contests, only: [:index, :show]
+  resources :contests, only: [:index, :show] do
+    resources :solutions, only: [:index, :show]
+  end
   resources :solutions, only: [:index, :show]
   resources :problems, only: [:index, :show]
   resources :executions, only: [:show, :index]
