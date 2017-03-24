@@ -1,5 +1,5 @@
-<%= form_for(solution) do |f| %>
-  <% if solution.errors.any? %>
+<%= form_for([@contest,solution]) do |f| %>
+    <% if solution.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(solution.errors.count, "error") %> prohibited this solution from being saved:</h2>
 
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :problem_id %>
-    <%= f.collection_select :problem_id, problems, :id, :name %>
+    <%= f.collection_select :problem_id, Problem.all, :id, :name %>
     
   </div>
 

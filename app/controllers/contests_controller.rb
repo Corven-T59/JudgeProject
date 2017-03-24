@@ -66,7 +66,7 @@ class ContestsController < ApplicationController
   end
 
   def submit
-    @solution = @contest.solutions.build(user: current_user)
+    @solution = Solution.new()
     @problems = @contest.problems
   end
 
