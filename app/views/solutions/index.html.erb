@@ -21,7 +21,7 @@
         <td><%= solution.problem.name %></td>
         <td><%= solution.solutionFile %></td>
         <td><%= solution.language %></td>
-        <td><%= solution.execution.status if solution.execution%></td>
+        <td><%= code_to_string(solution.execution.status) if solution.execution%></td>
         <td><%= link_to 'Show', solution %></td>
         
       </tr>
