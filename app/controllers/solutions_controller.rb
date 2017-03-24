@@ -1,6 +1,6 @@
 class SolutionsController < ApplicationController
   before_action :set_solution, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_contest
   # GET /solutions
   # GET /solutions.json
   def index
@@ -25,11 +25,12 @@ class SolutionsController < ApplicationController
   # POST /solutions.json
   def create
     #@solution = Solution.new(solution_params)
-    @solution = current_user.solutions.build(solution_params)
-
+    @solution = Solution.new(solution_params)
+    @solution.contest = @contest
+    @solution.user = current_user
     respond_to do |format|
       if @solution.save
-        format.html { redirect_to @solution, notice: 'Solution was successfully created.' }
+        format.html { redirect_to [@contest, @solution], notice: 'Solution was successfully created.' }
         format.json { render :show, status: :created, location: @solution }
       else
         format.html { render :new }
@@ -68,8 +69,11 @@ class SolutionsController < ApplicationController
       @solution = Solution.find(params[:id])
     end
 
+    def set_contest
+      @contest = Contest.find(params[:contest_id])
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def solution_params
-      params.require(:solution).permit(:problem_id, :solutionFile, :language)
+      params.require(:solution).permit(:problem_id, :contest_id, :solutionFile, :language)
     end
 end

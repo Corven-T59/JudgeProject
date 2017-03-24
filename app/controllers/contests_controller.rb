@@ -1,6 +1,8 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe]
-  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe]
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit]
+  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit]
+  before_action :is_subscribed, only: [:submit]
+  
   # GET /contests
   # GET /contests.json
   def index
@@ -63,6 +65,11 @@ class ContestsController < ApplicationController
     end
   end
 
+  def submit
+    @solution = Solution.new()
+    @problems = @contest.problems
+  end
+
   def subscribe
     if @contest.users.exists? current_user
       respond_to do |format|
@@ -106,5 +113,11 @@ class ContestsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
       params.require(:contest).permit(:title, :description, :difficulty, :startDate, :endDate, problem_ids:[])
+    end
+
+    def is_subscribed
+      if !@contest.users.exists? current_user
+        redirect_to contest_path, id: @contest_id, :alert => "You are not subscribed to this contest"
+      end
     end
 end
