@@ -4,7 +4,7 @@ class SolutionsController < ApplicationController
   # GET /solutions
   # GET /solutions.json
   def index
-    @solutions = Solution.includes(:execution).all
+    @solutions = @contest.solutions.includes(:execution, :problem, :user).all
   end
 
   # GET /solutions/1
