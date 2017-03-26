@@ -1,6 +1,7 @@
 class SolutionsController < ApplicationController
   before_action :set_solution, only: [:show, :edit, :update, :destroy]
   before_action :set_contest
+  before_action :authenticate_user!, only: [:create, :new]
   # GET /solutions
   # GET /solutions.json
   def index
@@ -18,13 +19,12 @@ class SolutionsController < ApplicationController
   end
 
   # GET /solutions/1/edit
-  def edit
-  end
+  #def edit
+  #end
 
   # POST /solutions
   # POST /solutions.json
   def create
-    #@solution = Solution.new(solution_params)
     @solution = Solution.new(solution_params)
     @solution.contest = @contest
     @solution.user = current_user

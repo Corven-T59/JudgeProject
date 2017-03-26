@@ -123,12 +123,13 @@ cpp)
 	fi
 	;;
 csharp)
-	$mcs -o "$prefix" "$name"
+	$mcs -out:"$prefix" "$name"
 	ret=$?
 	if [ "$ret" != "0" ]; then
 		echo "C# Compiling Error: $ret"
 		exit 1
 	else
+	    echo $sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002 >&2
 		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
