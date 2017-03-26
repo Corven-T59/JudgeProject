@@ -69,14 +69,11 @@ END
 
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_code = wait_thr.value.exitstatus
-        puts "Exit code is: " + exit_code.to_s
-
         exit_code = 2 if exit_code.to_i == 47
 
         if exit_code != 0
           execution = solution.build_execution(status: exit_code, runTime: 0)
           execution.save
-          puts "Execution saved"
           return;
         end
         team_solution = stdout.read
@@ -90,7 +87,6 @@ END
           exit_code = wait_thr.value.exitstatus
           execution = solution.build_execution(status: exit_code, runTime: 0)
           execution.save
-          puts "Execution saved"
         end
       end
     end
