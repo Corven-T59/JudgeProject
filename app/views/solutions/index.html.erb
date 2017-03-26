@@ -22,7 +22,7 @@
         <td><%= solution.solutionFile %></td>
         <td><%= solution.language %></td>
         <td><%= code_to_string(solution.execution.status) if solution.execution%></td>
-        <td><%= link_to 'Show', solution %></td>
+        <td><%= link_to 'Show', [@contest, solution] %></td>
         
       </tr>
     <% end %>

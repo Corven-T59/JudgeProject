@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit]
-  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit]
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard]
+  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard]
   before_action :is_subscribed, only: [:submit]
   
   # GET /contests
@@ -65,6 +65,9 @@ class ContestsController < ApplicationController
     end
   end
 
+  def scoreboard
+    @solutions = @contest.solutions.group(:user_id).count()
+  end
   def submit
     @solution = Solution.new()
     @problems = @contest.problems
@@ -107,7 +110,7 @@ class ContestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contest
-      @contest = Contest.find(params[:id])
+      @contest = Contest.includes(:solutions).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

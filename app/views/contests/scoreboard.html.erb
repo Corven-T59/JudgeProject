@@ -1,0 +1,22 @@
+
+<h1>Scoreboard</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+     
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @solutions.each do |solution| %>
+      <tr>
+        <td><%= solution %></td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
