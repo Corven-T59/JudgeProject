@@ -34,7 +34,6 @@
 
 umask 0022
 chown nobody.nogroup .
-
 export CLASSPATH=.:$CLASSPATH
 
 # this script makes use of safeexec to execute the code with less privilegies
@@ -49,8 +48,16 @@ java=`which java`
 [ -x "$java" ] || java=/usr/java/bin/java
 javac=`which javac`
 [ -x "$javac" ] || javac=/usr/java/bin/javac
-pascal=`which fpc`
-[ -x "$pascal" ] || pascal=/usr/bin/fpc
+mcs=`which mcs`
+[ -x "$mcs" ] || mcs=/usr/bin/mcs
+mono=`which mono`
+[ -x "$mono" ] || javac=/usr/bin/mono
+#ruby=`which ruby`
+[ -x "$ruby" ] || ruby=/usr/bin/ruby
+python=`which python`
+[ -x "$python" ] || python=/usr/bin/python
+python3=`which python3`
+[ -x "$python3" ] || python3=/usr/bin/python
 grep=`which grep`
 [ -x "$grep" ] || grep=/bin/grep
 
@@ -87,75 +94,88 @@ let ttime=$time+30
 # choose the compiler according to the language
 # note that languages should spelling the same as inside BOCA
 case "$4" in
-C)
+c)
 	$gcc -lm -o "$prefix" "$name"
 	ret=$?
 	if [ "$ret" != "0" ]; then
-		echo "Compiling Error: $ret"
+		echo "C Compiling Error: $ret"
 		exit 1
 	else
-		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix"
+		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
                     ret=0
 		fi
 	fi
 	;;
-C++)
+cpp)
 	$gpp -lm -o "$prefix" "$name"
 	ret=$?
 	if [ "$ret" != "0" ]; then
-		echo "Compiling Error: $ret"
+		echo "C++ Compiling Error: $ret"
 		exit 1
 	else
-		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix"
+		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
-                    ret=0
+            ret=0
 		fi
 	fi
 	;;
-Pascal)
-	$pascal -o"$prefix" "$name" >compiler.out 2>compiler.out
-        $grep -irq linking compiler.out
+csharp)
+	$mcs -o "$prefix" "$name"
 	ret=$?
-        $grep -irq "lines compiled" compiler.out
-	ret2=$?
-	if [ "$ret" != "0" -o "$ret2" != "0" ]; then
-		cat compiler.out
-		echo "Compiling Error: $ret"
+	if [ "$ret" != "0" ]; then
+		echo "C# Compiling Error: $ret"
 		exit 1
 	else
-		$sf -F10 -t$time -T$ttime -i$input -opascal.out -n0 -R. "./$prefix"
+		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
-                if [ -f pascal.out ]; then
- 	          cat pascal.out
-                  $grep -irq "runtime error" pascal.out
-                  ret2=$?
-		  if [ "$ret2" = "0" ]; then
-			echo "Strange output - possible runtime error"
-			if [ $ret -lt 4 ]; then
-				ret=48
-			fi
-                  fi
+		if [ $ret -gt 3 ]; then
+            ret=0
 		fi
 	fi
 	;;
-Java)
+java)
 	$javac "$name"
 	ret=$?
 	if [ "$ret" != "0" ]; then
-		echo "Compiling Error: $ret"
+		echo "Java Compiling Error: $ret"
 		exit 1
 	else
-		$sf -u10 -F30 -t$time -T$ttime -i$input -n0 -R. $java "$prefix"
+		$sf -u10 -F30 -t$time -T$ttime -i$input -n0 -R. $java "$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
-		    echo "Nonzero return code - possible runtime error"
+		    echo "Nonzero return code - possible runtime error on java"
 		    ret=47
 		fi
 	fi
 	;;
+rb)
+    $sf -F30 -t$time -T$ttime -i$input -n0 $ruby "$name" -U 1002 -G 1002
+    ret=$?
+    if [ $ret -gt 3 ]; then
+        echo "Nonzero return code - possible runtime error on Ruby: "$?
+
+        ret=47
+    fi
+    ;;
+py2)
+    $sf -F30 -t$time -T$ttime -i$input -n0 $python "$name" -U 1002 -G 1002
+    ret=$?
+    if [ $ret -gt 3 ]; then
+        echo "Nonzero return code - possible runtime error on Python2: "$?
+        ret=47
+    fi
+    ;;
+py3)
+    $sf -F30 -t$time -T$ttime -i$input -n0 $python3 "$name" -U 1002 -G 1002
+    ret=$?
+    if [ $ret -gt 3 ]; then
+        echo "Nonzero return code - possible runtime error on Python3: "$?
+        ret=47
+    fi
+    ;;
 *)
 	echo "Language not recognized"
 	exit 42

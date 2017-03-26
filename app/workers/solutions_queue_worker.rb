@@ -19,7 +19,9 @@ class SolutionsQueueWorker
       project_directory = %x(pwd).chomp
       run_sh = File.join(project_directory,"lib","judge","run.sh")
       compare_sh = File.join(project_directory,"lib","judge","compare.sh")
+      sf = File.join(project_directory,"lib","judge","safeexec")
       path_temp = "/tmp/solution_#{solution_id}"
+      team_solution_file = "team_solution.txt"
       source_code = File.join(project_directory,"public",solution.solutionFile.url)
       input_file = File.join(project_directory,"public",problem.inputFile.url)
       output_file = File.join(project_directory,"public",problem.outputFile.url)
@@ -28,23 +30,28 @@ class SolutionsQueueWorker
         cp #{source_code} #{path_temp}
         cp #{input_file} #{path_temp}
         cp #{output_file} #{path_temp}
+        cp #{run_sh} #{path_temp}
+        cp #{compare_sh} #{path_temp}
+        touch #{File.join(path_temp,team_solution_file)}
+        cp #{sf} #{path_temp}
 END
-
+      #run_sh = File.join(path_temp,"run.sh")
+      #compare_sh = File.join(path_temp,"compare.sh")
       res = system(setup_command)
-      if !res
+      unless res
         execution = solution.build_execution(status: 1, runTime: 0)
         execution.save
-        return;
+        return
       end
 
       source_code = File.join(path_temp,solution.solutionFile.sanitized_file.original_filename)
       input_file= File.join(path_temp,problem.inputFile.sanitized_file.original_filename)
       output_file = File.join(path_temp,problem.outputFile.sanitized_file.original_filename)
-      team_solution_name = "team_solution.txt"
+
       basename = problem.baseName
       name = problem.name
       time_limit = problem.timeLimit
-      lang_name = "C++"
+      lang_name = solution.language
 
       # parameters are:
       # $1 base_filename
@@ -56,29 +63,32 @@ END
 
       cmd =<<END
       cd #{path_temp}
-      dos2unix #{source_code}
+      # dos2unix #{source_code}
       dos2unix #{input_file}
       dos2unix #{output_file}
-      #{run_sh} #{basename} #{source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}
+      sudo #{run_sh} #{basename} #{source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}
 END
-      puts cmd
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
-        team_solution = stdout.read()
         exit_code = wait_thr.value.exitstatus
         puts "Exit code is: " + exit_code.to_s
-        if(exit_code != 0)
+        puts stderr.read
+        puts stdout.read
+        exit_code = 2 if exit_code.to_i == 47
+
+
+        if exit_code != 0
           execution = solution.build_execution(status: exit_code, runTime: 0)
           execution.save
           puts "Execution saved"
           return;
         end
-        File.open(File.join(path_temp,team_solution_name), 'w') { |file| file.write(team_solution) }
+        team_solution = stdout.read
+        File.open(File.join(path_temp,team_solution_file), 'w') { |file| file.write(team_solution) }
         compare =<<END
         cd #{path_temp}
-        #{compare_sh} #{team_solution_name} #{output_file} #{lang_name}
+        #{compare_sh} #{team_solution_file} #{output_file} #{lang_name}
 END
         Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
-          puts stdout.read()
           exit_code = wait_thr.value.exitstatus
           execution = solution.build_execution(status: exit_code, runTime: 0)
           execution.save
