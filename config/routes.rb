@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   
 
   authenticate :user do
-
     resources :contests, except: [:index, :show] do
       post 'subscribe', on: :member
       post 'unsubscribe', on: :member
