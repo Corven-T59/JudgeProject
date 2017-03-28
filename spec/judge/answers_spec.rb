@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  ["cpp", "java", "ruby", "python", "python3"].each do |lang|
+  ["cpp", "java", "ruby", "python", "python3", "csharp"].each do |lang|
     describe "Programming languages" do
       context lang.capitalize do
         it "Creates a execution result" do
