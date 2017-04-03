@@ -1,8 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  ["cpp", "java", "ruby", "python", "python3", "csharp"].each do |lang|
-    describe "Programming languages" do
+  #["cpp", "java", "ruby", "python", "python3", "csharp"].each do |lang|
+    ["ruby", "csharp"].each do |lang|
+      describe "Programming languages" do
       context lang.capitalize do
         it "Creates a execution result" do
           Sidekiq::Testing.inline!
@@ -22,7 +23,7 @@ RSpec.describe Solution, type: :model do
           expect(Execution.last.status.to_i>5).to be_truthy
         end
         unless ["ruby", "python", "python3"].include?(lang) then
-          it "Creates a execution result: #{lang}  CE" do
+          it "Creates a execution result: #{lang} CE" do
             Sidekiq::Testing.inline!
             @ce = FactoryGirl.create("#{lang}_ce".to_sym)
             expect(Execution.last.status.to_i).to eq(1)
@@ -41,4 +42,5 @@ RSpec.describe Solution, type: :model do
       end
     end
   end
+
 end

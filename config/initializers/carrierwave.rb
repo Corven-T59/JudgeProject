@@ -12,7 +12,7 @@ if Rails.env.test? || Rails.env.cucumber?
     next if klass.anonymous?
     klass.class_eval do
       def cache_dir
-        store_dir
+        "#{Rails.root}/spec/support/uploads/tmp"
       end
 
       def store_dir
