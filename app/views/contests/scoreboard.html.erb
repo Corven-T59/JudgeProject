@@ -5,7 +5,9 @@
   <thead>
     <tr>
       <th>User</th>
-     
+      <% @problems.each do |problem|%>
+        
+      <% end %>
     </tr>
   </thead>
 
@@ -14,8 +16,8 @@
       <tr>
         <td><%= solution %></td>
         
-      </tr>
     <% end %>
+    </tr>
   </tbody>
 </table>
 

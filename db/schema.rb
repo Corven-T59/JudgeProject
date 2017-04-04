@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323215131) do
+ActiveRecord::Schema.define(version: 20170404201603) do
 
   create_table "contests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",                     null: false
@@ -37,15 +37,6 @@ ActiveRecord::Schema.define(version: 20170323215131) do
     t.index ["user_id"], name: "index_contests_users_on_user_id", using: :btree
   end
 
-  create_table "executions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "solution_id", null: false
-    t.string   "status",      null: false
-    t.integer  "runTime",     null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["solution_id"], name: "index_executions_on_solution_id", using: :btree
-  end
-
   create_table "problems", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name",                               null: false
     t.string   "baseName",                           null: false
@@ -66,6 +57,8 @@ ActiveRecord::Schema.define(version: 20170323215131) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "contest_id"
+    t.integer  "status",       null: false
+    t.integer  "runtime",      null: false
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree
@@ -94,7 +87,6 @@ ActiveRecord::Schema.define(version: 20170323215131) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "executions", "solutions"
   add_foreign_key "solutions", "contests"
   add_foreign_key "solutions", "problems"
   add_foreign_key "solutions", "users"

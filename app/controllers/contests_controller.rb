@@ -66,7 +66,9 @@ class ContestsController < ApplicationController
   end
 
   def scoreboard
-    @solutions = @contest.solutions.group(:user_id).count()
+    @problems = @contest.problems
+    @users =  @contest.users.pluck(:id,:email)
+    @solutions = @contest.solutions.pluck(:user_id,:problem_id, :status, :created_at)
   end
   def submit
     @solution = Solution.new()
