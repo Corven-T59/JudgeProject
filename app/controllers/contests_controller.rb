@@ -68,7 +68,43 @@ class ContestsController < ApplicationController
   def scoreboard
     @problems = @contest.problems
     @users =  @contest.users.pluck(:id,:email)
-    @solutions = @contest.solutions.pluck(:user_id,:problem_id, :status, :created_at)
+    @solutions = @contest.solutions.order(user_id: :asc, problem_id: :asc).pluck(:user_id,:problem_id, :status, :created_at)
+
+    @scores = Hash.new
+    
+    submition_count = 0
+    accepted_count = 0
+    problems_sent = Hash.new
+    problems_accepted = Hash.new
+    total_temp = 300
+    time_temp = 20
+
+    #TODO order by users and then by problem
+    #this way you dont have to deal with existing data
+    solutions_size = @solutions.size
+    for i in 0..solutions_size - 1
+      solution = @solutions[i]
+
+      submition_count = submition_count + 1
+      if solution[2] == 4 #status
+        accepted_count = accepted_count + 1
+      end
+
+      if i + 1 == solutions_size || @solutions[i + 1][1] != solution[1] || @solutions[i + 1][0] != solution[0] #problem_id || user_id
+        problems_sent[solution[1]] = submition_count        
+        problems_accepted[solution[1]] = [accepted_count, time_temp]
+        accepted_count = 0
+        submition_count = 0
+      end
+
+      if i + 1 == solutions_size || @solutions[i + 1][0] != solution[0] #user_id
+        @scores[solution[0]] = [problems_sent, problems_accepted, total_temp]
+        problems_sent = Hash.new
+        problems_accepted = Hash.new
+      end
+
+    end 
+
   end
   def submit
     @solution = Solution.new()
