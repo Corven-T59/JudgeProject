@@ -2,7 +2,7 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard]
   before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard]
   before_action :is_subscribed, only: [:submit]
-  before_action :set_contest_state, except: [:scoreboard]
+  before_action :set_contest_state, except: [:index, :scoreboard]
 
   
   # GET /contests
