@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   authenticate :user do
     resources :contests, except: [:index, :show] do
       post 'subscribe', on: :member
-      post 'unsubscribe', on: :member
-      get 'scoreboard', on: :member
+      post 'unsubscribe', on: :member      
       get 'submit', on: :member
       resources :solutions, only: [:create, :new]
     end
@@ -15,7 +14,8 @@ Rails.application.routes.draw do
   end
   
   resources :contests, only: [:index, :show] do
-   resources :solutions, only: [:index, :show]
+    get 'scoreboard', on: :member
+    resources :solutions, only: [:index, :show]
   end
   resources :solutions, only: [:index, :show]
   resources :problems, only: [:index, :show]
