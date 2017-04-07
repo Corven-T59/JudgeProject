@@ -5,7 +5,9 @@
   <thead>
     <tr>
       <th>User</th>
-     
+      <% @problems.each do |problem|%>
+        
+      <% end %>
     </tr>
   </thead>
 
@@ -14,8 +16,14 @@
       <tr>
         <td><%= solution %></td>
         
-      </tr>
     <% end %>
+    </tr>
+    <% @scores.each do |key, array| %>
+      <tr>
+        <td><%= array %></td>
+        
+    <% end %>
+    </tr>
   </tbody>
 </table>
 

@@ -4,7 +4,6 @@ class Solution < ApplicationRecord
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  has_one :execution, dependent: :destroy
   enum language: [:c, :cpp, :java, :csharp, :rb, :py2, :py3]
 
   validates_presence_of :language, :solutionFile, :user, :problem, :contest

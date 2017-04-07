@@ -5,4 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable #, :confirmable
   has_many :solutions
   has_and_belongs_to_many :contests
+
+  def load_user_submition_count
+  	
+  end
+
 end

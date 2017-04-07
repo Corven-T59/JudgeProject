@@ -66,7 +66,59 @@ class ContestsController < ApplicationController
   end
 
   def scoreboard
-    @solutions = @contest.solutions.group(:user_id).count()
+    @problems = @contest.problems
+    @users =  @contest.users.pluck(:id,:email)
+    @solutions = @contest.solutions.order(user_id: :asc, problem_id: :asc, created_at: :asc).pluck(:user_id,:problem_id, :status, :created_at)
+
+    @scores = Hash.new
+    
+    submition_count = 0
+    accepted_count = 0
+    total_accepted_count = 0
+    problems_sent = Hash.new
+    problems_accepted = Hash.new
+
+    total_time_submit = 0
+    time_submition = -1
+
+    #TODO order by users and then by problem
+    #this way you dont have to deal with existing data
+    solutions_size = @solutions.size
+    for i in 0..solutions_size - 1
+      solution = @solutions[i]
+
+      submition_count = submition_count + 1
+      if solution[2] == 4 #status
+        accepted_count = accepted_count + 1        
+        if time_submition < 0
+          time_submition = solution[3] - @contest.startDate #created_at
+          total_time_submit = total_time_submit + time_submition
+          total_accepted_count = total_accepted_count + 1
+        end
+      end
+
+      if i + 1 == solutions_size || @solutions[i + 1][1] != solution[1] || @solutions[i + 1][0] != solution[0] #problem_id || user_id
+        problems_sent[solution[1]] = submition_count        
+        if time_submition < 0
+          time_submition = 0
+        end
+        problems_accepted[solution[1]] = [accepted_count, time_submition]
+        accepted_count = 0
+        submition_count = 0
+        time_submition = -1
+      end
+
+      if i + 1 == solutions_size || @solutions[i + 1][0] != solution[0] #user_id
+        @scores[solution[0]] = [problems_sent, problems_accepted, total_accepted_count, total_time_submit]
+        problems_sent = Hash.new
+        problems_accepted = Hash.new
+        total_time_submit = 0
+        total_accepted_count = 0
+      end
+
+    end 
+    @scores = @scores.sort_by{|k,v| [v[2] * -1,v[3]]} #v[2] OK count, V[3] time score
+
   end
   def submit
     @solution = Solution.new()

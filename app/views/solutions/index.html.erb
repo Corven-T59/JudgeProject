@@ -21,7 +21,7 @@
         <td><%= solution.problem.name %></td>
         <td><%= solution.solutionFile %></td>
         <td><%= solution.language %></td>
-        <td><%= code_to_string(solution.execution.status) if solution.execution%></td>
+        <td><%= code_to_string(solution.status) %></td>
         <td><%= link_to 'Show', [@contest, solution] %></td>
         
       </tr>
