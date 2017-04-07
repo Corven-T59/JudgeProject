@@ -51,7 +51,7 @@ javac=`which javac`
 mcs=`which mcs`
 [ -x "$mcs" ] || mcs=/usr/bin/mcs
 mono=`which mono`
-[ -x "$mono" ] || javac=/usr/bin/mono
+[ -x "$mono" ] || mono=/usr/bin/mono
 #ruby=`which ruby`
 [ -x "$ruby" ] || ruby=/usr/bin/ruby
 python=`which python`
@@ -104,7 +104,7 @@ c)
 		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
-                    ret=0
+            ret=0
 		fi
 	fi
 	;;
@@ -129,11 +129,11 @@ csharp)
 		echo "C# Compiling Error: $ret"
 		exit 1
 	else
-	    echo $sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002 >&2
-		$sf -F10 -t$time -T$ttime -i$input -n0 -R. "./$prefix" -U 1002 -G 1002
+		$sf -F10 -t$time -T$ttime -i$input -n0 -R. $mono "$prefix" -U 1002 -G 1002
 		ret=$?
 		if [ $ret -gt 3 ]; then
-            ret=0
+            echo "Nonzero return code - possible runtime error on C#"
+		    ret=47
 		fi
 	fi
 	;;
@@ -153,16 +153,15 @@ java)
 	fi
 	;;
 rb)
-    $sf -F30 -t$time -T$ttime -i$input -n0 $ruby "$name" -U 1002 -G 1002
+    $sf -F30 -t$time -T$ttime -i$input -n0 -R. $ruby "$name" -U 1002 -G 1002
     ret=$?
     if [ $ret -gt 3 ]; then
         echo "Nonzero return code - possible runtime error on Ruby: "$?
-
         ret=47
     fi
     ;;
 py2)
-    $sf -F30 -t$time -T$ttime -i$input -n0 $python "$name" -U 1002 -G 1002
+    $sf -F30 -t$time -T$ttime -i$input -n0 -R. $python "$name" -U 1002 -G 1002
     ret=$?
     if [ $ret -gt 3 ]; then
         echo "Nonzero return code - possible runtime error on Python2: "$?
@@ -170,7 +169,7 @@ py2)
     fi
     ;;
 py3)
-    $sf -F30 -t$time -T$ttime -i$input -n0 $python3 "$name" -U 1002 -G 1002
+    $sf -F30 -t$time -T$ttime -i$input -n0 -R. $python3 "$name" -U 1002 -G 1002
     ret=$?
     if [ $ret -gt 3 ]; then
         echo "Nonzero return code - possible runtime error on Python3: "$?

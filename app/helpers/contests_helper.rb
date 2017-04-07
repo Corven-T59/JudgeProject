@@ -7,7 +7,7 @@ module ContestsHelper
 		end
 	end
 	def submit_link
-		if @contest.users.exists? current_user
+		if @contest.users.exists? current_user.id
 			link_to 'Submit', submit_contest_path, method: :get
 		end		
 	end

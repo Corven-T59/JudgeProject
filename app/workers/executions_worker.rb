@@ -15,36 +15,25 @@ class ExecutionsWorker
     begin
       solution = Solution.includes(:problem).find(solution_id)
       problem = solution.problem
-      project_directory = %x(pwd).chomp
-      run_sh = File.join(project_directory,"lib","judge","run.sh")
-      compare_sh = File.join(project_directory,"lib","judge","compare.sh")
-      sf = File.join(project_directory,"lib","judge","safeexec")
+
+      run_sh = File.join(Rails.root,"lib","judge","run.sh")
+      compare_sh = File.join(Rails.root,"lib","judge","compare.sh")
+
       path_temp = "/tmp/solution_#{solution_id}"
       team_solution_file = "team_solution.txt"
       source_code = solution.solutionFile.file.file
       input_file = problem.inputFile.file.file
       output_file = problem.outputFile.file.file
-      setup_command = <<END
-        mkdir #{path_temp}
-        cp #{source_code} #{path_temp}
-        cp #{input_file} #{path_temp}
-        cp #{output_file} #{path_temp}
-        cp #{run_sh} #{path_temp}
-        cp #{compare_sh} #{path_temp}
-        touch #{File.join(path_temp,team_solution_file)}
-        cp #{sf} #{path_temp}
-END
-      #run_sh = File.join(path_temp,"run.sh")
-      #compare_sh = File.join(path_temp,"compare.sh")
-      res = system(setup_command)
-      unless res
-        execution = solution.build_execution(status: 1, runTime: 0)
-        execution.save
-        return
-      end
+
+      FileUtils.mkdir path_temp
+      FileUtils.cp [source_code, input_file, output_file, run_sh], path_temp
+      FileUtils.touch File.join(path_temp,team_solution_file)
+      system "sudo chmod 777 #{path_temp}"
+
       source_code = File.join(path_temp,solution.solutionFile.sanitized_file.original_filename)
       input_file= File.join(path_temp,problem.inputFile.sanitized_file.original_filename)
       output_file = File.join(path_temp,problem.outputFile.sanitized_file.original_filename)
+      run_sh = File.join(path_temp, "run.sh")
 
       basename = problem.baseName
       name = problem.name
@@ -61,32 +50,30 @@ END
 
       cmd =<<END
       cd #{path_temp}
-      # dos2unix #{source_code}
+      dos2unix #{source_code}
       dos2unix #{input_file}
       dos2unix #{output_file}
       sudo #{run_sh} #{basename} #{source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}
 END
-
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_code = wait_thr.value.exitstatus
+        puts stderr.read
         exit_code = 2 if exit_code.to_i == 47
-
         if exit_code != 0
-          execution = solution.build_execution(status: exit_code, runTime: 0)
-          execution.save
+          solution.status= exit_code
+          solution.runtime = 0
+          solution.save
           return;
         end
         team_solution = stdout.read
         File.open(File.join(path_temp,team_solution_file), 'w') { |file| file.write(team_solution) }
-        compare =<<END
-        cd #{path_temp}
-        #{compare_sh} #{team_solution_file} #{output_file} #{lang_name}
-END
+        compare = "#{compare_sh} #{team_solution_file} #{output_file} #{lang_name}"
 
         Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
           exit_code = wait_thr.value.exitstatus
-          execution = solution.build_execution(status: exit_code, runTime: 0)
-          execution.save
+          solution.status= exit_code
+          solution.runtime = 0
+          solution.save
         end
       end
     end
