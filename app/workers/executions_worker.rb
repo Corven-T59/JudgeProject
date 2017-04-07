@@ -57,11 +57,12 @@ class ExecutionsWorker
 END
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_code = wait_thr.value.exitstatus
-        exit_code = 2 if exit_code.to_i == 47
         puts stderr.read
+        exit_code = 2 if exit_code.to_i == 47
         if exit_code != 0
-          execution = solution.build_execution(status: exit_code, runTime: 0)
-          execution.save
+          solution.status= exit_code
+          solution.runtime = 0
+          solution.save
           return;
         end
         team_solution = stdout.read
@@ -70,8 +71,9 @@ END
 
         Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
           exit_code = wait_thr.value.exitstatus
-          execution = solution.build_execution(status: exit_code, runTime: 0)
-          execution.save
+          solution.status= exit_code
+          solution.runtime = 0
+          solution.save
         end
       end
     end

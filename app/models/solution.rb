@@ -1,5 +1,5 @@
 class Solution < ApplicationRecord
-  after_commit :run
+  after_create_commit :run
 
   belongs_to :user
   belongs_to :problem
