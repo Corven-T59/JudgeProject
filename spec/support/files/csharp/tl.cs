@@ -4,6 +4,8 @@ public class HelloWorld
 {
     static public void Main ()
     {
-        Console.WriteLine ("1")
+        while(true){
+            var a = 1;
+        }
     }
 }
