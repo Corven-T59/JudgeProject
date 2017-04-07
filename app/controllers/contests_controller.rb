@@ -20,6 +20,7 @@ class ContestsController < ApplicationController
   def new
     @contest = Contest.new
     @problems = Problem.all
+    @contest.endDate = Time.now + 1.hour
   end
 
   # GET /contests/1/edit
@@ -36,38 +37,56 @@ class ContestsController < ApplicationController
   # POST /contests.json
   def create
     @contest = Contest.new(contest_params)
+    contest_duration = @contest.endDate - @contest.startDate
 
-    respond_to do |format|
-      if @contest.save
-        format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
-        format.json { render :show, status: :created, location: @contest }
-      else
-        format.html { render :new }
-        format.json { render json: @contest.errors, status: :unprocessable_entity }
+    if contest_duration >= 3600 && Time.now < @contest.startDate 
+      respond_to do |format|
+        if @contest.save
+          format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
+          format.json { render :show, status: :created, location: @contest }
+        else
+          format.html { render :new }
+          format.json { render json: @contest.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to new_contest_path, notice: 'The contest must last at least 1 hour and the start date must not be in the past'}
+        format.json { render json: @contest.errors, status: :forbidden }
       end
     end
+    
   end
 
   # PATCH/PUT /contests/1
   # PATCH/PUT /contests/1.json
   def update
-    if @contest_state != 0
-      respond_to do |format|
-          format.html { redirect_to @contest, alert: 'You can only update a contest that has not started yet' }
-          format.json { render json: @contest_state, status: :forbidden }
+    new_contest = Contest.new(contest_params)
+    contest_duration = new_contest.endDate - new_contest.startDate
+   
+    if contest_duration >= 3600 && Time.now < @contest.startDate 
+      if @contest_state != 0
+        respond_to do |format|
+            format.html { redirect_to @contest, alert: 'You can only update a contest that has not started yet' }
+            format.json { render json: @contest_state, status: :forbidden }
+        end
+      else
+        respond_to do |format|
+          if @contest.update(contest_params)
+            format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
+            format.json { render :show, status: :ok, location: @contest }
+          else
+            format.html { render :edit }
+            format.json { render json: @contest.errors, status: :unprocessable_entity }
+          end
+        end
       end
     else
       respond_to do |format|
-        if @contest.update(contest_params)
-          format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
-          format.json { render :show, status: :ok, location: @contest }
-        else
-          format.html { render :edit }
-          format.json { render json: @contest.errors, status: :unprocessable_entity }
-        end
+        format.html { redirect_to edit_contest_path, notice: 'The contest must last at least 1 hour and the start date must not be in the past'}
+        format.json { render json: @contest.errors, status: :forbidden }
       end
     end
-
 
   end
 
