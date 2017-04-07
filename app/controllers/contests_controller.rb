@@ -117,6 +117,7 @@ class ContestsController < ApplicationController
       end
 
     end 
+    @scores = @scores.sort_by{|k,v| [v[2] * -1,v[3]]} #v[2] OK count, V[3] time score
 
   end
   def submit

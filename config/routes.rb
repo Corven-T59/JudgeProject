@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   
   resources :contests, only: [:index, :show] do
-    resources :solutions, only: [:index, :show]
+   resources :solutions, only: [:index, :show]
   end
   resources :solutions, only: [:index, :show]
   resources :problems, only: [:index, :show]
