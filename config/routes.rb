@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   
   resources :contests, only: [:index, :show] do
     get 'scoreboard', on: :member
+    get 'handles', on: :member
     resources :solutions, only: [:index, :show]
   end
   resources :solutions, only: [:index, :show]

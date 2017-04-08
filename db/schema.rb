@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404201603) do
+ActiveRecord::Schema.define(version: 20170408014654) do
 
   create_table "contests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",                     null: false
@@ -38,15 +38,17 @@ ActiveRecord::Schema.define(version: 20170404201603) do
   end
 
   create_table "problems", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                               null: false
-    t.string   "baseName",                           null: false
-    t.string   "color",           default: "000000", null: false
-    t.integer  "timeLimit",                          null: false
+    t.string   "name",                                     null: false
+    t.string   "baseName",                                 null: false
+    t.string   "color",                 default: "000000", null: false
+    t.integer  "timeLimit",                                null: false
     t.string   "descriptionFile"
-    t.string   "inputFile",                          null: false
-    t.string   "outputFile",                         null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.string   "inputFile",                                null: false
+    t.string   "outputFile",                               null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.integer  "codeforces_contest_id"
+    t.string   "codeforces_index"
   end
 
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -57,8 +59,8 @@ ActiveRecord::Schema.define(version: 20170404201603) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "contest_id"
-    t.integer  "status"
-    t.integer  "runtime"
+    t.integer  "status",       null: false
+    t.integer  "runtime",      null: false
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree

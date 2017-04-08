@@ -1,8 +1,8 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard]
-  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard]
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
+  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
   before_action :is_subscribed, only: [:submit]
-  before_action :set_contest_state, except: [:index, :new, :create, :scoreboard]
+  before_action :set_contest_state, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
 
   
   # GET /contests
@@ -240,6 +240,12 @@ class ContestsController < ApplicationController
     end
   end
 
+  def handles
+    user_handles = @contest.users.pluck(:id, :email)
+    respond_to do |format|
+      format.json {render json: user_handles, status: :ok}
+    end
+  end
   private
 
     # Use callbacks to share common setup or constraints between actions.
