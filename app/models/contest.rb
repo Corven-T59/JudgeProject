@@ -12,5 +12,8 @@ class Contest < ApplicationRecord
 		users.includes(solutions: [:execution, :problem]).where(solutions: {contest_id: self.id})
 	end
 
+  def next_date
+    DateTime.now < self.startDate ? self.startDate : self.endDate
+  end
 
 end

@@ -6,7 +6,7 @@ class ContestsController < ApplicationController
   # GET /contests
   # GET /contests.json
   def index
-    @contests = Contest.all
+    @contests = Contest.order(startDate: :desc).all
   end
 
   # GET /contests/1

@@ -1,0 +1,166 @@
+$green: #1c3b6d;
+$grey: #5a6576;
+$other-grey: #E7ECEE;
+$blue: #058cc5;
+$red: #CC342D;
+$dark-red: #9a2726;
+$ligth-blue: #3498db;
+
+/* Colors */
+.green {
+  background-color: $green;
+}
+
+.green-text {
+  color: $green
+}
+
+.red {
+  background-color: $red;
+}
+
+.red-text {
+  color: $red;
+}
+
+.dark-red {
+  background-color: $dark-red;
+}
+
+.dark-red-text {
+  color: $dark-red;
+}
+
+.grey {
+  background-color: $grey;
+}
+
+.grey-text {
+  color: $grey;
+}
+
+.other-grey {
+  background-color: $grey;
+}
+
+.other-grey-text {
+  color: $grey;
+}
+
+.ligth-blue {
+  background-color: $ligth-blue;
+}
+
+.ligth-blue-text {
+  color: $ligth-blue;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.blue-text {
+  color: $blue;
+}
+
+.white {
+  background-color: white;
+}
+
+.white-text {
+  color: white;
+}
+
+/* Paddings */
+
+.big-padding {
+  padding: 2em;
+}
+
+.medium-padding {
+  padding: 1.5em;
+}
+
+.normal-padding {
+  padding: 1em;
+}
+
+.small-padding {
+  padding: 0.5em;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+/* Margins */
+
+.top-space {
+  margin-top: 1em;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+/* Align */
+.no-float {
+  float: none !important;
+}
+
+.top-float-button {
+  float: right;
+  margin-right: 2em;
+}
+
+.inline-block {
+  float: none !important;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.absolute {
+  position: absolute;
+}
+
+/* Shapes */
+
+.circle {
+  border-radius: 50%;
+  display: inline-block;
+  padding-top: 10px;
+  height: 70px;
+  width: 80px;
+}
+
+/* Sizes */
+
+.small {
+  font-size: 1em;
+}
+
+.medium {
+  font-size: 1.5em;
+}
+
+.big {
+  font-size: 3em;
+}
+
+.bigger {
+  font-size: 4em;
+}
+
+.ultra-big {
+  font-size: 5.5em;
+}
+
+.list-inline {
+  display: flex;
+}
+
+.list-inline li {
+  flex: 1;
+  text-align: center;
+  vertical-align: middle;
+}

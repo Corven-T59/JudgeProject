@@ -13,5 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require arrive.min
+//= require bootstrap
+//= require material
+//= require ripples
+//= require bootstrap-table
+//
+//= require moment
+//= require bootstrap-datepicker.min
+//
+//= require main
 //= require_tree .
-//= require bootstrap-sprockets

@@ -24,4 +24,19 @@ module ApplicationHelper
   def user_menu
     content_tag(:li,user_auth_link) + user_actions_links
   end
+
+  def user_can_edit
+    current_user.try(:admin?)
+  end
+
+  def current_navbar
+    if !current_user && !(controller_name == "contests" && action_name=="scoreboard")
+      return "basic_navbar"
+    elsif current_user.try(:admin?)
+      return "admin_navbar"
+    elsif controller_name == "contests" && action_name=="scoreboard"
+      return "contest_navbar"
+    end
+    return "basic_navbar"
+  end
 end
