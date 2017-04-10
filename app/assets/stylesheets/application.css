@@ -10,8 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require bootstrap-material-design
+ *= require ripples
+ *= require bootstrap-datepicker/bootstrap-datepicker.standalone.min
+ *= require fresh-bootstrap-table
+ *= require pe-icon-7-stroke
+ *= require app
  *= require_tree .
  *= require_self
  */
-
-@import "bootstrap";

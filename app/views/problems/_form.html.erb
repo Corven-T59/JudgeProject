@@ -1,52 +1,17 @@
-<%= form_for(problem, html: { multipart: true }) do |f| %>
-  <% if problem.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(problem.errors.count, "error") %> prohibited this problem from being saved:</h2>
+<%= form_for(problem, html: {multipart: true}, builder: BootstrapFormBuilder) do |f| %>
+    <%= f.errors %>
 
-      <ul>
-      <% problem.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %>
     <%= f.text_field :name %>
-  </div>
 
-  <div class="field">
-    <%= f.label :baseName %>
     <%= f.text_field :baseName %>
-  </div>
 
-  <div class="field">
-    <%= f.label :color %>
     <%= f.text_field :color %>
-  </div>
 
-  <div class="field">
-    <%= f.label :timeLimit %>
     <%= f.number_field :timeLimit %>
-  </div>
+    <%= f.file_field :descriptionFile %>
+    <%= f.file_field :inputFile %>
 
-  <div class="field">
-    <%= f.label :descriptionFile %>
-    <%= f.file_field :descriptionFile%>    
-  </div>
+    <%= f.file_field :outputFile %>
 
-  <div class="field">
-    <%= f.label :inputFile %>
-    <%= f.file_field :inputFile%>
-  </div>
-
-  <div class="field">
-    <%= f.label :outputFile %>
-    <%= f.file_field :outputFile%>
-  </div>
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.submit "Guardar" %>
 <% end %>
