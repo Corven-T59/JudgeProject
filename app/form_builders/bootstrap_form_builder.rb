@@ -1,7 +1,7 @@
 class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   delegate :content_tag, to: :@template
   delegate :titleize, to: :@template
-  [:text_field, :text_area, :email_field, :password_field, :url_field].each do |method|
+  [:text_field, :text_area, :email_field, :password_field, :url_field, :number_field].each do |method|
     define_method method do |name, *args|
       options = args.extract_options!
       if options.has_key?(:class) then
@@ -16,6 +16,11 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
         content_tag(:label, name.to_s.titleize, name: name) + super(name, options)
       end
     end
+  end
+
+  def file_field name, *args
+    options = args.extract_options!
+    content_tag(:label, name.to_s.titleize) + super(name, options)
   end
 
   def m_check_box name, *args
@@ -53,7 +58,7 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
 
   def errors
     if object.errors.any?
-      content_tag(:div, class: "large-padding white-text") do
+      content_tag(:div, class: "large-padding") do
         content_tag(:h2, "Errores: ")+
             content_tag(:ul) do
               lis = ""
@@ -66,11 +71,13 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  def bootstrap_datetime name, id, *args
+  def bootstrap_datetime name, *args
+    options = args.extract_options!
+    id = options[:id] || name
     content_tag(:div, class: :form_group) do
       content_tag(:div, class: :"input-group date", id: id) do
         content_tag(:label, name.to_s.titleize, name: name) +
-            text_field(name, class: "form-control", "nodiv": true)+
+            text_field(name, class: "form-control", "nodiv": true) +
             content_tag(:span, content_tag(:span, nil, class: "glyphicon glyphicon-calendar"), class: "input-group-addon")
       end
     end

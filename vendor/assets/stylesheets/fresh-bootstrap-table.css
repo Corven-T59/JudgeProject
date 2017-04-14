@@ -1358,20 +1358,7 @@ input[type="file"] > input[type="button"]::-moz-focus-inner {
 }
 
 .fresh-table.toolbar-color-red .fixed-table-toolbar {
-    background: #ED362C;
-    background: -moz-radial-gradient(center, ellipse cover, #C51E1B 0%, #ED362C 100%);
-    /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #C51E1B), color-stop(100%, #ED362C));
-    /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover, #C51E1B 0%, #ED362C 100%);
-    /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover, #C51E1B 0%, #ED362C 100%);
-    /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover, #C51E1B 0%, #ED362C 100%);
-    /* IE10+ */
-    background: radial-gradient(ellipse at center, #C51E1B 0%, #ED362C 100%);
-    /* W3C */
-    background-size: 250% 250%;
+    background: #CC342D;
 }
 
 .fresh-table .fixed-table-pagination {

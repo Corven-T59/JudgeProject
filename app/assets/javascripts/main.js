@@ -1,12 +1,9 @@
-var $table = $('#fresh-table'),
-    $alertBtn = $('#alertBtn'),
-    full_screen = false;
 $(document).on("turbolinks:load", function () {
+    // Init material design
+    $.material.init();
 
     // Enable bootstrap date picker
-    console.log("startDate");
     $("#startDate").datetimepicker();
-    console.log("endDate");
     $("#endDate").datetimepicker();
 
     // Search for time and update
@@ -16,23 +13,15 @@ $(document).on("turbolinks:load", function () {
         $(this).html(message);
     });
 
-    // Init material design
-    $.material.init();
-
-    // Init hipster cards
-    var $container = $('.masonry-container');
-    doc_width = $(document).width();
-    if (doc_width >= 768) {
-        $container.masonry({
-            itemSelector: '.card-box',
-            columnWidth: '.card-box',
-            transitionDuration: 0
-        });
-    } else {
-        $('.mas-container').removeClass('mas-container').addClass('row');
-    }
 
     // Upgrade bootstrapTable
+    var $table = $('#fresh-table'),
+        $alertBtn = $('#alertBtn'),
+        full_screen = false;
+
+    window_height = $(window).height();
+    table_height = window_height - 20;
+
     $table.bootstrapTable({
         toolbar: ".toolbar",
 
@@ -40,36 +29,52 @@ $(document).on("turbolinks:load", function () {
         search: true,
         showToggle: true,
         showColumns: true,
-        pagination: true,
         striped: true,
         sortable: true,
-        pageSize: 8,
-        pageList: [8, 10, 25, 50, 100],
+        iconsPrefix: "fa",
 
-        formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        formatShowingRows: function(pageFrom, pageTo, totalRows){
             //do nothing here, we don't want to show the text "showing x of y from..."
         },
-        formatRecordsPerPage: function (pageNumber) {
+        formatRecordsPerPage: function(pageNumber){
             return pageNumber + " rows visible";
         },
         icons: {
-            refresh: 'fa fa-refresh',
-            toggle: 'fa fa-th-list',
-            columns: 'fa fa-columns',
-            detailOpen: 'fa fa-plus-circle',
-            detailClose: 'fa fa-minus-circle'
+            refresh: 'fa-refresh',
+            toggle: 'fa-th-list',
+            columns: 'fa-columns',
+            detailOpen: 'fa-plus-circle',
+            detailClose: 'fa-minus-circle'
         }
     });
 
 
-});
+    window.operateEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .edit': function (e, value, row, index) {
+            alert('You click edit icon, row: ' + JSON.stringify(row));
+            console.log(value, row, index);
+        },
+        'click .remove': function (e, value, row, index) {
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            });
 
-$(function () {
+        }
+    };
     $alertBtn.click(function () {
         alert("You pressed on Alert");
     });
-});
+    $(window).resize(function () {
+        $table.bootstrapTable('resetView');
+    });
 
+    // End bootstrap table
+});
 
 function operateFormatter(value, row, index) {
     return [
@@ -84,17 +89,3 @@ function operateFormatter(value, row, index) {
         '</a>'
     ].join('');
 }
-
-window.operateEvents = {
-    'click .like': function (e, value, row, index) {
-        alert('You click like icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
-    },
-    'click .edit': function (e, value, row, index) {
-        console.log(value, row, index);
-    },
-    'click .remove': function (e, value, row, index) {
-        alert('You click remove icon, row: ' + JSON.stringify(row));
-        console.log(value, row, index);
-    }
-};

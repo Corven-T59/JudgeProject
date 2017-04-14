@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: JudgeProject_production
-  username: JudgeProject
-  password: <%= ENV['JUDGEPROJECT_DATABASE_PASSWORD'] %>
+#  username: JudgeProject
+#  password: <%= ENV['JUDGEPROJECT_DATABASE_PASSWORD'] %>

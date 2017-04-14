@@ -15,10 +15,17 @@
 </head>
 
 <body class="red">
-<div style="
-  <% 'display: none;' if (alert.nil? && notice.nil?) %>">
-  <p id="notice"><%= notice %></p>
-  <p id="alert"><%= alert %></p>
+<div style="<%= 'display: none;' if !notice %>">
+  <div class="alert alert-dismissible alert-success no-margin">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <%= notice %>
+  </div>
+</div>
+<div style="<%= 'display: none;' if !alert %>">
+  <div class="alert alert-dismissible alert-warning no-margin">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <%= alert %>
+  </div>
 </div>
 <%= yield %>
 </body>

@@ -15,7 +15,7 @@
  *= require bootstrap-datepicker/bootstrap-datepicker.standalone.min
  *= require fresh-bootstrap-table
  *= require pe-icon-7-stroke
- *= require app
+ *= require highlightjs
  *= require_tree .
  *= require_self
  */

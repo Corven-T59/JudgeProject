@@ -65,8 +65,13 @@ class ContestsController < ApplicationController
     end
   end
 
+  # GET /contest/1/scoreboard
   def scoreboard
+    @user_scores = @contest.scoreboard
     @problems = @contest.problems
+    @color_cache = []
+    @problems.each{|p| @color_cache << [p.id, p.color] }
+=begin
     @users =  @contest.users.pluck(:id,:email)
     @solutions = @contest.solutions.order(user_id: :asc, problem_id: :asc, created_at: :asc).pluck(:user_id,:problem_id, :status, :created_at)
 
@@ -86,7 +91,6 @@ class ContestsController < ApplicationController
     solutions_size = @solutions.size
     for i in 0..solutions_size - 1
       solution = @solutions[i]
-
       submition_count = submition_count + 1
       if solution[2] == 4 #status
         accepted_count = accepted_count + 1        
@@ -96,7 +100,6 @@ class ContestsController < ApplicationController
           total_accepted_count = total_accepted_count + 1
         end
       end
-
       if i + 1 == solutions_size || @solutions[i + 1][1] != solution[1] || @solutions[i + 1][0] != solution[0] #problem_id || user_id
         problems_sent[solution[1]] = submition_count        
         if time_submition < 0
@@ -107,7 +110,6 @@ class ContestsController < ApplicationController
         submition_count = 0
         time_submition = -1
       end
-
       if i + 1 == solutions_size || @solutions[i + 1][0] != solution[0] #user_id
         @scores[solution[0]] = [problems_sent, problems_accepted, total_accepted_count, total_time_submit]
         problems_sent = Hash.new
@@ -115,10 +117,9 @@ class ContestsController < ApplicationController
         total_time_submit = 0
         total_accepted_count = 0
       end
-
-    end 
+    end
     @scores = @scores.sort_by{|k,v| [v[2] * -1,v[3]]} #v[2] OK count, V[3] time score
-
+=end
   end
   def submit
     @solution = Solution.new()
@@ -162,7 +163,7 @@ class ContestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_contest
-      @contest = Contest.includes(:solutions).find(params[:id])
+      @contest = Contest.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -1,37 +1,43 @@
-<p>
-  <strong>Name:</strong>
-  <%= @problem.name %>
-</p>
+<div class="top-space"> </div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= link_to 'Problemas', problems_path %> &raquo;  <%= @problem.name %> <%= problem_actions @problem%></h3>
+      </div>
+      <div class="panel-body">
 
-<p>
-  <strong>Basename:</strong>
-  <%= @problem.baseName %>
-</p>
+        <p>
+          <strong>Basename:</strong>
+          <%= @problem.baseName %>
+        </p>
 
-<p>
-  <strong>Color:</strong>
-  <%= @problem.color %>
-</p>
+        <p>
+          <strong>Color:</strong>
+          #<%= @problem.color %>
+        </p>
 
-<p>
-  <strong>Timelimit:</strong>
-  <%= @problem.timeLimit %>
-</p>
+        <p>
+          <strong>Timelimit:</strong>
+          <%= @problem.timeLimit %>
+        </p>
 
-<p>
-  <strong>Descriptionfile:</strong>
-  <%= @problem.descriptionFile %>
-</p>
+        <p>
+          <strong>Descriptionfile:</strong>
+          <%= content_or_link(@problem.descriptionFile)%>
+        </p>
 
-<p>
-  <strong>Inputfile:</strong>
-  <%= @problem.inputFile %>
-</p>
+        <p>
+          <strong>Inputfile:</strong>
+          <%= content_or_link(@problem.inputFile)%>
+        </p>
 
-<p>
-  <strong>Outputfile:</strong>
-  <%= @problem.outputFile %>
-</p>
+        <p>
+          <strong>Outputfile:</strong>
+          <%= content_or_link(@problem.outputFile)%>
+        </p>
 
-<%= link_to 'Edit', edit_problem_path(@problem) %> |
-<%= link_to 'Back', problems_path %>
+      </div>
+    </div>
+  </div>
+</div>
