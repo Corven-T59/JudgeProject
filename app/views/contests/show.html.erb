@@ -1,36 +1,47 @@
-<p>
-  <strong>Title:</strong>
-  <%= @contest.title %>
-</p>
+<div class="top-space"> </div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= link_to 'Competencias', contest_path %> &raquo;  <%= @contest.title %> <%= contest_actions @contest %></h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Description:</strong>
+          <%= @contest.description %>
+        </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @contest.description %>
-</p>
+        <p>
+          <strong>Difficulty:</strong>
+          <%= @contest.difficulty %>
+        </p>
 
-<p>
-  <strong>Difficulty:</strong>
-  <%= @contest.difficulty %>
-</p>
+        <p>
+          <strong>Startdate:</strong>
+          <%= @contest.startDate %>
+        </p>
 
-<p>
-  <strong>Startdate:</strong>
-  <%= @contest.startDate %>
-</p>
+        <p>
+          <strong>Enddate:</strong>
+          <%= @contest.endDate %>
+        </p>
+        <p>
+          <strong>Problems:</strong>
+          <% @contest.problems.each do |problem|%>
+              <%= problem.name %>
+              <br/>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Enddate:</strong>
-  <%= @contest.endDate %>
-</p>
-<p>
-  <strong>Problems:</strong>
-  <% @contest.problems.each do |problem|%>
-    <%= problem.name %>
-    <br/>
-  <% end %>
-</p>
-<%= subscribe_link %>
-<%= submit_link %>
+
+
+
+<%= subscribe_link @contest%>
+<%= submit_link @contest %>
 <%= link_to 'Scoreboard', scoreboard_contest_path(@contest) %>
 <%= link_to 'Edit', edit_contest_path(@contest) %> |
 <%= link_to 'Back', contests_path %>

@@ -21,6 +21,7 @@
 //
 //= require moment
 //= require bootstrap-datepicker.min
+//= require highlight.pack
 //
 //= require main
 //= require_tree .

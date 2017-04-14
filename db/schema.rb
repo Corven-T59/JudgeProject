@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408014654) do
+ActiveRecord::Schema.define(version: 20170414151434) do
 
   create_table "contests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",                     null: false
@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20170408014654) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "contest_id"
-    t.integer  "status",       null: false
-    t.integer  "runtime",      null: false
+    t.integer "status"
+    t.integer "runtime"
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree

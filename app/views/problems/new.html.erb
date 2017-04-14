@@ -1,5 +1,14 @@
-<h1>New Problem</h1>
+<div class="top-space"> </div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= link_to 'Problemas', problems_path %> &raquo; Nuevo problema</h3>
+      </div>
+      <div class="panel-body">
+        <%= render 'form', problem: @problem %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form', problem: @problem %>
-
-<%= link_to 'Back', problems_path %>

@@ -1,5 +1,6 @@
 module SolutionsHelper
   def code_to_string(code)
+    return "Not answer yet" if code.nil?
     code = code.to_i
     return "Compile Error" if code == 1
     return "Runtime Error" if code == 2

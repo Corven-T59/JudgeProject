@@ -1,16 +1,11 @@
 <%= form_for(problem, html: {multipart: true}, builder: BootstrapFormBuilder) do |f| %>
     <%= f.errors %>
-
     <%= f.text_field :name %>
-
     <%= f.text_field :baseName %>
-
     <%= f.text_field :color %>
-
     <%= f.number_field :timeLimit %>
     <%= f.file_field :descriptionFile %>
     <%= f.file_field :inputFile %>
-
     <%= f.file_field :outputFile %>
 
     <%= f.submit "Guardar" %>

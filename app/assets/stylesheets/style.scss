@@ -164,3 +164,13 @@ $ligth-blue: #3498db;
   text-align: center;
   vertical-align: middle;
 }
+
+.search .form-group{
+  margin: 0;
+  padding: 0;
+}
+
+.fixed-table-toolbar .bars, .fixed-table-toolbar .search, .fixed-table-toolbar .columns{
+  margin-bottom: 0;
+  margin-top: 0;
+}

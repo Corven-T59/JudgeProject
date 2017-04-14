@@ -47,6 +47,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  gem 'hirb'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -63,4 +64,4 @@ gem 'carrierwave', '~> 1.0'
 gem 'sidekiq'
 
 # Gem for bootstrap on sass
-gem "bootstrap-sass", '~> 3.3.6'
+gem "bootstrap-sass"
