@@ -36,7 +36,7 @@ module ApplicationHelper
   def current_navbar
     if !current_user && !(controller_name == "contests" && action_name=="scoreboard")
       return "basic_navbar"
-    elsif current_user.try(:admin?)
+    elsif current_user.try(:admin?) && !(controller_name == "contests" && action_name=="scoreboard")
       return "admin_navbar"
     elsif controller_name == "contests" && action_name=="scoreboard"
       return "contest_navbar"

@@ -19,7 +19,7 @@ class Contest < ApplicationRecord
     DateTime.now < self.startDate ? self.startDate : self.endDate
 	end
 
-  def status
+  def state
     current_time = Time.now
     if current_time < startDate
       0
