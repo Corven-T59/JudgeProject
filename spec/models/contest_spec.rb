@@ -7,5 +7,15 @@ RSpec.describe Contest, type: :model do
   it { should validate_presence_of :startDate }
   it { should validate_presence_of :endDate }
 
-  pending "Start datetime has to be at least one hour difference and before end datetime"
+  describe "Validates dates on contest" do
+    it "Valid update or create" do
+      contest = FactoryGirl.build(:contest, endDate: (DateTime.now + 65.minutes))
+      expect(contest.valid?).to be_truthy
+    end
+
+    it "Invalid update or create" do
+      contest = FactoryGirl.build(:contest, endDate: (DateTime.now + 59.minutes))
+      expect(contest.valid?).to be_falsy
+    end
+  end
 end
