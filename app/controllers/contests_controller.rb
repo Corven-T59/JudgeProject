@@ -2,7 +2,6 @@ class ContestsController < ApplicationController
   before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
   before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
   before_action :is_subscribed, only: [:submit]
-  before_action :set_contest_state, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
 
   
   # GET /contests
@@ -25,7 +24,7 @@ class ContestsController < ApplicationController
 
   # GET /contests/1/edit
   def edit
-    if @contest_state != 0
+    if @contest.state != 0
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only edit a contest that has not started yet' }
           format.json { render json: @contest_state, status: :forbidden }
@@ -61,42 +60,24 @@ class ContestsController < ApplicationController
   # PATCH/PUT /contests/1
   # PATCH/PUT /contests/1.json
   def update
-    new_contest = Contest.new(contest_params)
-    contest_duration = new_contest.endDate - new_contest.startDate
-   
-    if contest_duration >= 3600 && Time.now < @contest.startDate 
-      if @contest_state != 0
-        respond_to do |format|
-            format.html { redirect_to @contest, alert: 'You can only update a contest that has not started yet' }
-            format.json { render json: @contest_state, status: :forbidden }
-        end
+    respond_to do |format|
+      if @contest.update(contest_params)
+        format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
+        format.json { render :show, status: :ok, location: @contest }
       else
-        respond_to do |format|
-          if @contest.update(contest_params)
-            format.html { redirect_to @contest, notice: 'Contest was successfully updated.' }
-            format.json { render :show, status: :ok, location: @contest }
-          else
-            format.html { render :edit }
-            format.json { render json: @contest.errors, status: :unprocessable_entity }
-          end
-        end
-      end
-    else
-      respond_to do |format|
-        format.html { redirect_to edit_contest_path, notice: 'The contest must last at least 1 hour and the start date must not be in the past'}
-        format.json { render json: @contest.errors, status: :forbidden }
+        format.html { render :edit }
+        format.json { render json: @contest.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # DELETE /contests/1
   # DELETE /contests/1.json
   def destroy
-    if @contest_state != 0
+    if @contest.state != 0
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only destroy a contest that has not started yet' }
-          format.json { render json: @contest_state, status: :forbidden }
+          format.json { render json: @contest.state, status: :forbidden }
       end
     else
       @contest.destroy
@@ -116,10 +97,10 @@ class ContestsController < ApplicationController
     @problems.each { |p| @color_cache << [p.id, p.color] }
   end
   def submit
-    if @contest_state != 1
+    if @contest.state != 1
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only submit a solution while the contest is running' }
-          format.json { render json: @contest_state, status: :forbidden }
+          format.json { render json: @contest.state, status: :forbidden }
       end
     else
       @solution = Solution.new()
@@ -128,10 +109,10 @@ class ContestsController < ApplicationController
   end
 
   def subscribe
-    if @contest_state == 2
+    if @contest.state == 2
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only subscribe to a contest before or once it already started' }
-          format.json { render json: @contest_state, status: :forbidden }
+          format.json { render json: @contest.state, status: :forbidden }
       end
     elsif @contest.users.exists? current_user
       respond_to do |format|
@@ -151,10 +132,10 @@ class ContestsController < ApplicationController
   end
 
   def unsubscribe
-     if @contest_state != 0
+    if @contest.state != 0
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only unsubscribe from a contest before it already started' }
-          format.json { render json: @contest_state, status: :forbidden }
+          format.json { render json: @contest.state, status: :forbidden }
       end
     elsif @contest.users.exists? current_user
       @contest.users.delete(current_user)
@@ -167,7 +148,7 @@ class ContestsController < ApplicationController
           format.html { redirect_to @contest, alert: 'You are not subscribed to this contest' }
           format.json { render json: @contest.errors, status: :unprocessable_entity }
       end
-      
+
     end
   end
 
@@ -193,17 +174,6 @@ class ContestsController < ApplicationController
       if !@contest.users.exists? current_user
         redirect_to contest_path, id: @contest_id, :alert => "You are not subscribed to this contest"
       end
-    end
-
-    def set_contest_state
-      current_time = Time.now
-      if current_time < @contest.startDate
-        @contest_state = 0
-      elsif current_time >= @contest.startDate && current_time <= @contest.endDate
-        @contest_state = 1
-      else
-        @contest_state = 2
-      end       
     end
     
 end

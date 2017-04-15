@@ -6,6 +6,8 @@ class Contest < ApplicationRecord
 
 	validates_presence_of :title, :description, :difficulty, :startDate, :endDate
 
+  validate :dates_are_rigth
+
 	enum difficulty: [:easy, :medium, :strict]
 
 
@@ -17,7 +19,18 @@ class Contest < ApplicationRecord
     DateTime.now < self.startDate ? self.startDate : self.endDate
 	end
 
-	def scoreboard
+  def status
+    current_time = Time.now
+    if current_time < startDate
+      0
+    elsif current_time >= startDate && current_time <= endDate
+      1
+    else
+      2
+    end
+  end
+
+  def scoreboard
 		problem_set = self.problems
 		scores = self.scoreboards
 		users =  self.users.select(:id,:email)
@@ -29,11 +42,24 @@ class Contest < ApplicationRecord
       res << temp
     end
     res.sort_by{ |user_score| user_score.correct_answers }.reverse
-	end
+  end
 
-	private
+  private
+  def dates_are_rigth
+    return if !(endDate.present? && startDate.present?)
 
-	class UserScore
+    contest_duration = self.endDate - self.startDate
+    if contest_duration >= 3600 && Time.now < self.startDate
+      if status != 0
+        errors.add(:endDate, 'You can only update a contest that has not started yet')
+      end
+    else
+      errors.add(:endDate, 'The contest must last at least 1 hour and the start date must not be in the past')
+    end
+  end
+
+
+  class UserScore
 		attr_accessor :user
     attr_reader :scores, :correct_answers
 		def initialize problem_set
@@ -49,6 +75,5 @@ class Contest < ApplicationRecord
       tmp.collect!{|s| @correct_answers+= s.correct;  [s.problem_id,{correct: s.correct, incorrect: s.inconrrect, sent_time: s.sent_time}]}
       @scores.merge!(Hash[tmp])
 		end
-
 	end
 end
