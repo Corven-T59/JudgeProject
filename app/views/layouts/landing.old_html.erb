@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>JudgeProject</title>
+  <%= csrf_meta_tags %>
+  <!-- Material Design fonts -->
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <%= stylesheet_link_tag 'landing', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<%= render 'shared/navbar' %>
+<div style='<%= "display: none;" if !alert && !notice %>'>
+  <p id="notice"><%= notice %></p>
+  <p id="alert"><%= alert %></p>
+</div>
+<%= yield %>
+<%= render 'shared/footer' %>
+</body>
+</html>

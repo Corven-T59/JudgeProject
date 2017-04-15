@@ -1,17 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <title>JudgeProject</title>
     <%= csrf_meta_tags %>
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </head>
 
   <body>
-  	<%= render partial: "shared/navbar" %>
-    <p id="notice"><%= notice %></p>
-    <p id="alert"><%= alert %></p>
-    <%= yield %>
+  <%= render 'shared/navbar' %>
+  <div style="<%= 'display: none;' if !notice %>">
+    <div class="alert alert-dismissible alert-success no-margin">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <%= notice %>
+    </div>
+  </div>
+  <div style="<%= 'display: none;' if !alert %>">
+    <div class="alert alert-dismissible alert-warning no-margin">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <%= alert %>
+    </div>
+  </div>
+
+  <%= yield %>
+  <%= render 'shared/footer' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.min.js"></script>
   </body>
 </html>

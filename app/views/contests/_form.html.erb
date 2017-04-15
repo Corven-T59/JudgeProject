@@ -1,47 +1,17 @@
-<%= form_for(contest) do |f| %>
-  <% if contest.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+<%= form_for(contest, builder: BootstrapFormBuilder) do |f| %>
 
-      <ul>
-      <% contest.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
+    <%= f.errors %>
     <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
     <%= f.text_area :description %>
-  </div>
-
- <div class="field">
-    <%= f.label :difficulty %>
     <%= f.select :difficulty, Contest.difficulties.keys %>
-  </div>
+    <%= f.bootstrap_datetime :startDate%>
+    <%= f.bootstrap_datetime :endDate %>
 
-  <div class="field">
-    <%= f.label :startDate %>
-    <%= f.datetime_select :startDate %>
-  </div>
 
-  <div class="field">
-    <%= f.label :endDate %>
-    <%= f.datetime_select :endDate %>
-  </div>
-  
- 
-  <div class="field">
-    <%= collection_check_boxes(:contest, :problem_ids, Problem.all, :id, :name) %>
-  </div>
+    <div class="field">
+      <h4>Problemas del contest: </h4>
+      <%= collection_check_boxes(:contest, :problem_ids, Problem.all, :id, :name) %>
+    </div>
+    <%= f.submit "Guardar" %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

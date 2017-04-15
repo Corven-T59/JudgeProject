@@ -1,0 +1,19 @@
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= contest.title %> (<%= aux_time(contest.startDate, contest.endDate) %>
+          <time data-time="<%= contest.next_date.strftime('%Y-%m-%d %H:%M') %>"></time>
+          )
+        </h3>
+      </div>
+      <div class="panel-body">
+
+        <%= contest.description %>
+      </div>
+      <div class="panel-footer">
+        <%= contest_actions_links contest %>
+      </div>
+    </div>
+  </div>
+</div>
