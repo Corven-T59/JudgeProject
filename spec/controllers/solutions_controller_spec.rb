@@ -167,13 +167,5 @@ RSpec.describe SolutionsController, type: :controller do
       }.to change(ExecutionsWorker.jobs, :size).by(1)
     end
 
-    it "Trigger and run the job: OK" do
-      Sidekiq::Testing.inline!
-      before_count = Execution.count
-      post :create, params: {solution: valid_for_create, contest_id: @contest.to_param}
-      expect(Execution.count).to eq(before_count+1)
-    end
-
-
   end
 end
