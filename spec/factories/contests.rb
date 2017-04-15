@@ -4,6 +4,6 @@ FactoryGirl.define do
     description "Test description"
     difficulty 1
     startDate DateTime.now + 1.minute
-    endDate DateTime.now + 1.minute
+    endDate DateTime.now + 65.minute
   end
 end
