@@ -1,17 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  ["cpp", "java", "ruby", "python", "python3"].each do |lang|
+  ["cpp", "java", "python", "python3"].each do |lang|
     #  ["ruby", "csharp"].each do |lang|
       describe "Programming languages" do
       context lang.capitalize do
-        it "Creates a execution result" do
-          Sidekiq::Testing.inline!
-          expect{
-            FactoryGirl.create(:solution)
-          }.to change(Solution, :count).by(1)
-        end
-
         it "Creates a execution result: #{lang} OK" do
           Sidekiq::Testing.inline!
           @ok = FactoryGirl.create("#{lang}_ok".to_sym)

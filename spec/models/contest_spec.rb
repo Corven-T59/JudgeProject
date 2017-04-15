@@ -9,12 +9,12 @@ RSpec.describe Contest, type: :model do
 
   describe "Validates dates on contest" do
     it "Valid update or create" do
-      contest = FactoryGirl.build(:contest, endDate: (DateTime.now + 65.minutes))
+      contest = FactoryGirl.build(:contest,startDate: (DateTime.now + 2.minutes), endDate: (DateTime.now + 65.minutes))
       expect(contest.valid?).to be_truthy
     end
 
     it "Invalid update or create" do
-      contest = FactoryGirl.build(:contest, endDate: (DateTime.now + 59.minutes))
+      contest = FactoryGirl.build(:contest,startDate: (DateTime.now + 2.minutes), endDate: (DateTime.now + 59.minutes))
       expect(contest.valid?).to be_falsy
     end
   end
