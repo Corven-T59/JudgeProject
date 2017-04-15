@@ -57,7 +57,6 @@ class ExecutionsWorker
 END
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_code = wait_thr.value.exitstatus
-        puts stderr.read
         exit_code = 2 if exit_code.to_i == 47
         if exit_code != 0
           solution.status= exit_code
@@ -67,8 +66,8 @@ END
         end
         team_solution = stdout.read
         File.open(File.join(path_temp,team_solution_file), 'w') { |file| file.write(team_solution) }
+        team_solution_file = File.join(path_temp, team_solution_file)
         compare = "#{compare_sh} #{team_solution_file} #{output_file} #{lang_name}"
-
         Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
           exit_code = wait_thr.value.exitstatus
           solution.status= exit_code
