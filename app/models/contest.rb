@@ -5,8 +5,9 @@ class Contest < ApplicationRecord
 	has_many :solutions
 
 	validates_presence_of :title, :description, :difficulty, :startDate, :endDate
-
   validate :dates_are_rigth
+
+  scope :running, -> { where("? > startDate and ? < endDate",DateTime.now,DateTime.now) }
 
 	enum difficulty: [:easy, :medium, :strict]
 
@@ -72,7 +73,12 @@ class Contest < ApplicationRecord
 
 		def add_score scores
       tmp = scores.select{ |score| score if score.user_id == @user.id}
-      tmp.collect!{|s| @correct_answers+= s.correct;  [s.problem_id,{correct: s.correct, incorrect: s.inconrrect, sent_time: s.sent_time}]}
+      tmp.collect! do |s|
+        s.correct ||= 0
+        s.inconrrect ||=0
+        @correct_answers+= s.correct
+        [s.problem_id,{correct: s.correct, incorrect: s.inconrrect, sent_time: s.sent_time}]
+      end
       @scores.merge!(Hash[tmp])
 		end
 	end

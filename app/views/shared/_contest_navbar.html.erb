@@ -1,0 +1,27 @@
+<div class="navbar no-margin">
+  <div class="container-fluid red">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to(image_tag("logo-red.png", height: "50px"), root_path) %>
+    </div>
+    <div class="navbar-collapse collapse navbar-inverse-collapse">
+      <ul class="nav navbar-nav">
+        <li class="<%= 'active' if action_name == 'problems' %>"><%= link_to "Problemas",  problems_contest_path(@contest) %></li>
+        <li class="<%= 'active' if action_name == 'scoreboard' %>"><%= link_to "Scoreboard",  scoreboard_contest_path(@contest) %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+          <!-- Button trigger modal -->
+          <a class="btn btn-default" data-toggle="modal" data-target="#modal_form_solution">
+            <i class="fa fa-paper-plane white-text"></i>
+          </a>
+        <% end %>
+        <%= user_menu %>
+      </ul>
+    </div>
+  </div>
+</div>
