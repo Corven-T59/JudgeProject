@@ -59,8 +59,8 @@ ActiveRecord::Schema.define(version: 20170414151434) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "contest_id"
-    t.integer "status"
-    t.integer "runtime"
+    t.integer  "status"
+    t.integer  "runtime"
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree
