@@ -1,12 +1,12 @@
 -- execute("ALTER TABLE tags MODIFY name varchar(255) CHARACTER SET utf8 COLLATE utf8_bin;")
--> 0.0095s
+-> 0.0076s
 <!DOCTYPE html>
 <html lang='en'>
 <head>
     <title>RSpec results</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta http-equiv="Expires" content="-1" />
-    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Expires" content="-1"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
     <style type="text/css">
         body {
             margin: 0;
@@ -24,18 +24,18 @@
 
         function removeClass(element_id, classname) {
             var elem = document.getElementById(element_id);
-            var classlist = elem.className.replace(classname,'');
+            var classlist = elem.className.replace(classname, '');
             elem.className = classlist;
 }
 
         function moveProgressBar(percentDone) {
-            document.getElementById("rspec-header").style.width = percentDone +"%";
+            document.getElementById("rspec-header").style.width = percentDone + "%";
 }
 
         function makeRed(element_id) {
             removeClass(element_id, 'passed');
             removeClass(element_id, 'not_implemented');
-            addClass(element_id,'failed');
+            addClass(element_id, 'failed');
 }
 
         function makeYellow(element_id) {
@@ -43,7 +43,7 @@
             if (elem.className.indexOf("failed") == -1) {  // class doesn't includes failed
                 if (elem.className.indexOf("not_implemented") == -1) { // class doesn't include not_implemented
                     removeClass(element_id, 'passed');
-                    addClass(element_id,'not_implemented');
+                    addClass(element_id, 'not_implemented');
                 }
             }
 }
@@ -73,7 +73,7 @@
         function assign_display_style(classname, display_flag) {
             var style_mode = get_display_style(display_flag);
             var elems = document.getElementsByClassName(classname)
-            for (var i=0; i<elems.length; i++) {
+            for (var i = 0; i < elems.length; i++) {
                 elems[i].style.display = style_mode;
             }
 }
@@ -82,7 +82,7 @@
             var display_style_mode = get_display_style(display_flag);
             var subgroup_style_mode = get_display_style(subgroup_flag);
             var elems = document.getElementsByClassName(classname)
-            for (var i=0; i<elems.length; i++) {
+            for (var i = 0; i < elems.length; i++) {
                 var style_mode = display_style_mode;
                 if ((display_flag != subgroup_flag) && (elems[i].getElementsByTagName('dt')[0].innerHTML.indexOf(", ") != -1)) {
                     elems[i].style.display = subgroup_style_mode;
@@ -96,7 +96,9 @@
     </script>
     <style type="text/css">
 #rspec-header {
-    background: #65C400; color: #fff; height: 4em;
+    background: #65C400;
+    color: #fff;
+    height: 4em;
 }
 
 .rspec-report h1 {
@@ -108,17 +110,17 @@
 }
 
 #label {
-    float:left;
+    float: left;
 }
 
 #display-filters {
-    float:left;
+    float: left;
     padding: 28px 0 0 40%;
     font-family: "Lucida Grande", Helvetica, sans-serif;
 }
 
 #summary {
-    float:right;
+    float: right;
     padding: 5px 10px;
     font-family: "Lucida Grande", Helvetica, sans-serif;
     text-align: right;
@@ -138,7 +140,8 @@
 }
 
 dl {
-    margin: 0; padding: 0 0 5px;
+    margin: 0;
+    padding: 0 0 5px;
     font: normal 11px "Lucida Grande", Helvetica, sans-serif;
 }
 
@@ -158,56 +161,69 @@ dd .duration {
     padding-left: 5px;
     text-align: right;
     right: 0px;
-    float:right;
+    float: right;
 }
 
 dd.example.passed {
     border-left: 5px solid #65C400;
     border-bottom: 1px solid #65C400;
-    background: #DBFFB4; color: #3D7700;
+    background: #DBFFB4;
+    color: #3D7700;
 }
 
 dd.example.not_implemented {
     border-left: 5px solid #FAF834;
     border-bottom: 1px solid #FAF834;
-    background: #FCFB98; color: #131313;
+    background: #FCFB98;
+    color: #131313;
 }
 
 dd.example.pending_fixed {
     border-left: 5px solid #0000C2;
     border-bottom: 1px solid #0000C2;
-    color: #0000C2; background: #D3FBFF;
+    color: #0000C2;
+    background: #D3FBFF;
 }
 
 dd.example.failed {
     border-left: 5px solid #C20000;
     border-bottom: 1px solid #C20000;
-    color: #C20000; background: #FFFBD3;
+    color: #C20000;
+    background: #FFFBD3;
 }
 
+
 dt.not_implemented {
-    color: #000000; background: #FAF834;
+    color: #000000;
+    background: #FAF834;
 }
 
 dt.pending_fixed {
-    color: #FFFFFF; background: #C40D0D;
+    color: #FFFFFF;
+    background: #C40D0D;
 }
 
 dt.failed {
-    color: #FFFFFF; background: #C40D0D;
+    color: #FFFFFF;
+    background: #C40D0D;
 }
 
+
 #rspec-header.not_implemented {
-    color: #000000; background: #FAF834;
+    color: #000000;
+    background: #FAF834;
 }
 
 #rspec-header.pending_fixed {
-    color: #FFFFFF; background: #C40D0D;
+    color: #FFFFFF;
+    background: #C40D0D;
 }
 
 #rspec-header.failed {
-    color: #FFFFFF; background: #C40D0D;
+    color: #FFFFFF;
+    background: #C40D0D;
 }
+
 
 .backtrace {
     color: #000;
@@ -265,9 +281,12 @@ a {
         </div>
 
         <div id="display-filters">
-            <input id="passed_checkbox" name="passed_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="1" /> <label for="passed_checkbox">Passed</label>
-            <input id="failed_checkbox" name="failed_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="2" /> <label for="failed_checkbox">Failed</label>
-            <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked" onchange="apply_filters()" value="3" /> <label for="pending_checkbox">Pending</label>
+            <input id="passed_checkbox" name="passed_checkbox" type="checkbox" checked="checked"
+                   onchange="apply_filters()" value="1"/> <label for="passed_checkbox">Passed</label>
+            <input id="failed_checkbox" name="failed_checkbox" type="checkbox" checked="checked"
+                   onchange="apply_filters()" value="2"/> <label for="failed_checkbox">Failed</label>
+            <input id="pending_checkbox" name="pending_checkbox" type="checkbox" checked="checked"
+                   onchange="apply_filters()" value="3"/> <label for="pending_checkbox">Pending</label>
         </div>
 
         <div id="summary">
@@ -280,160 +299,976 @@ a {
     <div class="results">
 <div id="div_group_1" class="example_group passed">
     <dl style="margin-left: 0px;">
-        <dt id="example_group_1" class="passed">Solution</dt>
+        <dt id="example_group_1" class="passed">ContestsController</dt>
     </dl>
 </div>
 <div id="div_group_2" class="example_group passed">
     <dl style="margin-left: 15px;">
-        <dt id="example_group_2" class="passed">Programming languages</dt>
+        <dt id="example_group_2" class="passed">GET #index</dt>
+        <script type="text/javascript">makeYellow('rspec-header');</script>
+        <script type="text/javascript">makeYellow('div_group_2');</script>
+        <script type="text/javascript">makeYellow('example_group_2');</script>
+        <script type="text/javascript">moveProgressBar('0.7');</script>
+        <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns all contests as @contests (PENDING: Temporarily skipped with xdescribe)</span>
+        </dd>
     </dl>
 </div>
 <div id="div_group_3" class="example_group passed">
-    <dl style="margin-left: 30px;">
-        <dt id="example_group_3" class="passed">Cpp</dt>
-        diff "/tmp/solution_176/team_solution.txt" "/tmp/solution_176/output.out" # files match
-        Files match exactly
-        <script type="text/javascript">moveProgressBar('5.2');</script>
-        <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp OK</span><span
-                class='duration'>3.94333s</span></dd>
-        ### files dont match - see output
-        *** /tmp/solution_177/team_solution.txt 2017-04-23 11:03:10.180451000 +0200
-        --- /tmp/solution_177/output.out 2017-04-23 11:03:09.684203000 +0200
-        ***************
-        *** 1 ****
-        ! Hello world
-        --- 1 ----
-        ! 1
-        Differences found
-        <script type="text/javascript">moveProgressBar('10.5');</script>
-        <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp WA</span><span
-                class='duration'>2.78991s</span></dd>
-        <script type="text/javascript">moveProgressBar('15.7');</script>
-        <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp CE</span><span
-                class='duration'>2.31264s</span></dd>
-        <script type="text/javascript">moveProgressBar('21.0');</script>
-        <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp RTE</span><span
-                class='duration'>2.48238s</span></dd>
-        <script type="text/javascript">moveProgressBar('26.3');</script>
-        <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp TLE</span><span
-                class='duration'>6.32023s</span></dd>
+    <dl style="margin-left: 15px;">
+        <dt id="example_group_3" class="passed">GET #show</dt>
+        <script type="text/javascript">makeYellow('rspec-header');</script>
+        <script type="text/javascript">makeYellow('div_group_3');</script>
+        <script type="text/javascript">makeYellow('example_group_3');</script>
+        <script type="text/javascript">moveProgressBar('1.5');</script>
+        <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+        </dd>
     </dl>
 </div>
         <div id="div_group_4" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_4" class="passed">GET #new</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_4');</script>
+                <script type="text/javascript">makeYellow('example_group_4');</script>
+                <script type="text/javascript">moveProgressBar('2.3');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a new contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_5" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_5" class="passed">GET #edit</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_5');</script>
+                <script type="text/javascript">makeYellow('example_group_5');</script>
+                <script type="text/javascript">moveProgressBar('3.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_6" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_6" class="passed">POST #create</dt>
+            </dl>
+        </div>
+        <div id="div_group_7" class="example_group passed">
             <dl style="margin-left: 30px;">
-                <dt id="example_group_4" class="passed">Java</dt>
-                diff "/tmp/solution_181/team_solution.txt" "/tmp/solution_181/output.out" # files match
-                Files match exactly
-                <script type="text/javascript">moveProgressBar('31.5');</script>
+                <dt id="example_group_7" class="passed">with valid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_7');</script>
+                <script type="text/javascript">makeYellow('example_group_7');</script>
+                <script type="text/javascript">moveProgressBar('3.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">creates a new Contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_7');</script>
+                <script type="text/javascript">makeYellow('example_group_7');</script>
+                <script type="text/javascript">moveProgressBar('4.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a newly created contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_7');</script>
+                <script type="text/javascript">makeYellow('example_group_7');</script>
+                <script type="text/javascript">moveProgressBar('5.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the created contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_8" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_8" class="passed">with invalid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_8');</script>
+                <script type="text/javascript">makeYellow('example_group_8');</script>
+                <script type="text/javascript">moveProgressBar('6.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a newly created but unsaved contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_8');</script>
+                <script type="text/javascript">makeYellow('example_group_8');</script>
+                <script type="text/javascript">moveProgressBar('6.9');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">re-renders the &#39;new&#39; template (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_9" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_9" class="passed">PUT #update</dt>
+            </dl>
+        </div>
+        <div id="div_group_10" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_10" class="passed">with valid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_10');</script>
+                <script type="text/javascript">makeYellow('example_group_10');</script>
+                <script type="text/javascript">moveProgressBar('7.7');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">updates the requested contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_10');</script>
+                <script type="text/javascript">makeYellow('example_group_10');</script>
+                <script type="text/javascript">moveProgressBar('8.5');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_10');</script>
+                <script type="text/javascript">makeYellow('example_group_10');</script>
+                <script type="text/javascript">moveProgressBar('9.3');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_11" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_11" class="passed">with invalid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_11');</script>
+                <script type="text/javascript">makeYellow('example_group_11');</script>
+                <script type="text/javascript">moveProgressBar('10.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the contest as @contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_11');</script>
+                <script type="text/javascript">makeYellow('example_group_11');</script>
+                <script type="text/javascript">moveProgressBar('10.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">re-renders the &#39;edit&#39; template (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_12" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_12" class="passed">DELETE #destroy</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_12');</script>
+                <script type="text/javascript">makeYellow('example_group_12');</script>
+                <script type="text/javascript">moveProgressBar('11.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">destroys the requested contest (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_12');</script>
+                <script type="text/javascript">makeYellow('example_group_12');</script>
+                <script type="text/javascript">moveProgressBar('12.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the contests list (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_13" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_13" class="passed">ProblemsController</dt>
+            </dl>
+        </div>
+        <div id="div_group_14" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_14" class="passed">GET #index</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_14');</script>
+                <script type="text/javascript">makeYellow('example_group_14');</script>
+                <script type="text/javascript">moveProgressBar('13.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns all problems as @problems (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_15" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_15" class="passed">GET #show</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_15');</script>
+                <script type="text/javascript">makeYellow('example_group_15');</script>
+                <script type="text/javascript">moveProgressBar('13.9');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_16" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_16" class="passed">GET #new</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_16');</script>
+                <script type="text/javascript">makeYellow('example_group_16');</script>
+                <script type="text/javascript">moveProgressBar('14.7');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a new problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_17" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_17" class="passed">GET #edit</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_17');</script>
+                <script type="text/javascript">makeYellow('example_group_17');</script>
+                <script type="text/javascript">moveProgressBar('15.5');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_18" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_18" class="passed">POST #create</dt>
+            </dl>
+        </div>
+        <div id="div_group_19" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_19" class="passed">with valid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_19');</script>
+                <script type="text/javascript">makeYellow('example_group_19');</script>
+                <script type="text/javascript">moveProgressBar('16.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">creates a new Problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_19');</script>
+                <script type="text/javascript">makeYellow('example_group_19');</script>
+                <script type="text/javascript">moveProgressBar('17.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a newly created problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_19');</script>
+                <script type="text/javascript">makeYellow('example_group_19');</script>
+                <script type="text/javascript">moveProgressBar('17.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the created problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_20" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_20" class="passed">with invalid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_20');</script>
+                <script type="text/javascript">makeYellow('example_group_20');</script>
+                <script type="text/javascript">moveProgressBar('18.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns a newly created but unsaved problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_20');</script>
+                <script type="text/javascript">makeYellow('example_group_20');</script>
+                <script type="text/javascript">moveProgressBar('19.3');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">re-renders the &#39;new&#39; template (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_21" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_21" class="passed">PUT #update</dt>
+            </dl>
+        </div>
+        <div id="div_group_22" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_22" class="passed">with valid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_22');</script>
+                <script type="text/javascript">makeYellow('example_group_22');</script>
+                <script type="text/javascript">moveProgressBar('20.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">updates the requested problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_22');</script>
+                <script type="text/javascript">makeYellow('example_group_22');</script>
+                <script type="text/javascript">moveProgressBar('20.9');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the requested problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_22');</script>
+                <script type="text/javascript">makeYellow('example_group_22');</script>
+                <script type="text/javascript">moveProgressBar('21.7');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_23" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_23" class="passed">with invalid params</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_23');</script>
+                <script type="text/javascript">makeYellow('example_group_23');</script>
+                <script type="text/javascript">moveProgressBar('22.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">assigns the problem as @problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_23');</script>
+                <script type="text/javascript">makeYellow('example_group_23');</script>
+                <script type="text/javascript">moveProgressBar('23.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">re-renders the &#39;edit&#39; template (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_24" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_24" class="passed">DELETE #destroy</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_24');</script>
+                <script type="text/javascript">makeYellow('example_group_24');</script>
+                <script type="text/javascript">moveProgressBar('24.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">destroys the requested problem (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_24');</script>
+                <script type="text/javascript">makeYellow('example_group_24');</script>
+                <script type="text/javascript">moveProgressBar('24.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the problems list (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_25" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_25" class="passed">SolutionsController</dt>
+            </dl>
+        </div>
+        <div id="div_group_26" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_26" class="passed">GET #index</dt>
+                <script type="text/javascript">moveProgressBar('25.5');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: java OK</span><span class='duration'>3.64576s</span>
+                        class="passed_spec_name">assigns all solutions as @solutions</span><span class='duration'>3.87715s</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_27" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_27" class="passed">GET #show</dt>
+                <script type="text/javascript">moveProgressBar('26.3');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">assigns the requested solution as @solution</span><span
+                        class='duration'>2.10532s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_28" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_28" class="passed">GET #new</dt>
+                <script type="text/javascript">moveProgressBar('27.1');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">assigns a new solution as @solution</span><span class='duration'>0.20498s</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_29" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_29" class="passed">POST #create</dt>
+            </dl>
+        </div>
+        <div id="div_group_30" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_30" class="passed">with valid params</dt>
+                <script type="text/javascript">moveProgressBar('27.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">creates a new Solution</span><span
+                        class='duration'>2.15609s</span></dd>
+                <script type="text/javascript">moveProgressBar('28.6');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">assigns a newly created solution as @solution</span><span
+                        class='duration'>1.91166s</span></dd>
+                <script type="text/javascript">moveProgressBar('29.4');</script>
+                <dd class="example passed"><span class="passed_spec_name">redirects to the created solution</span><span
+                        class='duration'>2.10087s</span></dd>
+                <script type="text/javascript">moveProgressBar('30.2');</script>
+                <dd class="example passed"><span class="passed_spec_name">add a new item to ExecutionsWorker</span><span
+                        class='duration'>1.98467s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_31" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_31" class="passed">with invalid params</dt>
+                <script type="text/javascript">moveProgressBar('31.0');</script>
+                <dd class="example passed"><span class="passed_spec_name">assigns a newly created but unsaved solution as @solution</span><span
+                        class='duration'>2.68186s</span></dd>
+                <script type="text/javascript">moveProgressBar('31.7');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">re-renders the &#39;new&#39; template</span><span class='duration'>2.59980s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_31');</script>
+                <script type="text/javascript">makeYellow('example_group_31');</script>
+                <script type="text/javascript">moveProgressBar('32.5');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">Not running contest (PENDING: Not yet implemented)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_32" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_32" class="passed">Without a valid session</dt>
+                <script type="text/javascript">moveProgressBar('33.3');</script>
+                <dd class="example passed"><span class="passed_spec_name">Dont create a new solution</span><span
+                        class='duration'>1.60269s</span></dd>
+                <script type="text/javascript">moveProgressBar('34.1');</script>
+                <dd class="example passed"><span class="passed_spec_name">redirects to the index</span><span
+                        class='duration'>1.55589s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_33" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_33" class="passed">DELETE #destroy</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_33');</script>
+                <script type="text/javascript">makeYellow('example_group_33');</script>
+                <script type="text/javascript">moveProgressBar('34.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">destroys the requested solution (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_33');</script>
+                <script type="text/javascript">makeYellow('example_group_33');</script>
+                <script type="text/javascript">moveProgressBar('35.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">redirects to the solutions list (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_34" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_34" class="passed">Ruby</dt>
+                <script type="text/javascript">moveProgressBar('36.4');</script>
+                <dd class="example passed"><span class="passed_spec_name">Create the solution</span><span
+                        class='duration'>1.95266s</span></dd>
+                <script type="text/javascript">moveProgressBar('37.2');</script>
+                <dd class="example passed"><span class="passed_spec_name">Creates a new run</span><span
+                        class='duration'>1.90053s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_35" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_35" class="passed">Solution</dt>
+            </dl>
+        </div>
+        <div id="div_group_36" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_36" class="passed">Programming languages</dt>
+            </dl>
+        </div>
+        <div id="div_group_37" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_37" class="passed">Cpp</dt>
+                diff "/tmp/solution_203/team_solution.txt" "/tmp/solution_203/output.out" # files match
+                Files match exactly
+                <script type="text/javascript">moveProgressBar('37.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp OK</span><span
+                        class='duration'>2.69468s</span></dd>
+                ### files dont match - see output
+                *** /tmp/solution_204/team_solution.txt 2017-04-23 15:36:35.543033000 +0200
+                --- /tmp/solution_204/output.out 2017-04-23 15:36:35.086805000 +0200
+                ***************
+                *** 1 ****
+                ! Hello world
+                --- 1 ----
+                ! 1
+                Differences found
+                <script type="text/javascript">moveProgressBar('38.7');</script>
+                <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp WA</span><span
+                        class='duration'>2.62117s</span></dd>
+                <script type="text/javascript">moveProgressBar('39.5');</script>
+                <dd class="example passed"><span class="passed_spec_name">Creates a execution result: cpp CE</span><span
+                        class='duration'>2.26123s</span></dd>
+                <script type="text/javascript">moveProgressBar('40.3');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">Creates a execution result: cpp RTE</span><span class='duration'>2.47849s</span>
+                </dd>
+                <script type="text/javascript">moveProgressBar('41.0');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">Creates a execution result: cpp TLE</span><span class='duration'>6.23097s</span>
+                </dd>
+            </dl>
+</div>
+        <div id="div_group_38" class="example_group passed">
+            <dl style="margin-left: 30px;">
+                <dt id="example_group_38" class="passed">Java</dt>
+                diff "/tmp/solution_208/team_solution.txt" "/tmp/solution_208/output.out" # files match
+                Files match exactly
+                <script type="text/javascript">moveProgressBar('41.8');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">Creates a execution result: java OK</span><span class='duration'>3.37714s</span>
                 </dd>
                 ### files dont match - see output
-                *** /tmp/solution_182/team_solution.txt 2017-04-23 11:03:28.657685000 +0200
-                --- /tmp/solution_182/output.out 2017-04-23 11:03:27.276995000 +0200
+                *** /tmp/solution_209/team_solution.txt 2017-04-23 15:36:53.419967000 +0200
+                --- /tmp/solution_209/output.out 2017-04-23 15:36:52.155335000 +0200
                 ***************
                 *** 1 ****
                 ! Hello world!
                 --- 1 ----
                 ! 1
                 Differences found
-                <script type="text/javascript">moveProgressBar('36.8');</script>
+                <script type="text/javascript">moveProgressBar('42.6');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: java WA</span><span class='duration'>3.76364s</span>
+                        class="passed_spec_name">Creates a execution result: java WA</span><span class='duration'>3.57373s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('42.1');</script>
+                <script type="text/javascript">moveProgressBar('43.4');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: java CE</span><span class='duration'>2.91093s</span>
+                        class="passed_spec_name">Creates a execution result: java CE</span><span class='duration'>2.82278s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('47.3');</script>
+                <script type="text/javascript">moveProgressBar('44.1');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: java RTE</span><span class='duration'>3.62978s</span>
+                        class="passed_spec_name">Creates a execution result: java RTE</span><span class='duration'>3.39853s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('52.6');</script>
+                <script type="text/javascript">moveProgressBar('44.9');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: java TLE</span><span class='duration'>35.69656s</span>
+                        class="passed_spec_name">Creates a execution result: java TLE</span><span class='duration'>35.43033s</span>
                 </dd>
             </dl>
 </div>
-        <div id="div_group_5" class="example_group passed">
+        <div id="div_group_39" class="example_group passed">
             <dl style="margin-left: 30px;">
-                <dt id="example_group_5" class="passed">Python</dt>
-                diff "/tmp/solution_186/team_solution.txt" "/tmp/solution_186/output.out" # files match
+                <dt id="example_group_39" class="passed">Python</dt>
+                diff "/tmp/solution_213/team_solution.txt" "/tmp/solution_213/output.out" # files match
                 Files match exactly
-                <script type="text/javascript">moveProgressBar('57.8');</script>
+                <script type="text/javascript">moveProgressBar('45.7');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python OK</span><span class='duration'>2.57988s</span>
+                        class="passed_spec_name">Creates a execution result: python OK</span><span class='duration'>2.28906s</span>
                 </dd>
                 ### files dont match - see output
-                *** /tmp/solution_187/team_solution.txt 2017-04-23 11:04:16.053371000 +0200
-                --- /tmp/solution_187/output.out 2017-04-23 11:04:16.005347000 +0200
+                *** /tmp/solution_214/team_solution.txt 2017-04-23 15:37:39.787139000 +0200
+                --- /tmp/solution_214/output.out 2017-04-23 15:37:39.743117000 +0200
                 ***************
                 *** 1 ****
                 ! Hello world
                 --- 1 ----
                 ! 1
                 Differences found
-                <script type="text/javascript">moveProgressBar('63.1');</script>
+                <script type="text/javascript">moveProgressBar('46.5');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python WA</span><span class='duration'>2.48183s</span>
+                        class="passed_spec_name">Creates a execution result: python WA</span><span class='duration'>2.35349s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('68.4');</script>
+                <script type="text/javascript">moveProgressBar('47.2');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python RTE</span><span class='duration'>2.35800s</span>
+                        class="passed_spec_name">Creates a execution result: python RTE</span><span class='duration'>2.21744s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('73.6');</script>
+                <script type="text/javascript">moveProgressBar('48.0');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python TLE</span><span class='duration'>6.50520s</span>
+                        class="passed_spec_name">Creates a execution result: python TLE</span><span class='duration'>6.24652s</span>
                 </dd>
             </dl>
 </div>
-        <div id="div_group_6" class="example_group passed">
+        <div id="div_group_40" class="example_group passed">
             <dl style="margin-left: 30px;">
-                <dt id="example_group_6" class="passed">Python3</dt>
-                diff "/tmp/solution_190/team_solution.txt" "/tmp/solution_190/output.out" # files match
+                <dt id="example_group_40" class="passed">Python3</dt>
+                diff "/tmp/solution_217/team_solution.txt" "/tmp/solution_217/output.out" # files match
                 Files match exactly
-                <script type="text/javascript">moveProgressBar('78.9');</script>
+                <script type="text/javascript">moveProgressBar('48.8');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python3 OK</span><span class='duration'>2.56119s</span>
+                        class="passed_spec_name">Creates a execution result: python3 OK</span><span class='duration'>2.35348s</span>
                 </dd>
                 ### files dont match - see output
-                *** /tmp/solution_191/team_solution.txt 2017-04-23 11:04:29.812247000 +0200
-                --- /tmp/solution_191/output.out 2017-04-23 11:04:29.760221000 +0200
+                *** /tmp/solution_218/team_solution.txt 2017-04-23 15:37:52.997741000 +0200
+                --- /tmp/solution_218/output.out 2017-04-23 15:37:52.949717000 +0200
                 ***************
                 *** 1 ****
                 ! Hello world
                 --- 1 ----
                 ! 1
                 Differences found
-                <script type="text/javascript">moveProgressBar('84.2');</script>
+                <script type="text/javascript">moveProgressBar('49.6');</script>
                 <dd class="example passed"><span
-                        class="passed_spec_name">Creates a execution result: python3 WA</span><span class='duration'>2.28602s</span>
+                        class="passed_spec_name">Creates a execution result: python3 WA</span><span class='duration'>2.31733s</span>
                 </dd>
-                <script type="text/javascript">moveProgressBar('89.4');</script>
+                <script type="text/javascript">moveProgressBar('50.3');</script>
                 <dd class="example passed"><span class="passed_spec_name">Creates a execution result: python3 RTE</span><span
-                        class='duration'>2.55752s</span></dd>
-                <script type="text/javascript">moveProgressBar('94.7');</script>
+                        class='duration'>2.22675s</span></dd>
+                <script type="text/javascript">moveProgressBar('51.1');</script>
                 <dd class="example passed"><span class="passed_spec_name">Creates a execution result: python3 TLE</span><span
-                        class='duration'>34.53209s</span></dd>
+                        class='duration'>34.26147s</span></dd>
             </dl>
 </div>
-        <div id="div_group_7" class="example_group passed">
+        <div id="div_group_41" class="example_group passed">
             <dl style="margin-left: 0px;">
-                <dt id="example_group_7" class="passed">Solution</dt>
+                <dt id="example_group_41" class="passed">Solution</dt>
             </dl>
 </div>
-        <div id="div_group_8" class="example_group passed">
+        <div id="div_group_42" class="example_group passed">
             <dl style="margin-left: 15px;">
-                <dt id="example_group_8" class="passed">12532 - Interval Product (UVA)</dt>
-                diff "/tmp/solution_194/team_solution.txt" "/tmp/solution_194/output.out" # files match
+                <dt id="example_group_42" class="passed">12532 - Interval Product (UVA)</dt>
+                diff "/tmp/solution_221/team_solution.txt" "/tmp/solution_221/output.out" # files match
                 Files match exactly
-                <script type="text/javascript">moveProgressBar('100.0');</script>
+                <script type="text/javascript">moveProgressBar('51.9');</script>
                 <dd class="example passed"><span class="passed_spec_name">Interval Product on cpp OK</span><span
-                        class='duration'>4.34148s</span></dd>
+                        class='duration'>4.15442s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_43" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_43" class="passed">Contest</dt>
+                <script type="text/javascript">moveProgressBar('52.7');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :title cannot be empty/falsy</span><span
+                        class='duration'>0.00941s</span></dd>
+                <script type="text/javascript">moveProgressBar('53.4');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :description cannot be empty/falsy</span><span
+                        class='duration'>0.00903s</span></dd>
+                <script type="text/javascript">moveProgressBar('54.2');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :difficulty cannot be empty/falsy</span><span
+                        class='duration'>0.00799s</span></dd>
+                <script type="text/javascript">moveProgressBar('55.0');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :startDate cannot be empty/falsy</span><span
+                        class='duration'>0.00899s</span></dd>
+                <script type="text/javascript">moveProgressBar('55.8');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :endDate cannot be empty/falsy</span><span
+                        class='duration'>0.00999s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_44" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_44" class="passed">Validates dates on contest</dt>
+                <script type="text/javascript">moveProgressBar('56.5');</script>
+                <dd class="example passed"><span class="passed_spec_name">Valid update or create</span><span
+                        class='duration'>0.00584s</span></dd>
+                <script type="text/javascript">moveProgressBar('57.3');</script>
+                <dd class="example passed"><span class="passed_spec_name">Invalid update or create</span><span
+                        class='duration'>0.00620s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_45" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_45" class="passed">Problem</dt>
+                <script type="text/javascript">moveProgressBar('58.1');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :name cannot be empty/falsy</span><span
+                        class='duration'>0.00943s</span></dd>
+                <script type="text/javascript">moveProgressBar('58.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :baseName cannot be empty/falsy</span><span
+                        class='duration'>0.01029s</span></dd>
+                <script type="text/javascript">moveProgressBar('59.6');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :timeLimit cannot be empty/falsy</span><span
+                        class='duration'>0.00864s</span></dd>
+                <script type="text/javascript">moveProgressBar('60.4');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :descriptionFile cannot be empty/falsy</span><span
+                        class='duration'>0.00840s</span></dd>
+                <script type="text/javascript">moveProgressBar('61.2');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :inputFile cannot be empty/falsy</span><span
+                        class='duration'>0.00989s</span></dd>
+                <script type="text/javascript">moveProgressBar('62.0');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :outputFile cannot be empty/falsy</span><span
+                        class='duration'>0.00886s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_46" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_46" class="passed">Validate time limit is a positive number</dt>
+                <script type="text/javascript">moveProgressBar('62.7');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :timeLimit looks like a number</span><span
+                        class='duration'>0.00859s</span></dd>
+                <script type="text/javascript">moveProgressBar('63.5');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">should not allow :timeLimit to be ‹-1›</span><span class='duration'>0.00801s</span>
+                </dd>
+                <script type="text/javascript">moveProgressBar('64.3');</script>
+                <dd class="example passed"><span
+                        class="passed_spec_name">should not allow :timeLimit to be ‹0›</span><span class='duration'>0.01004s</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_47" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_47" class="passed">Scoreboard</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_47');</script>
+                <script type="text/javascript">makeYellow('example_group_47');</script>
+                <script type="text/javascript">moveProgressBar('65.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">add some examples to (or delete) /home/tesis/JudgeProject/spec/models/scoreboard_spec.rb (PENDING: Not yet implemented)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_48" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_48" class="passed">Solution</dt>
+                <script type="text/javascript">moveProgressBar('65.8');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :user cannot be empty/falsy</span><span
+                        class='duration'>0.00958s</span></dd>
+                <script type="text/javascript">moveProgressBar('66.6');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :problem cannot be empty/falsy</span><span
+                        class='duration'>0.00862s</span></dd>
+                <script type="text/javascript">moveProgressBar('67.4');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :contest cannot be empty/falsy</span><span
+                        class='duration'>0.01125s</span></dd>
+                <script type="text/javascript">moveProgressBar('68.2');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :solutionFile cannot be empty/falsy</span><span
+                        class='duration'>0.00705s</span></dd>
+                <script type="text/javascript">moveProgressBar('68.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :language cannot be empty/falsy</span><span
+                        class='duration'>0.00748s</span></dd>
+                <script type="text/javascript">moveProgressBar('69.7');</script>
+                <dd class="example passed"><span class="passed_spec_name">should belong to user</span><span
+                        class='duration'>0.00505s</span></dd>
+                <script type="text/javascript">moveProgressBar('70.5');</script>
+                <dd class="example passed"><span class="passed_spec_name">should belong to problem</span><span
+                        class='duration'>0.00579s</span></dd>
+                <script type="text/javascript">moveProgressBar('71.3');</script>
+                <dd class="example passed"><span class="passed_spec_name">should belong to contest</span><span
+                        class='duration'>0.00501s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_49" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_49" class="passed">User</dt>
+                <script type="text/javascript">moveProgressBar('72.0');</script>
+                <dd class="example passed"><span class="passed_spec_name">should validate that :email cannot be empty/falsy</span><span
+                        class='duration'>0.00787s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_50" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_50" class="passed">Contests</dt>
+            </dl>
+        </div>
+        <div id="div_group_51" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_51" class="passed">GET /contests</dt>
+                <script type="text/javascript">moveProgressBar('72.8');</script>
+                <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span><span
+                        class='duration'>8.74625s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_52" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_52" class="passed">Problems</dt>
+            </dl>
+        </div>
+        <div id="div_group_53" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_53" class="passed">GET /problems</dt>
+                <script type="text/javascript">moveProgressBar('73.6');</script>
+                <dd class="example passed"><span class="passed_spec_name">works! (now write some real specs)</span><span
+                        class='duration'>0.52488s</span></dd>
+            </dl>
+        </div>
+        <div id="div_group_54" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_54" class="passed">Solutions</dt>
+            </dl>
+        </div>
+        <div id="div_group_55" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_55" class="passed">GET /solutions</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_55');</script>
+                <script type="text/javascript">makeYellow('example_group_55');</script>
+                <script type="text/javascript">moveProgressBar('74.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">works! (now write some real specs) (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_56" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_56" class="passed">Users</dt>
+            </dl>
+        </div>
+        <div id="div_group_57" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_57" class="passed">GET /users</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_57');</script>
+                <script type="text/javascript">makeYellow('example_group_57');</script>
+                <script type="text/javascript">moveProgressBar('75.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">works! (now write some real specs) (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_58" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_58" class="passed">ContestsController</dt>
+            </dl>
+        </div>
+        <div id="div_group_59" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_59" class="passed">routing</dt>
+                <script type="text/javascript">moveProgressBar('75.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #index</span><span class='duration'>0.00643s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('76.7');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #new (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">moveProgressBar('77.5');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #show</span><span class='duration'>0.00473s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('78.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #edit (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('79.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #create (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('79.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PUT (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('80.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PATCH (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_59');</script>
+                <script type="text/javascript">makeYellow('example_group_59');</script>
+                <script type="text/javascript">moveProgressBar('81.3');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #destroy (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_60" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_60" class="passed">ProblemsController</dt>
+            </dl>
+        </div>
+        <div id="div_group_61" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_61" class="passed">routing</dt>
+                <script type="text/javascript">moveProgressBar('82.1');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #index</span><span class='duration'>0.00620s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('82.9');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #new (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">moveProgressBar('83.7');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #show</span><span class='duration'>0.00494s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('84.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #edit (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('85.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #create (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('86.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PUT (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('86.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PATCH (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_61');</script>
+                <script type="text/javascript">makeYellow('example_group_61');</script>
+                <script type="text/javascript">moveProgressBar('87.5');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #destroy (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_62" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_62" class="passed">SolutionsController</dt>
+            </dl>
+        </div>
+        <div id="div_group_63" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_63" class="passed">routing</dt>
+                <script type="text/javascript">moveProgressBar('88.3');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #index</span><span class='duration'>0.00555s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('89.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #new (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">moveProgressBar('89.9');</script>
+                <dd class="example passed"><span class="passed_spec_name">routes to #show</span><span class='duration'>0.00633s</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('90.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #edit (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('91.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #create (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('92.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PUT (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('93.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PATCH (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_63');</script>
+                <script type="text/javascript">makeYellow('example_group_63');</script>
+                <script type="text/javascript">moveProgressBar('93.7');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #destroy (PENDING: Temporarily skipped with xit)</span>
+                </dd>
+            </dl>
+        </div>
+        <div id="div_group_64" class="example_group passed">
+            <dl style="margin-left: 0px;">
+                <dt id="example_group_64" class="passed">UsersController</dt>
+            </dl>
+        </div>
+        <div id="div_group_65" class="example_group passed">
+            <dl style="margin-left: 15px;">
+                <dt id="example_group_65" class="passed">routing</dt>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('94.5');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #index (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('95.3');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #new (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('96.1');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #show (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('96.8');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #edit (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('97.6');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #create (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('98.4');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PUT (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('99.2');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #update via PATCH (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
+                <script type="text/javascript">makeYellow('rspec-header');</script>
+                <script type="text/javascript">makeYellow('div_group_65');</script>
+                <script type="text/javascript">makeYellow('example_group_65');</script>
+                <script type="text/javascript">moveProgressBar('100.0');</script>
+                <dd class="example not_implemented"><span class="not_implemented_spec_name">routes to #destroy (PENDING: Temporarily skipped with xdescribe)</span>
+                </dd>
             </dl>
 </div>
-        <script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>127.95880 seconds</strong>";</script>
-        <script type="text/javascript">document.getElementById('totals').innerHTML = "19 examples, 0 failures";</script>
+        <script type="text/javascript">document.getElementById('duration').innerHTML = "Finished in <strong>161.23053 seconds</strong>";</script>
+        <script type="text/javascript">document.getElementById('totals').innerHTML = "129 examples, 0 failures, 64 pending";</script>
 </div>
 </div>
 </body>

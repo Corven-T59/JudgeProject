@@ -8,7 +8,7 @@ class CodeforcesWorker
 	 
 def perform
 
-		@last_check_time_unix = get_last_check_time		
+  @last_check_time_unix = get_last_check_time
 		save_last_check_time
 
 		Contest.all.each do |contest|
