@@ -2,6 +2,7 @@
 lock "3.8.1"
 
 set :application, "JudgeProject"
+
 set :repo_url, "https://github.com/Corven-T59/JudgeProject.git"
 
 # Default branch is :master
