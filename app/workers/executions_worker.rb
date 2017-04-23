@@ -68,8 +68,9 @@ END
         File.open(File.join(path_temp,team_solution_file), 'w') { |file| file.write(team_solution) }
         team_solution_file = File.join(path_temp, team_solution_file)
         compare = "#{compare_sh} #{team_solution_file} #{output_file} #{lang_name}"
-        Open3.popen3(compare) do |stdin, stdout, stderr, wait_thr|
-          exit_code = wait_thr.value.exitstatus
+        Open3.popen3(compare) do |c_stdin, c_stdout, c_stderr, c_wait_thr|
+          puts c_stdout.read
+          exit_code = c_wait_thr.value.exitstatus
           solution.status= exit_code
           solution.runtime = 0
           solution.save

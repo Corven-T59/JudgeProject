@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     get 'handles', on: :member
     resources :solutions, only: [:index, :show]
   end
+  get "/search", to: "welcome#search"
   resources :solutions, only: [:index, :show]
   resources :problems, only: [:index, :show]
   resources :executions, only: [:show, :index]

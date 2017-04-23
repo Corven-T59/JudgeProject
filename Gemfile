@@ -65,3 +65,6 @@ gem 'sidekiq'
 
 # Gem for bootstrap on sass
 gem "bootstrap-sass"
+
+# Tags
+gem 'acts-as-taggable-on', '~> 4.0'
