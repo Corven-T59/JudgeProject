@@ -1,6 +1,6 @@
 class ContestsController < ApplicationController
-  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
-  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard, :handles]
+  before_action :set_contest, only: [:show, :edit, :update, :destroy, :subscribe, :unsubscribe, :submit, :scoreboard, :handles, :problems]
+  before_action :is_admin, except: [:show, :index, :subscribe, :unsubscribe, :submit, :scoreboard, :handles, :problems]
   before_action :is_subscribed, only: [:submit]
 
   
@@ -88,6 +88,11 @@ class ContestsController < ApplicationController
     end
 
     
+  end
+
+  def problems
+    @problems = @contest.problems
+    render "problems/index"
   end
 
   def scoreboard

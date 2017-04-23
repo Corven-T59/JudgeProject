@@ -1,0 +1,33 @@
+<div class="top-space"> </div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= link_to 'Problemas', problems_path %> &raquo;  <%= problem.name %> <%= problem_actions problem%></h3>
+      </div>
+      <div class="panel-body">
+
+        <p>
+          <strong>Basename:</strong>
+          <%= problem.baseName %>
+        </p>
+
+        <p>
+          <strong>Color:</strong>
+          #<%= problem.color %>
+        </p>
+
+        <p>
+          <strong>Timelimit:</strong>
+          <%= problem.timeLimit %>
+        </p>
+
+        <p>
+          <strong>Descriptionfile:</strong>
+          <%= content_or_link(problem, :descriptionFile)%>
+        </p>
+
+      </div>
+    </div>
+  </div>
+</div>

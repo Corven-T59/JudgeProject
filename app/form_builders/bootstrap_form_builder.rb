@@ -44,12 +44,6 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def select name, items, *args
-    options = args.extract_options!
-    if options.has_key?(:class) then
-      options[:class] += " form-control"
-    else
-      options[:class] = "form-control"
-    end
     content_tag(:div, class: "form-group") do
       content_tag(:label, name.to_s.titleize, name: name) +
           super(name, items, {}, {:class => 'form-control'})

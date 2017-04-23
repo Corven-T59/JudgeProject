@@ -1,8 +1,5 @@
 <div class="fresh-table toolbar-color-red">
-
-  <div class="toolbar">
-    <%= link_to(image_tag("logo-red.png", height: "50px"), root_path) %>
-    <h4 class="btn btn-default no-padding no-margin medium" style="margin-top: 18px;">Scoreboard</h4>
+  <div class="toolbar" style="display: none">
   </div>
 
   <table id="fresh-table" class="table">
@@ -12,7 +9,6 @@
     <% @problems.each do |problem| %>
       <%= content_tag(:th,problem.name,data: {field: problem.baseName}) %>
     <% end %>
-    <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
     </thead>
     <tbody>
     <% u = @user_scores%>
@@ -29,4 +25,9 @@
     <% end %>
     </tbody>
   </table>
+</div>
+
+<!-- Div for modal -->
+<div id="modal_create_solution">
+  <%= render "contests/modal_form", contest: @contest %>
 </div>
