@@ -1,0 +1,4 @@
+:schedule:
+  test-codeforces:
+    every: 1m
+    class: CodeforcesWorker
