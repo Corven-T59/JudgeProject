@@ -29,14 +29,14 @@ RSpec.describe SolutionsController, type: :controller do
         contest: FactoryGirl.create(:contest),
         problem: FactoryGirl.create(:problem),
         language: :rb,
-        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec','support', 'files','ruby', 'source.rb'))
+        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
     }
   }
 
   let(:valid_for_create){
     {
         language: :rb,
-        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec','support', 'files','ruby', 'source.rb'))
+        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
     }
   }
 

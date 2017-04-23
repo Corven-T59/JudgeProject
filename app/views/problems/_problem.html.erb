@@ -27,6 +27,14 @@
           <%= content_or_link(problem, :descriptionFile)%>
         </p>
 
+        <% if problem.tags.size > 0 %>
+            <p>Tags:
+              <%= content_tag(:pre, content_tag(:code, problem.tags.join(", ")), class: "nohighlight") %>
+            </p>
+        <% else %>
+            <p>No hay tags para este problema.</p>
+        <% end %>
+
       </div>
     </div>
   </div>

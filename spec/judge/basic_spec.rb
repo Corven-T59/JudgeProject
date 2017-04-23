@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Solution, type: :model do
-  ["cpp", "java", "python", "python3"].each do |lang|
-    #  ["ruby", "csharp"].each do |lang|
-      describe "Programming languages" do
+  describe "Programming languages" do
+    ["cpp", "java", "python", "python3"].each do |lang|
+      #  ["ruby", "csharp"].each do |lang|
       context lang.capitalize do
         it "Creates a execution result: #{lang} OK" do
           Sidekiq::Testing.inline!
@@ -35,5 +35,4 @@ RSpec.describe Solution, type: :model do
       end
     end
   end
-
 end
