@@ -63,6 +63,15 @@ gem 'carrierwave', '~> 1.0'
 # background async process
 gem 'sidekiq'
 
+# rest clien
+gem 'rest-client'
+
+# rest data manipulation
+gem 'json'
+
+# scheduled updates
+gem 'sidekiq-scheduler'
+
 # Gem for bootstrap on sass
 gem "bootstrap-sass"
 
