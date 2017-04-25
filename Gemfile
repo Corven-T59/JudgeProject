@@ -48,7 +48,6 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'hirb'
-  gem 'capistrano-sidekiq'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -87,4 +86,10 @@ group :development do
 
   # Add this if you're using rbenv
   gem 'capistrano-rbenv'
+
+  # Sidekiq
+  gem 'capistrano-sidekiq'
+
+  # Bundler
+  gem 'capistrano-bundler'
 end
