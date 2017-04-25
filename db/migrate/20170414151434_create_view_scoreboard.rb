@@ -10,7 +10,7 @@ SELECT
   SUM(solutions.status <> 4) as inconrrect,
   MAX(solutions.created_at) as sent_time
 FROM
-  JudgeProject_development.solutions
+  solutions
   INNER JOIN
     `users` ON `users`.`id` = `solutions`.`user_id`
 WHERE
