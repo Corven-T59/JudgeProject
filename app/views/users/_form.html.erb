@@ -1,23 +1,48 @@
-<%= form_for(user, html: { multipart: true }) do |f| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="top-space"> </div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-heading" style="background-color: #1c3b6d;">
+        <h3 class="panel-title white-text"><%= link_to 'Usuarios', users_path %> &raquo;  <%= user.email %> </h3>
+      </div>
+      <div class="panel-body">
+        <%= form_for(user, html: { multipart: true }, builder: BootstrapFormBuilder) do |f| %>
+          <% if user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-      <ul>
-      <% user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+              <ul>
+              <% user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :admin %>            
+            <%= f.toggle_button :admin %>
+          </div>
+
+          
+          <div class="actions">
+            <%= f.submit "Confirmar" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :admin %>
-    <%= f.check_box :admin %>
   </div>
+</div>
 
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+
+
+
+
+
+
+
+ 
+
+
+
+

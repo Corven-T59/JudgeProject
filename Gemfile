@@ -78,6 +78,9 @@ gem "bootstrap-sass"
 # Tags
 gem 'acts-as-taggable-on', '~> 4.0'
 
+# Display model as pages
+gem 'kaminari'
+
 group :development do
   # Use capistrano for deploy
   gem 'capistrano'
