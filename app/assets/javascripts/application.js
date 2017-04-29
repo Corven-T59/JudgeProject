@@ -17,6 +17,7 @@
 //= require bootstrap
 //= require material
 //= require ripples
+//= require snackbar.min
 //= require bootstrap-table
 //
 //= require moment
