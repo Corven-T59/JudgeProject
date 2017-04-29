@@ -7,6 +7,7 @@ class ContestsController < ApplicationController
   # GET /contests
   # GET /contests.json
   def index
+    @new_contest = Contest.new
     @contests = Contest.order(startDate: :desc).page params[:page]
   end
 
@@ -91,7 +92,7 @@ class ContestsController < ApplicationController
   end
 
   def problems
-    @problems = @contest.problems
+    @problems = @contest.problems.page params[:page]
     render "problems/index"
   end
 
