@@ -7,7 +7,7 @@ class ContestsController < ApplicationController
   # GET /contests
   # GET /contests.json
   def index
-    @contests = Contest.order(startDate: :desc).all
+    @contests = Contest.order(startDate: :desc).page params[:page]
   end
 
   # GET /contests/1
@@ -24,7 +24,7 @@ class ContestsController < ApplicationController
 
   # GET /contests/1/edit
   def edit
-    if @contest.state != 0
+    if @contest.status != 0
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'You can only edit a contest that has not started yet' }
           format.json { render json: @contest_state, status: :forbidden }

@@ -59,20 +59,20 @@ ActiveRecord::Schema.define(version: 20170422212741) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "contest_id"
-    t.integer  "status"
-    t.integer  "runtime"
+    t.integer  "status",       null: false
+    t.integer  "runtime",      null: false
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree
   end
 
   create_table "taggings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "tag_id"
-    t.string "taggable_type"
-    t.integer "taggable_id"
-    t.string "tagger_type"
-    t.integer "tagger_id"
-    t.string "context", limit: 128
+    t.integer  "tag_id"
+    t.string   "taggable_type"
+    t.integer  "taggable_id"
+    t.string   "tagger_type"
+    t.integer  "tagger_id"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
     t.index ["context"], name: "index_taggings_on_context", using: :btree
     t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20170422212741) do
   end
 
   create_table "tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name", collation: "utf8_bin"
+    t.string  "name",                       collation: "utf8_bin"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true, using: :btree
   end
@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 20170422212741) do
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.boolean  "admin",                  default: false
-    t.string "handle"
+    t.string   "handle"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

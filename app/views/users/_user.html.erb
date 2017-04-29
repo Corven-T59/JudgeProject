@@ -1,16 +1,15 @@
-
 <div class="top-space"> </div>
 <div class="row no-float">
   <div class="col-md-10 col-md-offset-1">
     <div class="panel">
       <div class="panel-heading" style="background-color: #1c3b6d;">
-        <h3 class="panel-title white-text"><%= link_to 'Usuarios', users_path %> &raquo;  <%= @user.email %> </h3>
+        <h3 class="panel-title white-text"><%= link_to 'Usuarios', users_path %> &raquo;  <%= user.email %> </h3>
       </div>
       <div class="panel-body">
 
         <p>
           <strong>Administrator:</strong>
-          <%= @user.admin %>
+          <%= user.admin %>
         </p>
       </div>
     </div>
@@ -23,7 +22,3 @@
 
 
 
-
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
