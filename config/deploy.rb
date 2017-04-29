@@ -10,7 +10,7 @@ set :repo_url, "https://github.com/Corven-T59/JudgeProject.git"
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/JudgeProject"
-set :sidekiq_default_hooks, false
+
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
