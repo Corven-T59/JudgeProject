@@ -3,7 +3,7 @@
   <div class="col-md-10 col-md-offset-1">
     <div class="panel">
       <div class="panel-heading" style="background-color: #1c3b6d;">
-        <h3 class="panel-title white-text"><%= link_to 'Competencias', contest_path %> &raquo;  <%= @contest.title %> <%= contest_actions @contest %></h3>
+        <h3 class="panel-title white-text"><%= link_to 'Competencias', contest_path %> &raquo;  <%= @contest.title %> </h3>
       </div>
       <div class="panel-body">
         <p>
@@ -32,6 +32,9 @@
               <br/>
           <% end %>
         </p>
+      </div>
+      <div class="panel-footer">
+        <%= contest_actions_links @contest %>
       </div>
     </div>
   </div>
