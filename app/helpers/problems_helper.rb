@@ -6,4 +6,28 @@ module ProblemsHelper
       link_to("File", object.send(uploader).url)
     end
   end
+
+  def display_add_problem_button
+    if user_can_edit && @contest == nil
+      content_tag(:div, class: "top-float-button") do
+        content_tag(:a, content_tag(:i, "add", class: "material-icons"), class: "btn btn-danger btn-fab", style: "background-color: #CC342D;", "data-toggle": "modal", "data-target": "#myModal")
+      end
+    
+    end
+  end
+
+  def create_problem_modal_body new_problem
+    if @contest == nil
+    	form_for(new_problem, html: {multipart: true}, builder: BootstrapFormBuilder) do |f|
+    		content_tag(:div, class: "modal-body") do
+    			render :partial => "problems/fields", :locals => {:f => f} 
+    		end +
+    		
+    		content_tag(:div, class: "modal-footer") do
+    			content_tag(:button, "Cerrar", class: "btn btn-default", "data-dismiss": "modal") +		
+    			button_tag("Crear", class: "btn btn-primary")
+    		end
+      end
+    end
+  end
 end

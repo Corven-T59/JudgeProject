@@ -48,8 +48,18 @@ module ApplicationHelper
   %w(problem contest).each do |model|
     define_method "#{model.underscore}_actions" do |param|
       if user_can_edit
-        icon_link("glyphicon-pencil", send("edit_#{model}_path",param)) + " " +
-            icon_link("glyphicon-remove", param, method: :delete, data: { confirm: 'Estás seguro?' })
+        content_tag(:ul, class: "list-inline") do
+          links = ""
+          links += content_tag (:li) do
+            icon_link("glyphicon-pencil", send("edit_#{model}_path",param)) + 
+            content_tag(:span, "Editar")            
+          end
+          links += content_tag(:li) do
+            icon_link("glyphicon-remove", param, method: :delete, data: { confirm: 'Estás seguro?' }) +
+            content_tag(:span, "Eliminar")
+          end
+          links.html_safe
+        end       
       end
     end
   end

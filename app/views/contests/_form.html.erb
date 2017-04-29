@@ -1,17 +1,6 @@
 <%= form_for(contest, builder: BootstrapFormBuilder) do |f| %>
 
-    <%= f.errors %>
-    <%= f.text_field :title %>
-    <%= f.text_area :description %>
-    <%= f.select :difficulty, Contest.difficulties.keys %>
-    <%= f.bootstrap_datetime :startDate%>
-    <%= f.bootstrap_datetime :endDate %>
-
-
-    <div class="field">
-      <h4>Problemas del contest: </h4>
-      <%= collection_check_boxes(:contest, :problem_ids, Problem.all, :id, :name) %>
-    </div>
+    <%= render "contests/fields", f: f %>
     <%= f.submit "Guardar" %>
 
 <% end %>
