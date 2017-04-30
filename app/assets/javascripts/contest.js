@@ -10,5 +10,6 @@ $(document).on("turbolinks:load", function () {
 
     $("#new_solution").on("ajax:error", function(e, xhr, status, error){
         alert("Fail");
+        alert(error)
     });
 });

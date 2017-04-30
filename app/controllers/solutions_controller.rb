@@ -1,5 +1,5 @@
 class SolutionsController < ApplicationController
-  respond_to :html, :js, :json
+
   before_action :set_solution, only: [:show, :edit, :update, :destroy]
   before_action :set_contest
   before_action :authenticate_user!, only: [:create, :new]
@@ -27,7 +27,7 @@ class SolutionsController < ApplicationController
     @solution.user = current_user
     respond_to do |format|
       if @solution.save
-        format.js { render "solutions/create" }
+        format.js
         format.html { redirect_to [@contest, @solution], notice: 'Solution was successfully created.' }
         format.json { render :show, status: :created, location: @solution }
       else

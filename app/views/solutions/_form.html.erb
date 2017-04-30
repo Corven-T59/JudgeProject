@@ -1,16 +1,18 @@
-<%= form_for([@contest,solution], builder: BootstrapFormBuilder,
-    remote: remote ||= false,
-    authenticity_token: true) do |f| %>
+<%= form_for([@contest, solution],
+             remote: true,
+             html: {:multipart => true},
+             builder: BootstrapFormBuilder,
+             authenticity_token: true) do |f| %>
+
   <%= f.errors %>
   <%=
-  content_tag(:div, class: "form-group") do
-    content_tag(:label, "Problema", name: :problem_id) +
-     f.collection_select(:problem_id, @contest.problems, :id, :name,{}, {class: :"form-control"})
+    content_tag(:div, class: 'form-group') do
+      content_tag(:label, 'Problema', name: :problem_id) +
+          f.collection_select(:problem_id, @contest.problems, :id, :name, {}, {class: :'form-control'})
   end
   %>
   <%= f.file_field :solutionFile %>
   <%= f.select :language, Solution.languages.keys %>
-    Remote. <%= remote %>
-  <%= f.submit "Enviar"%>
+    <%= f.submit 'Enviar' %>
 
 <% end %>
