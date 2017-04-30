@@ -59,7 +59,7 @@ gem 'devise'
 
 # file uploads
 gem 'carrierwave', '~> 1.0'
-
+gem 'remotipart', '~> 1.2' # File uploads trough AJAX request
 # background async process
 gem 'sidekiq'
 

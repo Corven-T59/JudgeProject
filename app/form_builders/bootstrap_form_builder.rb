@@ -38,8 +38,10 @@ class BootstrapFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(*args)
+    options = args.extract_options!
+    options["class"] = "btn btn-default green white-text";
     content_tag(:div) do
-      super(args, class: "btn btn-default green white-text")
+      super(args, options)
     end
   end
 
