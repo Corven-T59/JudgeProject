@@ -1,5 +1,20 @@
 # README
 
+This is a RubyOnRails judge for coding contest, this is part of Aldo Rincon Mora and Diego Andres Tarazona Orduz bachelor degree project, it uses Rails 5.0.2.
+
+The code is write to linux enviroments, tested using Ubuntu Server 16.10, if you want use a different OS you sould be sure make the configuration by your self.
+
+1. Install safeexec
+
+The source code for safeexec is located lib/judge/safeexec.c and build with the following commands
+```bash
+ gcc -Wall -o safeexec safeexec.c
+ chown root.root safeexec
+ chmod 4555 safeexec
+```
+and move the new safeexec binary to /usr/bin folder.
+
+To install all the RoR dependencies run the command bundle install. 
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
