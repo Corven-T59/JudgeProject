@@ -9,10 +9,9 @@ module ProblemsHelper
 
   def display_add_problem_button
     if user_can_edit && @contest == nil
-      content_tag(:div, class: "top-float-button") do
+      content_tag(:div, class: "top-float-button top-space") do
         content_tag(:a, content_tag(:i, "add", class: "material-icons"), class: "btn btn-danger btn-fab", style: "background-color: #CC342D;", "data-toggle": "modal", "data-target": "#myModal")
       end
-    
     end
   end
 

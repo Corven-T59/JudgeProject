@@ -81,6 +81,8 @@ gem 'acts-as-taggable-on', '~> 4.0'
 # Display model as pages
 gem 'kaminari'
 
+# Rails internationalization
+gem 'rails-i18n', '~> 5.0.0'
 group :development do
   # Use capistrano for deploy
   gem 'capistrano'

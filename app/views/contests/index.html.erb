@@ -1,15 +1,18 @@
-<div class="top-space"></div>
+
 <% if user_can_edit %>
-    <div class="top-float-button">
+    <div class="top-float-button top-space">
       <a class="btn btn-danger btn-fab" style="background-color: #CC342D;" data-toggle="modal" data-target="#myModal">
         <i class="material-icons">add</i>
       </a>
     </div>
 <% end %>
-
-<%= render @contests %>
-<%= paginate @contests %>
-
+<% if @contests.length > 0 %>
+    <div class="top-space"></div>
+    <%= render @contests %>
+    <%= paginate @contests %>
+<% else %>
+    <%= render "shared/empty_collection" %>
+<% end %>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
