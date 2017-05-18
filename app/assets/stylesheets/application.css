@@ -16,6 +16,7 @@
  *= require fresh-bootstrap-table
  *= require pe-icon-7-stroke
  *= require highlightjs
+ *= require snackbar.css
  *= require_tree .
  *= require_self
  */

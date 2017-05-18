@@ -12,11 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require turbolinks
 //= require arrive.min
 //= require bootstrap
 //= require material
 //= require ripples
+//= require snackbar.min
 //= require bootstrap-table
 //
 //= require moment

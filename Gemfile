@@ -59,7 +59,7 @@ gem 'devise'
 
 # file uploads
 gem 'carrierwave', '~> 1.0'
-
+gem 'remotipart', '~> 1.2' # File uploads trough AJAX request
 # background async process
 gem 'sidekiq'
 
@@ -91,4 +91,10 @@ group :development do
 
   # Add this if you're using rbenv
   gem 'capistrano-rbenv'
+
+  # Sidekiq
+  gem 'capistrano-sidekiq'
+
+  # Bundler
+  gem 'capistrano-bundler'
 end

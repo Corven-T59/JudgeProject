@@ -2,6 +2,9 @@ set :stage, :production
 
 server "207.248.81.91", user: "deploy", roles: %w{app db web}
 
+set :pty, false
+set :sidekiq_role, :web
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.
