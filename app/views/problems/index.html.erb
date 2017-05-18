@@ -1,9 +1,11 @@
-<div class="top-space"></div>
 <%= display_add_problem_button %>
-
-<%= render  @problems %>
-<%= paginate @problems %>
-
+<% if @problems.size > 0 %>
+    <div class="top-space"></div>
+    <%= render @problems %>
+    <%= paginate @problems %>
+<% else %>
+    <%= render "shared/empty_collection" %>
+<% end %>
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">

@@ -2,8 +2,12 @@
 <%= f.text_field :title %>
 <%= f.text_area :description %>
 <%= f.select :difficulty, Contest.difficulties.keys %>
-<%= f.bootstrap_datetime :startDate%>
-<%= f.bootstrap_datetime :endDate %>
+
+<%= f.label :startDate %><br>
+<%= f.datetime_select :startDate %>
+<br>
+<%= f.label :endDate %><br>
+<%= f.datetime_select :endDate %>
 
 
 <div class="field">
