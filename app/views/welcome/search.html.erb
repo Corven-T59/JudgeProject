@@ -1,2 +1,6 @@
-<h1>Searching for: <%= @serach_name %></h1>
-<%= render @problems %>
+<% if @problems.size > 0 %>
+    <h1>Searching for: <%= @serach_name %></h1>
+    <%= render @problems %>
+<% else %>
+    <%= render "shared/empty_collection", message: ("Ups, la búsqueda de \""+@serach_name+ "\" no tuvo ningún resultado") %>
+<% end %>
