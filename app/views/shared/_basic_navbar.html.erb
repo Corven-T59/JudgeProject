@@ -12,17 +12,18 @@
       <ul class="nav navbar-nav">
         <li class="<%= 'active' if controller_name == 'contests' %>"><%= link_to "Competencias", contests_path %></li>
         <li class="<%= 'active' if controller_name == 'problems' %>"><%= link_to "Problemas", problems_path %></li>
+        <% if admin %>
+            <li class="<%= 'active' if controller_name == 'users' %>"><%= link_to "Usuarios", users_path %></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <%= user_menu %>
       </ul>
-
       <%= form_tag("/search", method: :get, class: "navbar-form navbar-right") do |f| %>
           <p>
             <%= text_field_tag :search, params[:search], class: "form-control col-md-8", placeholder: "Busqueda" %>
           </p>
       <% end %>
-
     </div>
   </div>
 </div>
