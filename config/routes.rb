@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:index, :show]
 
 
   unauthenticated :user do
@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       resources :solutions, only: [:create, :new]
     end
     resources :problems, except: [:index, :show]
-    resources :users, only: [:index]
+    resources :users, only: [:edit, :update]
     root "welcome#index"
   end
 

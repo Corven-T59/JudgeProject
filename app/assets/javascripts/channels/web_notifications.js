@@ -15,8 +15,8 @@ App.web_notifications = App.cable.subscriptions.create("WebNotificationsChannel"
             content: data["message"], // text of the snackbar
             style: "snackbar", // add a custom class to your snackbar
             timeout: 8000 // time in milliseconds after the snackbar autohides, 0 is disabled
-        }
-
+        };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
         $.snackbar(options);
+        location.reload();
     }
 });

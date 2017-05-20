@@ -7,10 +7,10 @@ class ApplicationController < ActionController::Base
     def is_admin
     	if current_user != nil
 	  	  	if !current_user.admin
-	    		redirect_to root_path, :alert => "Access denied"
+            redirect_to root_path, :alert => "Acceso denegado"
 	      	end
 		  else
-					redirect_to root_path, :alert => "Access denied"
+        redirect_to root_path, :alert => "Acceso denegado"
 		  end
   		
 

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_users, only: [:index]
 	before_action :set_user, except: [:index]
-	before_action :is_admin
+  before_action :is_admin, except: [:index, :show]
 
   def index
 

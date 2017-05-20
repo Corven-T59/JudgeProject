@@ -23,9 +23,13 @@ RSpec.describe ContestsController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # Contest. As you add validations to Contest, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) { {
+      title: "Test title",
+      description: "Test description",
+      difficulty: "easy",
+      startDate: DateTime.now + 1.hour,
+      endDate: DateTime.now + 3.hours
+  } }
   let(:valid_for_create_solution){
     {
         language: :rb,
@@ -33,7 +37,12 @@ RSpec.describe ContestsController, type: :controller do
     }
   }
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+        title: "",
+        description: "",
+        startDate: (DateTime.now - 1.seconds),
+        endDate: DateTime.now - 1.minute
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -41,92 +50,97 @@ RSpec.describe ContestsController, type: :controller do
   # ContestsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  xdescribe "GET #index" do
+  describe "GET #index" do
     it "assigns all contests as @contests" do
-      contest = Contest.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      contest = FactoryGirl.create(:contest)
+      get :index
       expect(assigns(:contests)).to eq([contest])
     end
   end
 
-  xdescribe "GET #show" do
+  describe "GET #show" do
     it "assigns the requested contest as @contest" do
-      contest = Contest.create! valid_attributes
-      get :show, params: {id: contest.to_param}, session: valid_session
+      contest = FactoryGirl.create(:contest)
+      get :show, params: {id: contest.to_param}
       expect(assigns(:contest)).to eq(contest)
     end
   end
 
-  xdescribe "GET #new" do
+  describe "GET #new" do
+    login_admin
     it "assigns a new contest as @contest" do
-      get :new, params: {}, session: valid_session
+      get :new, params: {}
       expect(assigns(:contest)).to be_a_new(Contest)
     end
   end
 
-  xdescribe "GET #edit" do
+  describe "GET #edit" do
+    login_admin
     it "assigns the requested contest as @contest" do
-      contest = Contest.create! valid_attributes
-      get :edit, params: {id: contest.to_param}, session: valid_session
+      contest = FactoryGirl.create(:contest)
+      get :edit, params: {id: contest.to_param}
       expect(assigns(:contest)).to eq(contest)
     end
   end
 
-  xdescribe "POST #create" do
+  describe "POST #create" do
     context "with valid params" do
+      login_admin
       it "creates a new Contest" do
         expect {
-          post :create, params: {contest: valid_attributes}, session: valid_session
+          post :create, params: {contest: valid_attributes}
         }.to change(Contest, :count).by(1)
       end
 
       it "assigns a newly created contest as @contest" do
-        post :create, params: {contest: valid_attributes}, session: valid_session
+        post :create, params: {contest: valid_attributes}
         expect(assigns(:contest)).to be_a(Contest)
         expect(assigns(:contest)).to be_persisted
       end
 
       it "redirects to the created contest" do
-        post :create, params: {contest: valid_attributes}, session: valid_session
+        post :create, params: {contest: valid_attributes}
         expect(response).to redirect_to(Contest.last)
       end
     end
 
     context "with invalid params" do
+      login_admin
       it "assigns a newly created but unsaved contest as @contest" do
-        post :create, params: {contest: invalid_attributes}, session: valid_session
+        post :create, params: {contest: invalid_attributes}
         expect(assigns(:contest)).to be_a_new(Contest)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: {contest: invalid_attributes}, session: valid_session
+        post :create, params: {contest: invalid_attributes}
         expect(response).to render_template("new")
       end
     end
   end
 
-  xdescribe "PUT #update" do
+  describe "PUT #update" do
+    login_admin
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {title: "Update the title"}
       }
 
       it "updates the requested contest" do
         contest = Contest.create! valid_attributes
-        put :update, params: {id: contest.to_param, contest: new_attributes}, session: valid_session
+        put :update, params: {id: contest.to_param, contest: new_attributes}
         contest.reload
-        skip("Add assertions for updated state")
+        expect(contest.title).to eq("Update the title")
       end
 
       it "assigns the requested contest as @contest" do
         contest = Contest.create! valid_attributes
-        put :update, params: {id: contest.to_param, contest: valid_attributes}, session: valid_session
+        put :update, params: {id: contest.to_param, contest: valid_attributes}
         expect(assigns(:contest)).to eq(contest)
       end
 
       it "redirects to the contest" do
         contest = Contest.create! valid_attributes
-        put :update, params: {id: contest.to_param, contest: valid_attributes}, session: valid_session
+        put :update, params: {id: contest.to_param, contest: valid_attributes}
         expect(response).to redirect_to(contest)
       end
     end
@@ -134,30 +148,34 @@ RSpec.describe ContestsController, type: :controller do
     context "with invalid params" do
       it "assigns the contest as @contest" do
         contest = Contest.create! valid_attributes
-        put :update, params: {id: contest.to_param, contest: invalid_attributes}, session: valid_session
+        put :update, params: {id: contest.to_param, contest: invalid_attributes}
         expect(assigns(:contest)).to eq(contest)
       end
 
       it "re-renders the 'edit' template" do
         contest = Contest.create! valid_attributes
-        put :update, params: {id: contest.to_param, contest: invalid_attributes}, session: valid_session
+        put :update, params: {id: contest.to_param, contest: invalid_attributes}
         expect(response).to render_template("edit")
       end
     end
   end
 
-  xdescribe "DELETE #destroy" do
+  describe "DELETE #destroy" do
+    login_admin
     it "destroys the requested contest" do
       contest = Contest.create! valid_attributes
       expect {
-        delete :destroy, params: {id: contest.to_param}, session: valid_session
+        delete :destroy, params: {id: contest.to_param}
       }.to change(Contest, :count).by(-1)
     end
 
     it "redirects to the contests list" do
       contest = Contest.create! valid_attributes
-      delete :destroy, params: {id: contest.to_param}, session: valid_session
+      delete :destroy, params: {id: contest.to_param}
       expect(response).to redirect_to(contests_url)
     end
+  end
+
+  describe "Actions without valid session" do
   end
 end

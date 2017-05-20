@@ -24,11 +24,22 @@ RSpec.describe ProblemsController, type: :controller do
   # Problem. As you add validations to Problem, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+        name: "Test problem",
+        baseName: "source",
+        timeLimit: 2,
+        descriptionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'desc.txt')),
+        inputFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'input.in')),
+        outputFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'output.out'))
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+        name: "Test problem",
+        baseName: "",
+        timeLimit: -1,
+    }
   }
 
   # This should return the minimal set of values that should be in the session
@@ -36,92 +47,96 @@ RSpec.describe ProblemsController, type: :controller do
   # ProblemsController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  xdescribe "GET #index" do
+  describe "GET #index" do
     it "assigns all problems as @problems" do
-      problem = Problem.create! valid_attributes
+      problem = FactoryGirl.create(:problem)
       get :index, params: {}, session: valid_session
       expect(assigns(:problems)).to eq([problem])
     end
   end
 
-  xdescribe "GET #show" do
+  describe "GET #show" do
     it "assigns the requested problem as @problem" do
-      problem = Problem.create! valid_attributes
+      problem = FactoryGirl.create(:problem)
       get :show, params: {id: problem.to_param}, session: valid_session
       expect(assigns(:problem)).to eq(problem)
     end
   end
 
-  xdescribe "GET #new" do
+  describe "GET #new" do
+    login_admin
     it "assigns a new problem as @problem" do
-      get :new, params: {}, session: valid_session
+      get :new, params: {}
       expect(assigns(:problem)).to be_a_new(Problem)
     end
   end
 
-  xdescribe "GET #edit" do
+  describe "GET #edit" do
+    login_admin
     it "assigns the requested problem as @problem" do
-      problem = Problem.create! valid_attributes
-      get :edit, params: {id: problem.to_param}, session: valid_session
+      problem = FactoryGirl.create(:problem)
+      get :edit, params: {id: problem.to_param}
       expect(assigns(:problem)).to eq(problem)
     end
   end
 
-  xdescribe "POST #create" do
+  describe "POST #create" do
+    login_admin
     context "with valid params" do
       it "creates a new Problem" do
         expect {
-          post :create, params: {problem: valid_attributes}, session: valid_session
+          post :create, params: {problem: valid_attributes}
         }.to change(Problem, :count).by(1)
       end
 
       it "assigns a newly created problem as @problem" do
-        post :create, params: {problem: valid_attributes}, session: valid_session
+        post :create, params: {problem: valid_attributes}
         expect(assigns(:problem)).to be_a(Problem)
         expect(assigns(:problem)).to be_persisted
       end
 
       it "redirects to the created problem" do
-        post :create, params: {problem: valid_attributes}, session: valid_session
+        post :create, params: {problem: valid_attributes}
         expect(response).to redirect_to(Problem.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved problem as @problem" do
-        post :create, params: {problem: invalid_attributes}, session: valid_session
+        post :create, params: {problem: invalid_attributes}
         expect(assigns(:problem)).to be_a_new(Problem)
       end
 
       it "re-renders the 'new' template" do
-        post :create, params: {problem: invalid_attributes}, session: valid_session
+        post :create, params: {problem: invalid_attributes}
         expect(response).to render_template("new")
       end
     end
   end
 
-  xdescribe "PUT #update" do
+  describe "PUT #update" do
+    login_admin
     context "with valid params" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {name: "New title"}
       }
 
       it "updates the requested problem" do
         problem = Problem.create! valid_attributes
-        put :update, params: {id: problem.to_param, problem: new_attributes}, session: valid_session
+        put :update, params: {id: problem.to_param, problem: new_attributes}
         problem.reload
-        skip("Add assertions for updated state")
+        expect(problem.name).to eq("New title")
       end
 
       it "assigns the requested problem as @problem" do
         problem = Problem.create! valid_attributes
-        put :update, params: {id: problem.to_param, problem: valid_attributes}, session: valid_session
+        put :update, params: {id: problem.to_param, problem: valid_attributes}
         expect(assigns(:problem)).to eq(problem)
       end
 
       it "redirects to the problem" do
         problem = Problem.create! valid_attributes
-        put :update, params: {id: problem.to_param, problem: valid_attributes}, session: valid_session
+        put :update, params: {id: problem.to_param, problem: valid_attributes}
         expect(response).to redirect_to(problem)
       end
     end
@@ -141,7 +156,8 @@ RSpec.describe ProblemsController, type: :controller do
     end
   end
 
-  xdescribe "DELETE #destroy" do
+  describe "DELETE #destroy" do
+    login_admin
     it "destroys the requested problem" do
       problem = Problem.create! valid_attributes
       expect {

@@ -133,21 +133,22 @@ RSpec.describe SolutionsController, type: :controller do
     end
   end
 
-  xdescribe "DELETE #destroy" do
+=begin  describe "DELETE #destroy" do
+    login_admin
     it "destroys the requested solution" do
-      solution = Solution.create! valid_attributes
+      solution = FactoryGirl.create(:solution)
       expect {
         delete :destroy, params: {id: solution.to_param}
       }.to change(Solution, :count).by(-1)
     end
 
     it "redirects to the solutions list" do
-      solution = Solution.create! valid_attributes
+      solution = FactoryGirl.create(:solution)
       delete :destroy, params: {id: solution.to_param}
       expect(response).to redirect_to(solutions_url)
     end
   end
-
+=end
   context "Ruby" do
     login_user
     before(:each) do

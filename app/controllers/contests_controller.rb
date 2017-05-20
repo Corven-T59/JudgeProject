@@ -51,7 +51,7 @@ class ContestsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to new_contest_path, notice: 'The contest must last at least 1 hour and the start date must not be in the past'}
+        format.html { render :new, notice: 'The contest must last at least 1 hour and the start date must not be in the past' }
         format.json { render json: @contest.errors, status: :forbidden }
       end
     end

@@ -9,9 +9,10 @@ RSpec.describe "Solutions", type: :request do
     }
   }
 
-  xdescribe "GET /solutions" do
+  describe "GET /contest/1/solutions" do
     it "works! (now write some real specs)" do
-      get solutions_path
+      contest= FactoryGirl.create(:contest)
+      get solutions_path, params: {contest_id: contest.id}
       expect(response).to have_http_status(200)
     end
   end
