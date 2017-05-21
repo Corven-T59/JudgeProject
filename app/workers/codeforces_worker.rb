@@ -69,15 +69,15 @@ def update_contest(contest)
 	end
 
 	def get_last_check_time
-		if !File.exist?('last_check_time')
+    if !File.exist?('tmp/last_check_time')
 			save_last_check_time
-		end
-		contents = File.open("last_check_time", "r"){ |file| file.read }
+    end
+    contents = File.open("tmp/last_check_time", "r") { |file| file.read }
 		return contents.to_i
 		#return 1451606400
 	end
 	def save_last_check_time
-		File.open("last_check_time", "w"){ |file| file.puts DateTime.now.to_time.to_i}
+    File.open("tmp/last_check_time", "w") { |file| file.puts DateTime.now.to_time.to_i }
 	end
 end
 

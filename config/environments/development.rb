@@ -27,9 +27,21 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.raise_delivery_errors = true # default was false
+  config.action_mailer.default_url_options = {:host => '10.21.21.155:3000'}
   config.action_mailer.perform_caching = false
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.smtp_settings = {
+      address: "smtp.office365.com",
+      port: 587,
+      domain: "upb.edu.co",
+      authentication: :login,
+      enable_starttls_auto: true,
+      user_name: IO.read(File.expand_path('~/.jp_vars/user_smtp')).chop,
+      password: IO.read(File.expand_path('~/.jp_vars/pass_smtp')).chop
+  }
+
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

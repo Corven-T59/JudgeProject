@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
 
   unauthenticated :user do
-    devise_scope :user do
+    #devise_scope :user do
       root "welcome#landing"
-    end
+    #end
   end
   authenticate :user do
     resources :contests, except: [:index, :show] do
