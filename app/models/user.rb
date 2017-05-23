@@ -10,4 +10,7 @@ class User < ApplicationRecord
     raise "Method not implemented yet"
   end
 
+  def email_user
+    email.split("@").first()
+  end
 end

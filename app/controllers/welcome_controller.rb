@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   def index
+    @contests = Contest.next_contest.all.limit(3)
   end
 
   def landing

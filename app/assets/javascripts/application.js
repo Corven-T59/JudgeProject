@@ -22,7 +22,6 @@
 //= require bootstrap-table
 //
 //= require moment
-//= require bootstrap-datepicker.min
 //= require highlight.pack
 //
 //= require main

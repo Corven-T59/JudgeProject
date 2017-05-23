@@ -8,7 +8,7 @@ class ContestsController < ApplicationController
   # GET /contests.json
   def index
     @new_contest = Contest.new
-    @contests = Contest.order(startDate: :desc).page params[:page]
+    @contests = Contest.order(startDate: :desc).page(params[:page])
   end
 
   # GET /contests/1
@@ -19,7 +19,7 @@ class ContestsController < ApplicationController
   # GET /contests/new
   def new
     @contest = Contest.new
-    @problems = Problem.all
+    @problems = Problem.valid_problems
     @contest.endDate = Time.now + 1.hour
   end
 

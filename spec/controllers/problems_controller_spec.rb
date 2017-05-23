@@ -158,11 +158,18 @@ RSpec.describe ProblemsController, type: :controller do
 
   describe "DELETE #destroy" do
     login_admin
-    it "destroys the requested problem" do
+    it "Disable the requested problem" do
       problem = Problem.create! valid_attributes
       expect {
         delete :destroy, params: {id: problem.to_param}, session: valid_session
-      }.to change(Problem, :count).by(-1)
+      }.to change(Problem, :count).by(0)
+    end
+
+    it "Mark as disable the problem" do
+      problem = Problem.create! valid_attributes
+      expect {
+        delete :destroy, params: {id: problem.to_param}, session: valid_session
+      }.to change(Problem.valid_problems, :count).by(-1)
     end
 
     it "redirects to the problems list" do

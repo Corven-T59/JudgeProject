@@ -8,7 +8,7 @@ class Contest < ApplicationRecord
   validate :dates_are_rigth
 
   scope :running, -> { where("? > startDate and ? < endDate",DateTime.now,DateTime.now) }
-
+  scope :next_contest, -> { where("startDate > ?", DateTime.now).order(:startDate) }
 	enum difficulty: [:easy, :medium, :strict]
 
 

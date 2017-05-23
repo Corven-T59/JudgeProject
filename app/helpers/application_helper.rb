@@ -16,12 +16,11 @@ module ApplicationHelper
         	current_user.email.html_safe + content_tag(:span, nil, class: "caret")
 	      end
 	      ul_dd = content_tag(:ul, class: :"dropdown-menu") do
-	      	content_tag(:li, nil, class: :divider, role: :separator) +
-	        content_tag(:li,  link_to("Log out", destroy_user_session_url, method: :delete))
-
+          content_tag(:li, link_to("Log out", destroy_user_session_url, method: :delete)) +
+              content_tag(:li, link_to("Profile", edit_user_registration_path))
 	      end
 	      link_dd + ul_dd
-	    end
+      end
 	  end
   end
 

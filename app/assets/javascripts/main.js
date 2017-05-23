@@ -2,9 +2,6 @@ $(document).on("turbolinks:load", function () {
     // Init material design
     $.material.init();
 
-    // Enable bootstrap date picker
-    $("#startDate").datetimepicker();
-    $("#endDate").datetimepicker();
 
     // Search for time and update
     moment.locale("es");

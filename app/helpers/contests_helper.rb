@@ -1,8 +1,8 @@
 module ContestsHelper
 	def subscribe_link contest
-		if contest.users.exists? current_user
+    if contest.users.exists? current_user.try(:id)
 			link_to 'Unsubscribe', unsubscribe_contest_path(contest), method: :post
-		else
+    else
 			link_to 'Subscribe', subscribe_contest_path(contest), method: :post
     end
 	end

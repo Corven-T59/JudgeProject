@@ -5,7 +5,7 @@ class ProblemsController < ApplicationController
   # GET /problems.json
   def index
     @new_problem = Problem.new
-    @problems = Problem.all.page params[:page]
+    @problems = Problem.valid_problems.page params[:page]
   end
 
   # GET /problems/1

@@ -11,7 +11,7 @@
 
           <%= f.email_field :email, autofocus: true,
                             placeholder: "alumno@upb.edu.co" %>
-
+          <%= f.text_field :handle, placeholder: "Codeforces hanlde" %>
           <%= f.password_field :password, autocomplete: "off",
                                placeholder: "#{@minimum_password_length} characters minimum" if @minimum_password_length %>
           <%= f.password_field :password_confirmation, autocomplete: "off",

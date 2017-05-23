@@ -2,6 +2,7 @@ class Problem < ApplicationRecord
 	has_many :solutions
 	has_and_belongs_to_many :contests
   acts_as_taggable
+  include NotDeleteable
 
 	validates_presence_of :name, :baseName, :timeLimit, :descriptionFile, :inputFile, :outputFile
 	validates :timeLimit, numericality: {greater_than: 0}
@@ -17,4 +18,5 @@ class Problem < ApplicationRecord
       tags + by_name
     end
   end
+
 end

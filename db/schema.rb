@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518205636) do
+ActiveRecord::Schema.define(version: 20170523192042) do
 
   create_table "contests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",                     null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170518205636) do
     t.datetime "updated_at",                               null: false
     t.integer  "codeforces_contest_id"
     t.string   "codeforces_index"
+    t.boolean "disabled", default: false
   end
 
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
