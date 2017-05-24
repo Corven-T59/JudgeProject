@@ -5,8 +5,13 @@ module ApplicationHelper
     end
   end
 
-  def icon_link( icon, path, options={})
-    link_to(content_tag(:span,nil,class: "glyphicon #{icon}").html_safe,path,options)
+  def icon_link(icon, path=nil, options={})
+    if block_given?
+      additional_text = yield(icon)
+      link_to(content_tag(:span, nil, class: "glyphicon #{icon}") + additional_text, path, options)
+    else
+      link_to(content_tag(:span, nil, class: "glyphicon #{icon}"), path, options)
+    end
   end
   
   def user_actions_links
@@ -44,18 +49,20 @@ module ApplicationHelper
     return "basic_navbar"
   end
 
-  %w(problem contest).each do |model|
+  %w(problem user contest).each do |model|
     define_method "#{model.underscore}_actions" do |param|
       if user_can_edit
         content_tag(:ul, class: "list-inline") do
           links = ""
           links += content_tag (:li) do
-            icon_link("glyphicon-pencil", send("edit_#{model}_path",param)) + 
-            content_tag(:span, "Editar")            
+            icon_link("glyphicon-pencil", send("edit_#{model}_path", param)) do
+              "Editar"
+            end
           end
           links += content_tag(:li) do
-            icon_link("glyphicon-remove", param, method: :delete, data: { confirm: 'Estás seguro?' }) +
-            content_tag(:span, "Eliminar")
+            icon_link("glyphicon-remove", param, method: :delete, data: {confirm: 'Estás seguro?'}) do
+              "Eliminar"
+            end
           end
           links.html_safe
         end       
