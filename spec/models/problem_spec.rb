@@ -13,4 +13,11 @@ RSpec.describe Problem, type: :model do
     it { should_not allow_value(-1).for(:timeLimit) }
     it { should_not allow_value(0).for(:timeLimit) }
   end
+
+  describe "Valid delimiter" do
+    it { should allow_value("").for(:delimiter) }
+    it { should_not
+    allow_value("'").for(:delimiter) }
+    it { should_not allow_value('"').for(:delimiter) }
+  end
 end

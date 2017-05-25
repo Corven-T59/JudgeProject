@@ -26,10 +26,10 @@ class ProblemsController < ApplicationController
   # POST /problems.json
   def create
     @problem = Problem.new(problem_params)
-    
+
     respond_to do |format|
       if @problem.save
-        format.html { redirect_to @problem, notice: 'Problem was successfully created.' }
+        format.html { redirect_to @problem, notice: 'El problema se ha creado correctamente.' }
         format.json { render :show, status: :created, location: @problem }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class ProblemsController < ApplicationController
   def update
     respond_to do |format|
       if @problem.update(problem_params)
-        format.html { redirect_to @problem, notice: 'Problem was successfully updated.' }
+        format.html { redirect_to @problem, notice: 'El problema se ha actualizado correctamente.' }
         format.json { render :show, status: :ok, location: @problem }
       else
         format.html { render :edit }
@@ -57,7 +57,7 @@ class ProblemsController < ApplicationController
   def destroy
     @problem.destroy
     respond_to do |format|
-      format.html { redirect_to problems_url, notice: 'Problem was successfully destroyed.' }
+      format.html { redirect_to problems_url, notice: 'El problema se ha eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -70,7 +70,8 @@ class ProblemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def problem_params
-      params.require(:problem).permit(:name, :baseName, :color, :timeLimit, :descriptionFile, :inputFile, :outputFile, :language, :tag_list)
+      params.require(:problem).permit(:name, :baseName, :color, :timeLimit, :descriptionFile,
+                                      :delimiter, :inputFile, :outputFile, :language, :tag_list)
     end
 
 end

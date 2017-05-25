@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523192042) do
+ActiveRecord::Schema.define(version: 20170525144037) do
 
   create_table "contests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title",                     null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170523192042) do
     t.integer  "codeforces_contest_id"
     t.string   "codeforces_index"
     t.boolean "disabled", default: false
+    t.string "delimiter", default: ""
   end
 
   create_table "solutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -62,6 +63,9 @@ ActiveRecord::Schema.define(version: 20170523192042) do
     t.integer  "contest_id"
     t.integer "status", default: 0, null: false
     t.integer "runtime"
+    t.text "input", limit: 65535
+    t.text "output", limit: 65535
+    t.text "user_output", limit: 65535
     t.index ["contest_id"], name: "index_solutions_on_contest_id", using: :btree
     t.index ["problem_id"], name: "index_solutions_on_problem_id", using: :btree
     t.index ["user_id"], name: "index_solutions_on_user_id", using: :btree

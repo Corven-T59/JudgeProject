@@ -4,6 +4,9 @@
 <%= f.text_field :color %>
 <%= f.number_field :timeLimit %>
 <%= f.file_field :descriptionFile %>
+<%= f.text_field :delimiter, placeholder: "#:)#" %>
+<em><strong>NOTA: </strong>Si no ingresa un valor para delimitar este problema no mostrará información adicional en las
+  diferentes modalidades.</em><br>
 <%= f.file_field :inputFile %>
 <%= f.file_field :outputFile %>
 <%= f.text_field :tag_list, placeholder: "Separados por coma." %>

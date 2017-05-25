@@ -38,6 +38,10 @@ FactoryGirl.define do
         language "#{lang[1]}"
         solutionFile File.open(File.join(Rails.root, 'spec', 'support', 'files', 'interval_product', "#{lang[0]}", "source.#{lang[2]}"))
       end
+      factory :"#{lang[0]}_interval_wa" do
+        language "#{lang[1]}"
+        solutionFile File.open(File.join(Rails.root, 'spec', 'support', 'files', 'interval_product', "#{lang[0]}", "wa.#{lang[2]}"))
+      end
     end
 
   end
