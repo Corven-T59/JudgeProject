@@ -18,5 +18,18 @@
   <strong>Language:</strong>
   <%= @solution.language %>
 </p>
-
+<% if @contest.easy? || @contest.medium? %>
+    <p>
+      <strong>Failed input case:</strong>
+    </p>
+    <pre><%= @solution.input %></pre>
+    <p>
+      <strong>Real output:</strong>
+      <%= @solution.output %>
+    </p>
+    <p>
+      <strong>Your output:</strong>
+      <%= @solution.user_output %>
+    </p>
+<% end %>
 <%= link_to 'Back', contest_solutions_path(@contest) %>

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       post 'subscribe', on: :member
       post 'unsubscribe', on: :member
       get 'submit', on: :member
-      resources :solutions, only: [:create, :new]
+      resources :solutions, only: [:create, :new, :index]
     end
     resources :problems, except: [:index, :show]
     resources :users, only: [:edit, :update]
