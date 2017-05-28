@@ -37,25 +37,15 @@ class ContestsController < ApplicationController
   # POST /contests.json
   def create
     @contest = Contest.new(contest_params)
-    contest_duration = @contest.endDate - @contest.startDate
-
-    if contest_duration >= 3600 && Time.now < @contest.startDate 
-      respond_to do |format|
-        if @contest.save
-          format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
-          format.json { render :show, status: :created, location: @contest }
-        else
-          format.html { render :new }
-          format.json { render json: @contest.errors, status: :unprocessable_entity }
-        end
-      end
-    else
-      respond_to do |format|
-        format.html { render :new, notice: 'The contest must last at least 1 hour and the start date must not be in the past' }
-        format.json { render json: @contest.errors, status: :forbidden }
+    respond_to do |format|
+      if @contest.save
+        format.html { redirect_to @contest, notice: 'Contest was successfully created.' }
+        format.json { render :show, status: :created, location: @contest }
+      else
+        format.html { render :new }
+        format.json { render json: @contest.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # PATCH/PUT /contests/1

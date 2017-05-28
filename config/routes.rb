@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  mount ActionCable.server => '/cable'
 
   devise_for :users, :controllers => {registrations: 'registrations'}
   resources :users, only: [:index, :show]
-
 
   unauthenticated :user do
     #devise_scope :user do

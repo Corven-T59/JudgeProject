@@ -4,9 +4,10 @@ class Problem < ApplicationRecord
   acts_as_taggable
   include NotDeleteable
 
-	validates_presence_of :name, :baseName, :timeLimit, :descriptionFile, :inputFile, :outputFile
+  validates_presence_of :name, :baseName, :timeLimit, :descriptionFile, :inputFile, :outputFile, :color
 	validates :timeLimit, numericality: {greater_than: 0}
   validate :valid_delimiter
+  validate :valid_color
 
 	mount_uploader :descriptionFile, FileUploader
 	mount_uploader :inputFile, InoutUploader
@@ -30,4 +31,9 @@ class Problem < ApplicationRecord
     end
   end
 
+  def valid_color
+    unless color.nil?
+      errors.add(:color, "No es un color valido, debe contener exactamente 3 o 6 caracteres") unless (color.size == 3 || color.size == 6)
+    end
+  end
 end
