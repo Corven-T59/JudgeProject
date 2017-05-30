@@ -37,7 +37,7 @@ Rails.application.configure do
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
   config.action_cable.mount_path = '/cable'
-  config.action_cable.url = 'ws://c81c3a75.ngrok.io//cable'
+  config.action_cable.url = 'ws://207.248.81.91//cable'
   #config.action_cable.allowed_request_origins = ['http://207.248.81.91', %r{http://207.248.81.91*},'ws://207.248.81.91']
   config.action_cable.disable_request_forgery_protection = true
 
