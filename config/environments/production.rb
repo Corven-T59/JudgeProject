@@ -36,8 +36,8 @@ Rails.application.configure do
 
   # Mount Action Cable outside main process or domain
   # config.action_cable.mount_path = nil
-  config.action_cable.mount_path = '/cable'
-  config.action_cable.url = 'ws://207.248.81.91/cable'
+  config.action_cable.mount_path = '/websocket'
+  config.action_cable.url = 'ws://207.248.81.91/websocket'
   config.action_cable.allowed_request_origins = ['http://207.248.81.91', %r{http://207.248.81.91*}]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount ActionCable.server => '/cable'
+  mount ActionCable.server => '/websocket'
 
   devise_for :users, :controllers => {registrations: 'registrations'}
   resources :users, only: [:index, :show]
