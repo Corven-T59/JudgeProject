@@ -38,7 +38,8 @@ Rails.application.configure do
   # config.action_cable.mount_path = nil
   config.action_cable.mount_path = '/websocket'
   config.action_cable.url = 'ws://207.248.81.91/websocket'
-  config.action_cable.allowed_request_origins = ['http://207.248.81.91', %r{http://207.248.81.91*}]
+  #config.action_cable.allowed_request_origins = ['http://207.248.81.91', %r{http://207.248.81.91*},'ws://207.248.81.91']
+  config.action_cable.disable_request_forgery_protection = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
