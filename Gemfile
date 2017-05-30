@@ -7,7 +7,7 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.1'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use Puma as the app server
@@ -54,14 +54,13 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # users
-gem 'devise'
-
+gem 'devise', '~> 4.2', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
 
 # file uploads
 gem 'carrierwave', '~> 1.0'
 gem 'remotipart', '~> 1.2' # File uploads trough AJAX request
 # background async process
-gem 'sidekiq'
+gem 'sidekiq', '~> 5.0'
 
 # rest clien
 gem 'rest-client'
