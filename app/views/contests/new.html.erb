@@ -1,5 +1,14 @@
-<h1>Nueva competencia</h1>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel">
+      <div class="panel-body">
+        <h1>Nueva competencia</h1>
+        <%= render 'form', contest: @contest %>
+      </div>
+      <div class="panel-footer">
+        <%= link_to 'Back', contests_path %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form', contest: @contest %>
-
-<%= link_to 'Back', contests_path %>

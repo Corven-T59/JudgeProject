@@ -52,10 +52,10 @@ class Contest < ApplicationRecord
     contest_duration = self.endDate - self.startDate
     if contest_duration >= 3600 && Time.now < self.startDate
       if status != 0
-        errors.add(:endDate, 'You can only update a contest that has not started yet')
+        errors.add(:endDate, 'Solo se pueden editar competencias que no hayan iniciado')
       end
     else
-      errors.add(:endDate, 'The contest must last at least 1 hour and the start date must not be in the past')
+      errors.add(:endDate, 'La competencia debe durar por lo menos una (1) hora y no puede empezar en el pasado')
     end
   end
 

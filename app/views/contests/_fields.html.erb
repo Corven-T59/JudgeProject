@@ -12,5 +12,7 @@
 
 <div class="field">
   <h4>Problemas del contest: </h4>
-  <%= collection_check_boxes(:contest, :problem_ids, Problem.valid_problems, :id, :name) %>
+  <%= f.collection_check_boxes(:problem_ids, Problem.valid_problems, :id, :name) do |p| %>
+      <p> <%= p.label { p.check_box + p.text } %></p>
+  <% end %>
 </div>

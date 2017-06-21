@@ -5,16 +5,19 @@
         <h2 class="bigger text-center"><strong>Próximas competencias</strong></h2>
         <div class="text-center">
           <% @contests.each do |contest| %>
-              <div class="col-md-3 inline-block text-left">
-                <div class="top-space">
-                  <strong class="medium">
-                    <%= contest.title %>
-                  </strong>
-                  <p class="white-text text-justify medium"><%= contest.description %></p>
-                  <p class="white-text text-justify medium">
-                  <p>Comienza en
+
+              <div class="col-md-3 inline-block">
+
+                <div class="panel panel-default grey-text">
+                  <div class="panel-heading"><%= link_to contest.title, contest %></div>
+                  <div class="panel-body">
+                    <%= contest.description %>
+                  </div>
+                  <div class="panel-footer">
+                    <p>Comienza en
                     <time data-time="<%= contest.next_date.strftime('%Y-%m-%d %H:%M') %>"></time>
-                  </p>
+                    </p>
+                  </div>
                 </div>
               </div>
           <% end %>

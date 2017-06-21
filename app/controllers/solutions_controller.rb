@@ -6,6 +6,7 @@ class SolutionsController < ApplicationController
   # GET /solutions
   # GET /solutions.json
   def index
+    # todo This view need to be improved.
     @solutions = @contest.solutions.includes(:problem, :user).all
   end
 

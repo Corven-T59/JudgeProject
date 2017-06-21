@@ -75,13 +75,14 @@ gem 'sidekiq-scheduler'
 gem "bootstrap-sass"
 
 # Tags
-gem 'acts-as-taggable-on', '~> 4.0'
+gem 'acts-as-taggable-on', '~> 5.0'
 
 # Display model as pages
 gem 'kaminari'
 
 # Rails internationalization
 gem 'rails-i18n', '~> 5.0.0'
+gem 'devise-i18n'
 group :development do
   # Use capistrano for deploy
   gem 'capistrano'

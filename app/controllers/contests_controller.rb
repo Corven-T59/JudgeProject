@@ -27,7 +27,7 @@ class ContestsController < ApplicationController
   def edit
     if @contest.status != 0
       respond_to do |format|
-          format.html { redirect_to @contest, alert: 'You can only edit a contest that has not started yet' }
+        format.html { redirect_to @contest, alert: 'Solo se pueden editar competencias que aún no hayan iniciado.' }
           format.json { render json: @contest_state, status: :forbidden }
       end
     end
@@ -110,7 +110,7 @@ class ContestsController < ApplicationController
           format.html { redirect_to @contest, alert: 'You can only subscribe to a contest before or once it already started' }
           format.json { render json: @contest.status, status: :forbidden }
       end
-    elsif @contest.users.exists? current_user
+    elsif @contest.users.exists? current_user.try(:id)
       respond_to do |format|
           format.html { redirect_to @contest, alert: 'Already subscribed to contest' }
           format.json { render json: @contest.errors, status: :forbidden }
@@ -120,7 +120,7 @@ class ContestsController < ApplicationController
       @contest.users << current_user
 
       respond_to do |format|
-        format.html { redirect_to @contest, notice: 'Subscribed to contest successfully.' }
+        format.html { redirect_to @contest, notice: 'Se ha subscrito correctamente.' }
         format.json { render json: @contest, status: :ok, location: @contest }
       end
     end
@@ -130,13 +130,13 @@ class ContestsController < ApplicationController
   def unsubscribe
     if @contest.status != 0
       respond_to do |format|
-          format.html { redirect_to @contest, alert: 'You can only unsubscribe from a contest before it already started' }
+        format.html { redirect_to @contest, alert: 'Solo puede cancelar la subscripción antes de que la competencia empiece' }
           format.json { render json: @contest.status, status: :forbidden }
       end
-    elsif @contest.users.exists? current_user
+    elsif @contest.users.exists? current_user.try(:id)
       @contest.users.delete(current_user)
       respond_to do |format|
-        format.html { redirect_to @contest, notice: 'Unsubscribed to contest successfully.' }
+        format.html { redirect_to @contest, notice: 'Ha cancelado la subscripción a la competencia.' }
         format.json { render :show, status: :ok, location: @contest }
       end
     else
@@ -167,7 +167,7 @@ class ContestsController < ApplicationController
     end
 
     def is_subscribed
-      if !@contest.users.exists? current_user
+      if !@contest.users.exists? current_user.try(:id)
         redirect_to contest_path, id: @contest_id, :alert => "You are not subscribed to this contest"
       end
     end

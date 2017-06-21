@@ -34,6 +34,10 @@ module ApplicationHelper
   end
 
   def user_can_edit
+    is_admin?
+  end
+
+  def is_admin?
     current_user.try(:admin?)
   end
 
