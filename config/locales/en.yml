@@ -21,7 +21,3 @@
 
 en:
   hello: "Hello world"
-  activerecord:
-    attributes:
-      user:
-        email: "Your Email Address"

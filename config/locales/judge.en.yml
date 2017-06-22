@@ -1,0 +1,31 @@
+en:
+  models:
+    contests: Contests
+    contest:
+      new: "New contest"
+    problems: Problems
+    problem: Problem
+    users: Users
+    user: User
+  slogan: Coding contests
+  three_steps:
+    title: "Contest in three steps"
+    first_title: "Upload yours problems"
+    first_description: "Add problems to the repository o pick from codeforces.com the problems for the contests."
+    second_title: "Setup the contest"
+    second_description: "Set time, date and those small details."
+    third_title: "Submit requests"
+    third_description: "Share with people, send emails, buy cookies and everyone will be ready for the new contest."
+  media_files: "You can upload the relevant material on many different file formats like pdf, docx, mp4, xlsx, zip, rar & more!"
+  quote:
+    text: "Obstacles are those dreadful things you see when you take your eyes off your goal."
+    author: "- Henry Ford"
+  actions:
+    save: "Save"
+    show: "Show"
+    edit: "Edit"
+    remove: "Delete"
+    subscribe: "Subscribe"
+    unsubscribe: "Unsubscribe"
+    scoreboard: "Scoreboard"
+    close: "Close"

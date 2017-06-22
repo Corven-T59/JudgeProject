@@ -1,0 +1,32 @@
+es:
+  models:
+    contests: Competencias
+    contest:
+      new: "Nueva competencia"
+    problems: problemas
+    problem: Problema
+    users: Usuarios
+    user: Usuario
+  slogan: "Competencias de programación"
+  three_steps:
+    title: "Competencias en tres pasos"
+    first_title: "Sube tus problemas"
+    first_description: "Agrega problemas al repositorio o elige desde codeforces.com los que desees agregar a las competencias."
+    second_title: "Configura la competencia"
+    second_description: "Define tiempos, fechas y esos pequeños detalles."
+    third_title: "Soluciona los problemas"
+    third_description: "Invita gente, dales correos, reparte galletas y todos a programar en el nuevo contest."
+  media_files: "Acompaña tus ejercicios con los archivos multimedia que necesites: pdf, docx, mp4, xlsx, zip, rar y más!"
+  quote:
+    text: "Los obstáculos son esas cosas espantosas que ves cuando apartas los ojos de tu meta."
+    author: "- Henry Ford"
+  actions:
+
+    save: "Guardar"
+    show: "Ver"
+    edit: "Editar"
+    remove: "Eliminar"
+    subscribe: "Subscribirse"
+    unsubscribe: "Desubscribirse"
+    scoreboard: "Puntuación"
+    close: "Cerrar"
