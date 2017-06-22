@@ -60,12 +60,12 @@ module ApplicationHelper
           links = ""
           links += content_tag (:li) do
             icon_link("glyphicon-pencil", send("edit_#{model}_path", param)) do
-              "Editar"
+              t("actions.edit")
             end
           end
           links += content_tag(:li) do
             icon_link("glyphicon-remove", param, method: :delete, data: {confirm: 'Estás seguro?'}) do
-              "Eliminar"
+              t("actions.remove")
             end
           end
           links.html_safe

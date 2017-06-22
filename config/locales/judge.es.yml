@@ -3,7 +3,7 @@ es:
     contests: Competencias
     contest:
       new: "Nueva competencia"
-    problems: problemas
+    problems: Problemas
     problem: Problema
     users: Usuarios
     user: Usuario
@@ -21,7 +21,7 @@ es:
     text: "Los obstáculos son esas cosas espantosas que ves cuando apartas los ojos de tu meta."
     author: "- Henry Ford"
   actions:
-
+    search: "Búsqueda"
     save: "Guardar"
     show: "Ver"
     edit: "Editar"

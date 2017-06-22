@@ -21,6 +21,7 @@ en:
     text: "Obstacles are those dreadful things you see when you take your eyes off your goal."
     author: "- Henry Ford"
   actions:
+    search: "Search"
     save: "Save"
     show: "Show"
     edit: "Edit"
