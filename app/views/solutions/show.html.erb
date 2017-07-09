@@ -23,13 +23,15 @@
       <strong>Failed input case:</strong>
     </p>
     <pre><%= @solution.input %></pre>
-    <p>
-      <strong>Real output:</strong>
-      <%= @solution.output %>
-    </p>
-    <p>
-      <strong>Your output:</strong>
-      <%= @solution.user_output %>
-    </p>
+    <% if @contest.easy? %>
+        <p>
+          <strong>Real output:</strong>
+          <%= @solution.output %>
+        </p>
+        <p>
+          <strong>Your output:</strong>
+          <%= @solution.user_output %>
+        </p>
+    <% end %>
 <% end %>
 <%= link_to 'Back', contest_solutions_path(@contest) %>
