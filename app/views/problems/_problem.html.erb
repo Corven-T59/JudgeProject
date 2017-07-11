@@ -24,7 +24,7 @@
             </p>
         <% end %>
         <p>
-          <% unless descriptionFile.empty? %>
+          <% if problem.descriptionFile.file %>
               <strong>Descriptionfile:</strong>
               <%= content_or_link(problem, :descriptionFile) %>
           <% end %>
