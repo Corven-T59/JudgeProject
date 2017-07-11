@@ -40,7 +40,7 @@ class ExecutionsWorker
   private
 
   def clean_directory
-    # system "sudo rm -r #{@path_temp}" if @path_temp.starts_with?("/tmp/solution_")
+    system "sudo rm -r #{@path_temp}" if @path_temp.starts_with?("/tmp/solution_")
   end
 
   def setup_env

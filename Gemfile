@@ -85,7 +85,7 @@ gem 'rails-i18n', '~> 5.0.0'
 gem 'devise-i18n'
 group :development do
   # Use capistrano for deploy
-  gem 'capistrano'
+  gem 'capistrano', '3.8.1'
   gem 'capistrano-rails'
   gem 'capistrano-passenger'
 
