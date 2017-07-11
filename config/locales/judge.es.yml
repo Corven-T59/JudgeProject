@@ -4,7 +4,8 @@ es:
     contest:
       new: "Nueva competencia"
     problems: Problemas
-    problem: Problema
+    problem:
+      new: "New problem"
     users: Usuarios
     user: Usuario
   slogan: "Competencias de programación"

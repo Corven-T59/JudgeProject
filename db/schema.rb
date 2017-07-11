@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170621173411) do
+ActiveRecord::Schema.define(version: 20170709114326) do
 
   create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", null: false
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 20170621173411) do
     t.string "name", null: false
     t.string "baseName", null: false
     t.string "color", default: "000000", null: false
-    t.integer "timeLimit", null: false
+    t.integer "timeLimit"
     t.string "descriptionFile"
-    t.string "inputFile", null: false
-    t.string "outputFile", null: false
+    t.string "inputFile"
+    t.string "outputFile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "codeforces_contest_id"

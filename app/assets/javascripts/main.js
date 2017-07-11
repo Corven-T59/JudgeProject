@@ -35,6 +35,22 @@ $(document).on("turbolinks:load", function () {
     $(window).resize(function () {
         $table.bootstrapTable('resetView');
     });
-
     // End bootstrap table
+
+    // Problems codeforces/normal toogle
+
+
+    $("#problem_select_manual").on("click", function () {
+        $("#manual_problem").css("display", "block");
+        $("#codeforces_problem").css("display", "none");
+        $("#problem_select_manual").addClass("btn-success");
+        $("#problem_select_codeforces").removeClass("btn-success");
+    });
+    $("#problem_select_codeforces").on("click", function () {
+        $("#manual_problem").css("display", "none");
+        $("#codeforces_problem").css("display", "block");
+        $("#problem_select_codeforces").addClass("btn-success");
+        $("#problem_select_manual").removeClass("btn-success");
+    });
+
 });

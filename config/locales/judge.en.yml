@@ -4,7 +4,8 @@ en:
     contest:
       new: "New contest"
     problems: Problems
-    problem: Problem
+    problem:
+      new: "New problem"
     users: Users
     user: User
   slogan: Coding contests

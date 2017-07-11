@@ -6,25 +6,28 @@
         <h3 class="panel-title white-text"><%= link_to t('models.problems'), problems_path %> &raquo;  <%= problem.name %> </h3>
       </div>
       <div class="panel-body">
-
         <p>
-          <strong>Basename:</strong>
-          <%= problem.baseName %>
+          <strong>Name:</strong>
+          <%= problem.name %>
         </p>
+        <% if problem.is_codeforces? %>
+            <%= link_to("Ir al problema", codeforces_url(problem)) %>
+        <% else %>
+            <p>
+              <strong>Color:</strong>
+              #<%= problem.color %>
+            </p>
 
+            <p>
+              <strong>Timelimit:</strong>
+              <%= problem.timeLimit %>
+            </p>
+        <% end %>
         <p>
-          <strong>Color:</strong>
-          #<%= problem.color %>
-        </p>
-
-        <p>
-          <strong>Timelimit:</strong>
-          <%= problem.timeLimit %>
-        </p>
-
-        <p>
-          <strong>Descriptionfile:</strong>
-          <%= content_or_link(problem, :descriptionFile)%>
+          <% unless descriptionFile.empty? %>
+              <strong>Descriptionfile:</strong>
+              <%= content_or_link(problem, :descriptionFile) %>
+          <% end %>
         </p>
 
         <% if problem.tags.size > 0 %>

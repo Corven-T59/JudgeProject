@@ -4,9 +4,17 @@ class Problem < ApplicationRecord
   acts_as_taggable
   include NotDeleteable
 
-  validates_presence_of :name, :baseName, :timeLimit, :descriptionFile, :inputFile, :outputFile, :color
-	validates :timeLimit, numericality: {greater_than: 0}
+  # Validations for normal problems
+  validates_presence_of :baseName, :timeLimit, :descriptionFile, :inputFile, :outputFile, :color, unless: :is_codeforces?
+  validates :timeLimit, numericality: {greater_than: 0}, unless: :is_codeforces?
   validate :valid_delimiter
+
+  # Validations for codeforces problems
+  validates_presence_of :codeforces_contest_id, :codeforces_index, if: :is_codeforces?
+  validates :codeforces_contest_id, numericality: {greater_than: 0}, if: :codeforces_contest_id
+
+  # Validations for all
+  validates_presence_of :name
   validate :valid_color
 
 	mount_uploader :descriptionFile, FileUploader
@@ -19,6 +27,10 @@ class Problem < ApplicationRecord
       by_name = Problem.includes(:tags).where('name LIKE ?', "%#{search}%")
       tags + by_name
     end
+  end
+
+  def is_codeforces?
+    (!codeforces_contest_id.nil? && !codeforces_index.try(:empty?))
   end
 
   private
@@ -36,4 +48,5 @@ class Problem < ApplicationRecord
       errors.add(:color, "No es un color valido, debe contener exactamente 3 o 6 caracteres") unless (color.size == 3 || color.size == 6)
     end
   end
+
 end

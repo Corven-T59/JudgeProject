@@ -128,7 +128,7 @@ RSpec.describe SolutionsController, type: :controller do
       end
       it "redirects to the index" do
         post :create, params: {solution: valid_for_create, contest_id: @contest.to_param}
-        expect(response).to redirect_to(new_user_session_path)
+        expect(response).to redirect_to(new_user_session_path.split("?")[0])
       end
     end
   end

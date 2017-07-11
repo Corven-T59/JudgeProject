@@ -29,4 +29,8 @@ module ProblemsHelper
       end
     end
   end
+
+  def codeforces_url problem
+    "http://codeforces.com/problemset/problem/#{problem.codeforces_contest_id}/#{problem.codeforces_index}"
+  end
 end

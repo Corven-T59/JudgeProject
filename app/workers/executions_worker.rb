@@ -20,7 +20,6 @@ class ExecutionsWorker
       @solution = Solution.includes(:problem).find(solution_id)
       @problem = @solution.problem
       @contest = @solution.contest
-
       setup_env
       if (!@problem.delimiter.nil? && @problem.delimiter.empty?) || @contest.strict?
         if @contest.strict?
@@ -41,8 +40,7 @@ class ExecutionsWorker
   private
 
   def clean_directory
-    FileUtils.rm_r(@path_temp, force: true)
-    system "sudo rm -r #{@path_temp}" if @path_temp.starts_with?("/tmp/solution_")
+    # system "sudo rm -r #{@path_temp}" if @path_temp.starts_with?("/tmp/solution_")
   end
 
   def setup_env
@@ -65,7 +63,7 @@ class ExecutionsWorker
     FileUtils.cp [source_code, input_file, output_file, run_sh, compare_sh], @path_temp
     FileUtils.touch File.join(@path_temp, @team_solution_file)
     system "sudo chmod 777 #{@path_temp}"
-    system("dos2unix #{File.join(@path_temp, "*")} | echo > /dev/null")
+    system("dos2unix #{File.join(@path_temp, "*")}")
 
     backup_files
   end
@@ -93,14 +91,18 @@ class ExecutionsWorker
     lang_name = @solution.language
 
     cmd = "cd #{@path_temp}; sudo #{run_sh} #{basename} #{@source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}"
+    Rails.logger.debug cmd
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+      Rails.logger.debug "Error log:\n#{stderr.read}"
+      team_solution = stdout.read
+      Rails.logger.debug "Normal output:\n#{team_solution}"
       exit_code = wait_thr.value.exitstatus
       exit_code = 2 if exit_code.to_i == 47
       if exit_code != 0
         @solution.status = exit_code
         return
       end
-      team_solution = stdout.read
+
       File.open(File.join(@path_temp, @team_solution_file), 'w') { |file| file.write(team_solution) }
       team_solution_file = File.join(@path_temp, @team_solution_file)
       compare = "#{compare_sh} #{team_solution_file} #{output_file} #{lang_name}"
@@ -118,7 +120,7 @@ class ExecutionsWorker
 
     run_and_compare input, output
 
-    return if @solution.status == 4
+    return if @solution.status == 4 # OK
 
     restore_backup
     arr_input = create_array_from_file @backup_file_names[0]

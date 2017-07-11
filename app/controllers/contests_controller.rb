@@ -163,7 +163,8 @@ class ContestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
-      params.require(:contest).permit(:title, :description, :difficulty, :startDate, :endDate, problem_ids:[])
+      params.require(:contest).permit(:title, :description, :difficulty,
+                                      :startDate, :endDate, problem_ids: [])
     end
 
     def is_subscribed

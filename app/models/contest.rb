@@ -12,7 +12,7 @@ class Contest < ApplicationRecord
 	enum difficulty: [:easy, :medium, :strict]
 
 
-	def load_contest_user_information()
+  def load_contest_user_information
 		users.includes(solutions: [:execution, :problem]).where(solutions: {contest_id: self.id})
 	end
 
@@ -48,7 +48,6 @@ class Contest < ApplicationRecord
   private
   def dates_are_rigth
     return if !(endDate.present? && startDate.present?)
-
     contest_duration = self.endDate - self.startDate
     if contest_duration >= 3600 && Time.now < self.startDate
       if status != 0

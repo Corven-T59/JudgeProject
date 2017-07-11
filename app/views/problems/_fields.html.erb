@@ -1,12 +1,24 @@
+<a id="problem_select_manual" class="btn btn-default btn-success">Manual</a>
+<a id="problem_select_codeforces" class="btn btn-default">Codeforces</a>
 <%= f.errors %>
 <%= f.text_field :name %>
-<%= f.text_field :baseName %>
-<%= f.text_field :color %>
-<%= f.number_field :timeLimit %>
+<div id="manual_problem">
+  <%= f.text_field :baseName %>
+  <%= f.number_field :timeLimit %>
+  <%= f.text_field :delimiter, placeholder: "#:)#" %>
+  <em><strong>NOTA: </strong>Si no ingresa un valor para delimitar este problema no mostrará información adicional en
+    las
+    diferentes modalidades.</em><br>
+  <%= f.file_field :inputFile %>
+  <%= f.file_field :outputFile %>
+</div>
+
+<div id="codeforces_problem" style="display: none;">
+  <%= f.text_field :codeforces_contest_id %>
+  <%= f.text_field :codeforces_index %>
+</div>
+
 <%= f.file_field :descriptionFile %>
-<%= f.text_field :delimiter, placeholder: "#:)#" %>
-<em><strong>NOTA: </strong>Si no ingresa un valor para delimitar este problema no mostrará información adicional en las
-  diferentes modalidades.</em><br>
-<%= f.file_field :inputFile %>
-<%= f.file_field :outputFile %>
+<%= f.text_field :color %>
+
 <%= f.text_field :tag_list, placeholder: "Separados por coma." %>
