@@ -26,12 +26,12 @@
     <% if @contest.easy? %>
         <p>
           <strong>Real output:</strong>
-          <%= @solution.output %>
         </p>
+        <pre><%= @solution.output %></pre>
         <p>
           <strong>Your output:</strong>
-          <%= @solution.user_output %>
         </p>
+        <pre><%= @solution.user_output %></pre>
     <% end %>
 <% end %>
 <%= link_to 'Back', contest_solutions_path(@contest) %>
