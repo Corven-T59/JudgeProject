@@ -86,11 +86,10 @@ class ExecutionsWorker
     run_sh = File.join(@path_temp, "run.sh")
     compare_sh = File.join(@path_temp, "compare.sh")
     basename = @problem.baseName
-    name = @problem.name
     time_limit = @problem.timeLimit
     lang_name = @solution.language
 
-    cmd = "cd #{@path_temp}; sudo #{run_sh} #{basename} #{@source_code} #{input_file} #{lang_name} '#{name}' #{time_limit}"
+    cmd = "cd #{@path_temp}; sudo #{run_sh} #{basename} #{@source_code} #{input_file} #{lang_name} '#{basename}' #{time_limit}"
     Rails.logger.debug cmd
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
       Rails.logger.debug "Error log:\n#{stderr.read}"

@@ -144,7 +144,7 @@ java)
 		echo "Java Compiling Error: $ret"
 		exit 1
 	else
-		$sf -u10 -F30 -t$time -T$ttime -i$input -n0 -R. $java "$prefix" -U 1002 -G 1002
+		$sf -u10 -F30 -t$time -T$ttime -i$input -n0 -R. -F256 -u256 -U 1002 -G 1002 -n0 -C. -f20000 -d20000000 -m20000000 -- $java -Xmx512000K -Xms512000K "$prefix"
 		ret=$?
 		if [ $ret -gt 3 ]; then
 		    echo "Nonzero return code - possible runtime error on java"
