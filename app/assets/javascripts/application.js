@@ -20,6 +20,9 @@
 //= require ripples
 //= require snackbar.min
 //= require bootstrap-table
+//= require d3
+//
+//= require DataDrivenDocuments
 //
 //= require moment
 //= require highlight.pack

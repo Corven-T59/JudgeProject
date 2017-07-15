@@ -83,6 +83,9 @@ gem 'kaminari'
 # Rails internationalization
 gem 'rails-i18n', '~> 5.0.0'
 gem 'devise-i18n'
+
+# Data driven
+gem "d3-rails"
 group :development do
   # Use capistrano for deploy
   gem 'capistrano', '3.8.1'

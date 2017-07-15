@@ -22,7 +22,7 @@ module ApplicationHelper
 	      end
 	      ul_dd = content_tag(:ul, class: :"dropdown-menu") do
           content_tag(:li, link_to("Log out", destroy_user_session_url, method: :delete)) +
-              content_tag(:li, link_to("Profile", edit_user_registration_path))
+              content_tag(:li, link_to("Profile", profile_path))
 	      end
 	      link_dd + ul_dd
       end

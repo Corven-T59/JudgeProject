@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170709114326) do
+ActiveRecord::Schema.define(version: 20170715163043) do
 
   create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", null: false
@@ -29,9 +29,14 @@ ActiveRecord::Schema.define(version: 20170709114326) do
     t.index ["problem_id"], name: "index_contests_problems_on_problem_id"
   end
 
-  create_table "contests_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contests_users", id: :integer, default: nil, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "contest_id", null: false
     t.integer "user_id", null: false
+    t.integer "ok", default: 0, null: false
+    t.integer "wa", default: 0, null: false
+    t.integer "re", default: 0, null: false
+    t.integer "tle", default: 0, null: false
+    t.integer "ce", default: 0, null: false
     t.index ["contest_id", "user_id"], name: "index_contests_users_on_contest_id_and_user_id", unique: true
     t.index ["contest_id"], name: "index_contests_users_on_contest_id"
     t.index ["user_id"], name: "index_contests_users_on_user_id"

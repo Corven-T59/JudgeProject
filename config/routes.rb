@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
     resources :problems, except: [:index, :show]
     resources :users, only: [:edit, :update]
+    get :profile, to: "users#profile"
     root "welcome#index"
   end
 

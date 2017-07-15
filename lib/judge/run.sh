@@ -161,7 +161,7 @@ rb)
     fi
     ;;
 py2)
-    $sf -F30 -t$time -T$ttime -i$input -n0 -R. $python "$name" -U 1002 -G 1002
+    $sf -F30 -t$time -T$ttime -i$input -n1 -R. $python "$name" -U 1002 -G 1002
     ret=$?
     if [ $ret -gt 3 ]; then
         echo "Nonzero return code - possible runtime error on Python2: "$?

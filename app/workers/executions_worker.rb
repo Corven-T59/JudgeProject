@@ -34,6 +34,7 @@ class ExecutionsWorker
       end
       @solution.save
       clean_directory
+      StadisticsWorker.perform_async(@solution.user_id, @solution.contest_id, @solution.status)
     end
   end
 

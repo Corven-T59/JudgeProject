@@ -11,6 +11,9 @@ class Solution < ApplicationRecord
 
   mount_uploader :solutionFile, SolutionUploader
 
+  scope :last_solution_info, -> (user_id) { select(:id, :status, :title, :name).where(user_id: user_id).joins(:contest, :problem).last }
+  scope :total_solved, -> (user_id) { where(user_id: user_id, status: 4).distinct.count(:problem_id) }
+
   def run
     ExecutionsWorker.perform_async(self.id)
   end
