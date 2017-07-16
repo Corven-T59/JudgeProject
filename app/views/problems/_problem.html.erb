@@ -10,6 +10,10 @@
           <strong>Name:</strong>
           <%= problem.name %>
         </p>
+        <p>
+          <strong>Basename:</strong>
+          <%= problem.basename %>
+        </p>
         <% if problem.is_codeforces? %>
             <%= link_to("Ir al problema", codeforces_url(problem)) %>
         <% else %>
