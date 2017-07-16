@@ -3,8 +3,9 @@ task :set_permissions do
     execute "chmod +x $HOME/JudgeProject/current/lib/judge/*.sh"
     execute "dos2unix $HOME/JudgeProject/current/lib/judge/*.sh"
 
-    ActsAsTaggableOn.force_binary_collation = true
-    ActsAsTaggableOn.force_lowercase = true
+    # The followings line below should be placed on a initializer file
+    # ActsAsTaggableOn.force_binary_collation = true
+    # ActsAsTaggableOn.force_lowercase = true
   end
 end
 
