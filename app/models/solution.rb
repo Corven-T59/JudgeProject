@@ -5,7 +5,7 @@ class Solution < ApplicationRecord
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  enum language: [:c, :cpp, :java, :csharp, :rb, :py2, :py3]
+  enum language: [:cpp, :java, :py2, :py3] # :csharp, :rb,
 
   validates_presence_of :language, :solutionFile, :user, :problem, :contest
 
