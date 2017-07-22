@@ -42,7 +42,9 @@ module ApplicationHelper
   end
 
   def current_navbar
-    is_a_contest = controller_name == "contests" && (action_name=="scoreboard" || action_name=="problems")
+    is_a_contest = (controller_name == "contests" &&
+        (action_name=="scoreboard" || action_name=="problems")) || (controller_name=="solutions" && params[:contest_id])
+
     if !current_user && !is_a_contest
       return "basic_navbar"
     elsif current_user.try(:admin?) && !is_a_contest
