@@ -11,14 +11,14 @@
 
 <p>
   <strong>Solutionfile:</strong>
-  <%= @solution.solutionFile %>
+  <%= content_or_link(@solution, :solutionFile) %>
 </p>
 
 <p>
   <strong>Language:</strong>
   <%= @solution.language %>
 </p>
-<% if @contest.easy? || @contest.medium? %>
+<% if (@contest.easy? || @contest.medium?) && @solution.status != 4 %>
     <p>
       <strong>Failed input case:</strong>
     </p>
