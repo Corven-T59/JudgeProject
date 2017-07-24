@@ -11,10 +11,10 @@ class CodeforcesWorker
 	def perform
     begin
       if ping_codeforces
+				@last_check_time_unix = get_last_check_time
         Contest.running.all.each do |contest|
           update_contest(contest)
         end
-        @last_check_time_unix = get_last_check_time
         save_last_check_time
       end
     rescue => exception
