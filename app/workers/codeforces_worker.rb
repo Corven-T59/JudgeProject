@@ -13,10 +13,8 @@ class CodeforcesWorker
 		save_last_check_time
 
 		if ping_codeforces
-			Contest.all.each do |contest|
-				if contest.is_active
-					update_contest(contest)
-				end
+      Contest.running.all.each do |contest|
+        update_contest(contest)
 			end
 		end
 	end
