@@ -33,7 +33,7 @@ class ExecutionsWorker
         run_smart_and_compare
       end
       @solution.save
-      clean_directory
+      #clean_directory
       StadisticsWorker.perform_async(@solution.user_id, @solution.contest_id, @solution.status)
     end
   end
