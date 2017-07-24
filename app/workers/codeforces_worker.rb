@@ -24,15 +24,15 @@ class CodeforcesWorker
 		problems = contest.problems
 
 		users.each do |user|
-			if user.handle == nil
+      if user.handle == nil || user.handle.empty?
 				next
-			end
+      end
 
+      Rails.logger.debug "http://codeforces.com/api/user.status?handle=" + user.handle + "&from=1&count=10"
 			codeforces_response = RestClient.get "http://codeforces.com/api/user.status?handle=" + user.handle + "&from=1&count=10"
 			#codeforces_response = RestClient.get 'http://codeforces.com/api/user.status?handle=' + 'hatsumora' +'&from=1&count=10'
 
 			user_problems_codeforces = JSON.parse(codeforces_response)
-
 
 			user_problems_codeforces["result"].each do |submition|
 
