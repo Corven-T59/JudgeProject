@@ -9,13 +9,19 @@ class CodeforcesWorker
 	CODEFORCES_API_BASE = 'http://codeforces.com/api/'
 
 	def perform
-		if ping_codeforces
-      Contest.running.all.each do |contest|
-        update_contest(contest)
-			end
-      @last_check_time_unix = get_last_check_time
-      save_last_check_time
-		end
+    begin
+      if ping_codeforces
+        Contest.running.all.each do |contest|
+          update_contest(contest)
+        end
+        @last_check_time_unix = get_last_check_time
+        save_last_check_time
+      end
+    rescue => exception
+      puts "Se ha encontrado una excepcion"
+      puts exception.backtrace
+      puts "\n\n\n fin de la excepcion"
+    end
 	end
 
 	def update_contest(contest)
