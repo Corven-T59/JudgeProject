@@ -28,9 +28,7 @@ class CodeforcesWorker
 				next
       end
 
-      Rails.logger.debug "http://codeforces.com/api/user.status?handle=" + user.handle + "&from=1&count=10"
-			codeforces_response = RestClient.get "http://codeforces.com/api/user.status?handle=" + user.handle + "&from=1&count=10"
-			#codeforces_response = RestClient.get 'http://codeforces.com/api/user.status?handle=' + 'hatsumora' +'&from=1&count=10'
+			codeforces_response = RestClient.get "http://codeforces.com/api/user.status?handle=" + user.handle + "&from=1&count=15"
 
 			user_problems_codeforces = JSON.parse(codeforces_response)
 
@@ -41,7 +39,7 @@ class CodeforcesWorker
 				end
 				codeforces_problem = submition["problem"]
 				problem = problems.where(codeforces_contest_id: codeforces_problem["contestId"], codeforces_index: codeforces_problem["index"])
-
+				puts codeforces_problem["contestId"].to_s + codeforces_problem["index"].to_s
 				if problem.count > 0
 					puts "Adding solution to " + user.handle
 
@@ -49,9 +47,18 @@ class CodeforcesWorker
 					solution.contest = contest
 					solution.user = user
 					solution.problem = problem.take
-					solution.status = translate_veredict(submition["verdict"])
+					solution.language = 100 #submition["programmingLanguage"]
+					solution.status = translate_verdict(submition["verdict"])
 					solution.runtime = submition["timeConsumedMillis"]
-					solution.save
+					if solution.save
+						puts("Solution created with status #{solution.status} for user #{user.handle}")
+					else
+						solution.errors.full_messages.each do |message|
+							puts message
+						end
+					end
+				else
+					puts "No new solutions for "+user.handle
 				end
 			end
 		end
@@ -63,6 +70,7 @@ class CodeforcesWorker
 		code = res.code.to_i
 		ret = code >= 200 && code < 300
 		unless ret
+			#todo Create notification to the admin
 			puts "Warning, Codeforces is not working."
 		end
 
@@ -70,18 +78,27 @@ class CodeforcesWorker
 
 	end
 
-	def translate_veredict(veredict)
+	def translate_verdict(veredict)
 		case veredict
-		when "OK"
-			return 4
-		else
-			return 0
+			when "COMPILATION_ERROR"
+				return 1
+			when "RUNTIME_ERROR"
+				return 2
+			when "TIME_LIMIT_EXCEEDED"
+				return 3
+			when "OK"
+				return 4
+			when "PRESENTATION_ERROR"
+				return 5
+			else
+				return 6
 		end
 	end
 
 	def get_last_check_time
     if !File.exist?('tmp/last_check_time')
 			save_last_check_time
+			return 0
     end
     contents = File.open("tmp/last_check_time", "r") { |file| file.read }
 		return contents.to_i

@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   has_many :solutions
   has_and_belongs_to_many :contests
+  validates :handle, format: {without: /\s/}
 
   def load_user_submition_count
     raise "Method not implemented yet"

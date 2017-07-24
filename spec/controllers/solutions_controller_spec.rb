@@ -28,21 +28,21 @@ RSpec.describe SolutionsController, type: :controller do
         user: FactoryGirl.create(:user),
         contest: FactoryGirl.create(:contest),
         problem: FactoryGirl.create(:problem),
-        language: :rb,
+        language: :java,
         solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
     }
   }
 
   let(:valid_for_create){
     {
-        language: :rb,
+        language: :java,
         solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
     }
   }
 
   let(:invalid_attributes) {
     {
-        language: :rb,
+        language: :java,
         problem: FactoryGirl.create(:problem),
         contest: FactoryGirl.create(:contest),
     }
@@ -117,7 +117,14 @@ RSpec.describe SolutionsController, type: :controller do
         expect(response).to render_template("new")
       end
 
-      pending ("Not running contest")
+      it "post a solution after the contest has end" do
+        contest = FactoryGirl.build(:contest, startDate: DateTime.now - 3.hour,
+                                    endDate: DateTime.now - 1.hours)
+        contest.save(validate: false)
+        expect {
+          post :create, params: {solution: valid_for_create, contest_id: contest.to_param}
+        }.to change(Solution, :count).by(1)
+      end
     end
 
     context "Without a valid session" do

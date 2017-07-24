@@ -2,20 +2,26 @@ class Solution < ApplicationRecord
   after_create_commit :run
   after_save :send_response, if: Proc.new { |model| model.id != nil && model.id >0 }
 
+  validates_presence_of :language, :user, :problem, :contest
+  validates_presence_of :solutionFile, unless: :problem_is_codeforces?
+
   belongs_to :user
   belongs_to :problem
   belongs_to :contest
-  enum language: [:cpp, :java, :py2, :py3] # :csharp, :rb,
-
-  validates_presence_of :language, :solutionFile, :user, :problem, :contest
+  enum language: {
+      cpp: 0,
+      java: 1,
+      py2: 2,
+      py3: 3,
+      codeforces: 100,
+  }
 
   mount_uploader :solutionFile, SolutionUploader
-
   scope :last_solution_info, -> (user_id) { select(:id, :status, :title, :name).where(user_id: user_id).joins(:contest, :problem).last }
   scope :total_solved, -> (user_id) { where(user_id: user_id, status: 4).distinct.count(:problem_id) }
 
   def run
-    ExecutionsWorker.perform_async(self.id)
+    ExecutionsWorker.perform_async(self.id) unless problem_is_codeforces?
   end
 
   def send_response
@@ -25,7 +31,6 @@ class Solution < ApplicationRecord
         message: "Para su envío #{id} usted obtuvo #{code_to_string(status)}"
     )
   end
-
 
   def code_to_string(code)
     return "Not answer yet" if code.nil? || code == 0
@@ -45,4 +50,10 @@ class Solution < ApplicationRecord
 
   end
 
+  private
+  def problem_is_codeforces?
+    if self.problem != nil
+      self.problem.is_codeforces?
+    end
+  end
 end

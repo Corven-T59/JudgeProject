@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716143851) do
+ActiveRecord::Schema.define(version: 20170724191501) do
+
+  create_table "codeforces_submitions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "codeforces_id", null: false
+    t.integer "solution_id"
+    t.index ["codeforces_id"], name: "index_codeforces_submitions_on_codeforces_id"
+    t.index ["solution_id"], name: "index_codeforces_submitions_on_solution_id"
+  end
 
   create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", null: false
@@ -61,7 +68,7 @@ ActiveRecord::Schema.define(version: 20170716143851) do
   create_table "solutions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "user_id", null: false
     t.integer "problem_id", null: false
-    t.string "solutionFile", null: false
+    t.string "solutionFile"
     t.integer "language", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -125,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170716143851) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "codeforces_submitions", "solutions"
   add_foreign_key "solutions", "contests"
   add_foreign_key "solutions", "problems"
   add_foreign_key "solutions", "users"

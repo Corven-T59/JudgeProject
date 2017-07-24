@@ -3,7 +3,7 @@ FactoryGirl.define do
     user
     problem
     contest
-    language "rb"
+    language "java"
     solutionFile File.open(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'cpp', 'source.cpp'))
 
     [["cpp", "cpp", "cpp"], ["java", "java", "java"], ["ruby", "rb", "rb"], ["csharp", "csharp", "cs"],

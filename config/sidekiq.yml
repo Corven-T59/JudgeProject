@@ -1,4 +1,4 @@
 :schedule:
   test-codeforces:
-    every: 3m
+    every: 2m
     class: CodeforcesWorker
