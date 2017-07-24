@@ -60,7 +60,7 @@ class CodeforcesWorker
 	end
 
 	def ping_codeforces
-		uri = URI(CODEFORCES_API_BASE)
+    uri = URI("http://codeforces.com/api/user.status?handle=HatsuMora&from=1&count=10")
 		res = Net::HTTP.get_response(uri)
 		code = res.code.to_i
 		ret = code >= 200 && code < 300
