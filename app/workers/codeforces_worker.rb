@@ -9,13 +9,12 @@ class CodeforcesWorker
 	CODEFORCES_API_BASE = 'http://codeforces.com/api/'
 
 	def perform
-		@last_check_time_unix = get_last_check_time
-		save_last_check_time
-
 		if ping_codeforces
       Contest.running.all.each do |contest|
         update_contest(contest)
 			end
+      @last_check_time_unix = get_last_check_time
+      save_last_check_time
 		end
 	end
 
@@ -24,7 +23,7 @@ class CodeforcesWorker
 		problems = contest.problems
 
 		users.each do |user|
-      if user.handle == nil || user.handle.empty?
+      if user.handle.nil? || user.handle.empty?
 				next
       end
 
