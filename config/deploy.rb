@@ -6,6 +6,7 @@ set :application, "JudgeProject"
 set :repo_url, "https://github.com/Corven-T59/JudgeProject.git"
 
 # Default branch is :master
+set :branch, 'release'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
