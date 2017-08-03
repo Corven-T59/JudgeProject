@@ -29,7 +29,7 @@ class SolutionsController < ApplicationController
     respond_to do |format|
       if @solution.save
         format.js
-        format.html { redirect_to [@contest, @solution], notice: 'Solution was successfully created.' }
+        format.html {redirect_to scoreboard_contest_path(@contest), notice: 'Solution was successfully created.'}
         format.json { render :show, status: :created, location: @solution }
       else
         format.js {render json: @solution, status: 422}

@@ -11,8 +11,6 @@ App.web_notifications = App.cable.subscriptions.create("WebNotificationsChannel"
     disconnected: function () {
         // Called when the subscription has been terminated by the server
         console.log("disconected");
-        App.cable.disconnect();
-        setTimeout(customConnect, 1000 * 60 * 5);
     },
     received: function (data) {
         console.log(data);
