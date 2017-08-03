@@ -9,7 +9,6 @@
     <table class="table">
       <thead>
       <tr>
-        <th>User</th>
         <th>Problem</th>
         <th>Language</th>
         <th>Status</th>
@@ -20,7 +19,6 @@
       <tbody>
       <% @solutions.each do |solution| %>
           <tr>
-            <td><%= solution.user.email %></td>
             <td><%= solution.problem.name %></td>
             <td><%= solution.language %></td>
             <td><%= code_to_string(solution.status) %></td>
@@ -32,3 +30,4 @@
     </table>
   </div>
 </div>
+<div class="top-space"></div>
