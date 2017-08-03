@@ -10,7 +10,7 @@
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">La competencia termina en
+        <li><a href="#">La competencia <%= aux_time(@contest.startDate, @contest.endDate) %>
           <time data-time="<%= @contest.endDate.strftime('%Y-%m-%d %H:%M') %>"></time>
         </a></li>
         <li class="<%= 'active' if action_name == 'problems' %>"><%= link_to t("models.problems"), problems_contest_path(@contest) %></li>
