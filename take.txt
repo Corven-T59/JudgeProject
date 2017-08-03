@@ -1,3 +1,0 @@
-https://www.phusionpassenger.com/library/walkthroughs/basics/ruby/fundamental_concepts.html
-
-The devil is in the details: Nginx and Apache are better at handling I/O security, HTTP concurrency management, connection  timeouts, etc. That's why, in production environments, application servers are used in combination with Nginx or Apache.
