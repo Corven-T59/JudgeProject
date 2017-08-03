@@ -6,8 +6,7 @@ class SolutionsController < ApplicationController
   # GET /solutions
   # GET /solutions.json
   def index
-    # todo This view need to be improved.
-    @solutions = @contest.solutions.includes(:problem, :user).all
+    @solutions = @contest.solutions.where(user: current_user).includes(:problem).all
   end
 
   # GET /solutions/1
@@ -33,7 +32,7 @@ class SolutionsController < ApplicationController
         format.json { render :show, status: :created, location: @solution }
       else
         format.js {render json: @solution, status: 422}
-        format.html { render :new }
+        format.html {redirect_to scoreboard_contest_path(@contest), alert: @solution.errors}
         format.json { render json: @solution.errors, status: :unprocessable_entity }
       end
     end
