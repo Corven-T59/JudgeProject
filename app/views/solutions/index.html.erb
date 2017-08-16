@@ -1,32 +1,33 @@
 <p id="notice"><%= notice %></p>
+<div class="top-space white"></div>
+<div class="row no-float">
+  <div class="col-md-10 col-md-offset-1 white medium-padding">
+    <p>
+      <span class="big"><strong>Soluciones</strong></span>
+    </p>
 
-<h1>Solutions</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Problem</th>
-      <th>Language</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @solutions.each do |solution| %>
+    <table class="table">
+      <thead>
       <tr>
-        <td><%= solution.user.email %></td>
-        <td><%= solution.problem.name %></td>
-        <td><%= solution.language %></td>
-        <td><%= code_to_string(solution.status) %></td>
-        <td><%= link_to 'Show', [@contest, solution] %></td>
-        
+        <th>Problem</th>
+        <th>Language</th>
+        <th>Status</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @solutions.each do |solution| %>
+          <tr>
+            <td><%= solution.problem.name %></td>
+            <td><%= solution.language %></td>
+            <td><%= code_to_string(solution.status) %></td>
+            <td><%= link_to 'Ver', [@contest, solution] %></td>
 
-<%= link_to 'New Solution', new_contest_solution_path(@contest) %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="top-space"></div>

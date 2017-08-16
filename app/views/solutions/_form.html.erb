@@ -1,5 +1,4 @@
 <%= form_for([@contest, solution],
-             remote: true,
              html: {:multipart => true},
              builder: BootstrapFormBuilder,
              authenticity_token: true) do |f| %>

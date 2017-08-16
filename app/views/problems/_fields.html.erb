@@ -7,10 +7,15 @@
   <%= f.number_field :timeLimit %>
   <%= f.text_field :delimiter, placeholder: "#:)#" %>
   <em><strong>NOTA: </strong>Si no ingresa un valor para delimitar este problema no mostrará información adicional en
-    las
-    diferentes modalidades.</em><br>
-  <%= f.file_field :inputFile %>
+    las diferentes modalidades.</em><br>
+  <%= f.file_field :inputFile && !f.object.try(:inputFile).blank? %>
+  <% if f.object.try(:inputFile) %>
+      <p>Ver input <%= link_to("File", f.object.send(:inputFile).url) %></p>
+  <% end %>
   <%= f.file_field :outputFile %>
+  <% if f.object.try(:outputFile)&& !f.object.try(:outputFile).blank? %>
+      <p>Ver output <%= link_to("File", f.object.send(:outputFile).url) %></p>
+  <% end %>
 </div>
 
 <div id="codeforces_problem" style="display: none;">

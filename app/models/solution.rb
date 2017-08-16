@@ -4,6 +4,7 @@ class Solution < ApplicationRecord
 
   validates_presence_of :language, :user, :problem, :contest
   validates_presence_of :solutionFile, unless: :problem_is_codeforces?
+  validate :contest_is_active
 
   belongs_to :user
   belongs_to :problem
@@ -29,7 +30,7 @@ class Solution < ApplicationRecord
         self.user,
         title: 'Nueva respuesta!',
         message: "Para su envío #{id} usted obtuvo #{code_to_string(status)}"
-    )
+    ) if status != 0
   end
 
   def code_to_string(code)
@@ -54,6 +55,12 @@ class Solution < ApplicationRecord
   def problem_is_codeforces?
     if self.problem != nil
       self.problem.is_codeforces?
+    end
+  end
+
+  def contest_is_active
+    if self.contest.status != 1
+      errors.add(:created_at, 'Solo se pueden enviar soluciones en competencias activas')
     end
   end
 end

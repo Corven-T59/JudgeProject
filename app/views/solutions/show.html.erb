@@ -18,7 +18,7 @@
   <strong>Language:</strong>
   <%= @solution.language %>
 </p>
-<% if (@contest.easy? || @contest.medium?) && @solution.status != 4 %>
+<% if (@contest.easy? || @contest.medium?) && (@solution.status != 4 && @solution.status > 1) %>
     <p>
       <strong>Failed input case:</strong>
     </p>

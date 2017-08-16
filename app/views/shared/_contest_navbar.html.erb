@@ -6,11 +6,11 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to(image_tag("logo-red.png", height: "50px"), root_path) %>
+      <%= link_to(image_tag("logoCHJ_blanco.png", height: "50px"), root_path) %>
     </div>
     <div class="navbar-collapse collapse navbar-inverse-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="#">La competencia termina en
+        <li><a href="#">La competencia <%= aux_time(@contest.startDate, @contest.endDate).downcase %>
           <time data-time="<%= @contest.endDate.strftime('%Y-%m-%d %H:%M') %>"></time>
         </a></li>
         <li class="<%= 'active' if action_name == 'problems' %>"><%= link_to t("models.problems"), problems_contest_path(@contest) %></li>
@@ -32,4 +32,9 @@
       </ul>
     </div>
   </div>
+</div>
+
+<!-- Div for modal -->
+<div id="modal_create_solution">
+  <%= render "contests/modal_form", contest: @contest %>
 </div>
