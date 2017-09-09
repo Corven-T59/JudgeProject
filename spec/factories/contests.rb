@@ -3,7 +3,8 @@ FactoryGirl.define do
     title "Test title"
     description "Test description"
     difficulty 1
-    startDate DateTime.now + 1.hour
+    startDate DateTime.now
     endDate DateTime.now + 3.hours
+    to_create {|instance| instance.save(validate: false) }
   end
 end
