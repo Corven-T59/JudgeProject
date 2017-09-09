@@ -14,7 +14,7 @@ default: &default
   encoding: utf8
   pool: 5
   username: tesis
-  password:
+  password: tesis_password
   host: localhost
 
 development:

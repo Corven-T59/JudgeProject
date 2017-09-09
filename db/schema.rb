@@ -12,14 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170724191501) do
 
-  create_table "codeforces_submitions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "codeforces_id", null: false
-    t.integer "solution_id"
-    t.index ["codeforces_id"], name: "index_codeforces_submitions_on_codeforces_id"
-    t.index ["solution_id"], name: "index_codeforces_submitions_on_solution_id"
-  end
-
-  create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contests", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "title", null: false
     t.text "description", null: false
     t.integer "difficulty", null: false
@@ -29,14 +22,14 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "contests_problems", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contests_problems", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "contest_id", null: false
     t.integer "problem_id", null: false
     t.index ["contest_id"], name: "index_contests_problems_on_contest_id"
     t.index ["problem_id"], name: "index_contests_problems_on_problem_id"
   end
 
-  create_table "contests_users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "contests_users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "contest_id", null: false
     t.integer "user_id", null: false
     t.integer "ok", default: 0, null: false
@@ -49,7 +42,7 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.index ["user_id"], name: "index_contests_users_on_user_id"
   end
 
-  create_table "problems", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "problems", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", null: false
     t.string "baseName", null: false
     t.string "color", default: "000000", null: false
@@ -65,7 +58,7 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.string "delimiter", default: ""
   end
 
-  create_table "solutions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "solutions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "user_id", null: false
     t.integer "problem_id", null: false
     t.string "solutionFile"
@@ -73,7 +66,7 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "contest_id"
-    t.integer "status", default: 0, null: false
+    t.integer "status", default: 0
     t.integer "runtime"
     t.text "input"
     t.text "output"
@@ -83,7 +76,7 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.index ["user_id"], name: "index_solutions_on_user_id"
   end
 
-  create_table "taggings", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "taggings", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer "tag_id"
     t.string "taggable_type"
     t.integer "taggable_id"
@@ -102,13 +95,13 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
   end
 
-  create_table "tags", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tags", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name", collation: "utf8_bin"
     t.integer "taggings_count", default: 0
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -132,7 +125,6 @@ ActiveRecord::Schema.define(version: 20170724191501) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "codeforces_submitions", "solutions"
   add_foreign_key "solutions", "contests"
   add_foreign_key "solutions", "problems"
   add_foreign_key "solutions", "users"
