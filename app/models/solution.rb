@@ -59,7 +59,7 @@ class Solution < ApplicationRecord
   end
 
   def contest_is_active
-    if self.contest.status != 1
+    if self.contest.try(:status) != 1
       errors.add(:created_at, 'Solo se pueden enviar soluciones en competencias activas')
     end
   end

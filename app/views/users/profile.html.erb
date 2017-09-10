@@ -6,15 +6,11 @@
         <div class="profile-photo center-block text-center">
           <%= image_tag("blank_profile.png") %>
         </div>
-        <p><strong>Ha participado en: </strong><br><%= @stadistics.total_contests %> competencias</p>
-        <div>
-          <strong>Último envío:</strong>
-          <ul>
-            <li>(C)<%= @last_solution.title %></li>
-            <li>(P)<%= @last_solution.name %></li>
-            <li>(S)<%= code_to_string(@last_solution.status) %></li>
-          </ul>
-        </div>
+        <% if @stadistics %>
+          <p><strong>Ha participado en: </strong><br><%= @stadistics.total_contests %> competencias</p>
+        <%else%>
+          <p><strong>No ha participado en competencias</strong></p>
+        <% end %>
         <p><strong>Problemas resueltos:</strong><br><%= @total_solved %></p>
       </div>
 
@@ -25,15 +21,17 @@
       </p>
       <p><span class="medium">Estadísticas del usuario</span></p>
       <div class="col-md-6">
-        <%= content_tag :div, nil, id: "user_answers_chart", data: {stadistics: @stadistics} %>
+        <%= content_tag :div, nil, class: :chart, id: "user_answers_chart", data: {stadistics: @stadistics} %>
       </div>
       <div class="col-md-6">
-        <p>OK= <%= @stadistics.total_ok %></p>
-        <p>WA= <%= @stadistics.total_wa %></p>
-        <p>RE= <%= @stadistics.total_re %></p>
-        <p>CE= <%= @stadistics.total_ce %></p>
-        <p>TLE= <%= @stadistics.total_tle %></p>
-        <p>Ha participado en: <%= @stadistics.total_contests %> competencias</p>
+        <% if @stadistics %>
+          <p>OK= <%= @stadistics.total_ok %></p>
+          <p>WA= <%= @stadistics.total_wa %></p>
+          <p>RE= <%= @stadistics.total_re %></p>
+          <p>CE= <%= @stadistics.total_ce %></p>
+          <p>TLE= <%= @stadistics.total_tle %></p>
+          <p>Ha participado en: <%= @stadistics.total_contests %> competencias</p>
+      <% end %>
       </div>
     </div>
   </div>
