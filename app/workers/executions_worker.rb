@@ -16,6 +16,7 @@ class ExecutionsWorker
   USER_OUTPUT_FILE = "user_solution.txt"
 
   def perform(solution_id)
+    puts "Begin"
     begin
       @solution = Solution.includes(:problem).find(solution_id)
       @problem = @solution.problem
@@ -32,6 +33,10 @@ class ExecutionsWorker
       else
         run_smart_and_compare
       end
+    rescue Exception => e
+      puts e.message
+      puts e.backtrace.inspect
+    ensure
       @solution.save
       clean_directory
       StadisticsWorker.perform_async(@solution.user_id, @solution.contest_id, @solution.status)
@@ -63,7 +68,7 @@ class ExecutionsWorker
     FileUtils.mkdir @path_temp
     FileUtils.cp [source_code, input_file, output_file, run_sh, compare_sh], @path_temp
     FileUtils.touch File.join(@path_temp, @team_solution_file)
-    system "sudo chmod 777 #{@path_temp}"
+    system "sudo chmod -R 777 #{@path_temp}"
     system("dos2unix #{File.join(@path_temp, "*")}")
 
     backup_files
@@ -91,11 +96,11 @@ class ExecutionsWorker
     lang_name = @solution.language
 
     cmd = "cd #{@path_temp}; sudo #{run_sh} #{basename} #{@source_code} #{input_file} #{lang_name} '#{basename}' #{time_limit}"
-    Rails.logger.debug cmd
+    puts cmd
     Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
-      Rails.logger.debug "Error log:\n#{stderr.read}"
+      puts "Error log:\n#{stderr.read}"
       team_solution = stdout.read
-      Rails.logger.debug "Normal output:\n#{team_solution}"
+      puts "Normal output:\n#{team_solution}"
       exit_code = wait_thr.value.exitstatus
       exit_code = 2 if exit_code.to_i == 47
       if exit_code != 0
@@ -107,6 +112,8 @@ class ExecutionsWorker
       team_solution_file = File.join(@path_temp, @team_solution_file)
       compare = "#{compare_sh} #{team_solution_file} #{output_file} #{lang_name}"
       Open3.popen3(compare) do |c_stdin, c_stdout, c_stderr, c_wait_thr|
+        puts c_stderr.read
+        puts c_stdout.read
         exit_code = c_wait_thr.value.exitstatus
         @solution.status= exit_code
       end

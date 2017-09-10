@@ -29,14 +29,14 @@ RSpec.describe SolutionsController, type: :controller do
         contest: FactoryGirl.create(:contest),
         problem: FactoryGirl.create(:problem),
         language: :java,
-        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
+        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'java', 'source.java'))
     }
   }
 
   let(:valid_for_create){
     {
         language: :java,
-        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'ruby', 'source.rb'))
+        solutionFile: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'basic', 'java', 'source.java'))
     }
   }
 
@@ -49,16 +49,18 @@ RSpec.describe SolutionsController, type: :controller do
   }
 
   describe "GET #index" do
+    login_user
     it "assigns all solutions as @solutions" do
-      solution = Solution.create! valid_attributes
+      solution = FactoryGirl.create(:solution, user: @user)
       get :index, params: {contest_id: solution.contest.to_param}
       expect(assigns(:solutions)).to eq([solution])
     end
   end
 
   describe "GET #show" do
+    login_user
     it "assigns the requested solution as @solution" do
-      solution = Solution.create! valid_attributes
+      solution = FactoryGirl.create(:solution, user: @user)
       get :show, params: {id: solution.to_param, contest_id: solution.contest.to_param}
       expect(assigns(:solution)).to eq(solution)
     end
@@ -95,7 +97,7 @@ RSpec.describe SolutionsController, type: :controller do
 
       it "redirects to the created solution" do
         post :create, params: {solution: valid_for_create, contest_id: @contest.to_param}
-        expect(response).to redirect_to([@contest,Solution.last])
+        expect(response).to redirect_to(scoreboard_contest_url(@contest))
       end
 
       it "add a new item to ExecutionsWorker" do
@@ -114,7 +116,7 @@ RSpec.describe SolutionsController, type: :controller do
 
       it "re-renders the 'new' template" do
         post :create, params: {solution: invalid_attributes, contest_id: @contest.to_param}
-        expect(response).to render_template("new")
+        expect(response).to redirect_to(scoreboard_contest_url(@contest))
       end
 
       it "post a solution after the contest has end" do
@@ -123,7 +125,7 @@ RSpec.describe SolutionsController, type: :controller do
         contest.save(validate: false)
         expect {
           post :create, params: {solution: valid_for_create, contest_id: contest.to_param}
-        }.to change(Solution, :count).by(1)
+        }.to change(Solution, :count).by(0)
       end
     end
 
