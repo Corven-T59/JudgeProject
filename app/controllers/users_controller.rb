@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	before_action :set_users, only: [:index]
   before_action :set_user, except: [:index, :profile]
-  before_action :is_admin, except: [:index, :show]
+  before_action :is_admin, except: [:index, :show, :profile]
 
   def index
 
@@ -14,14 +14,15 @@ class UsersController < ApplicationController
     if current_user
       @user = current_user
       @stadistics = ContestsUser.stadistics.where(user_id: @user.id).take
-      @last_solution = Solution.last_solution_info(@user.id)
+      #@last_solution = Solution.last_solution_info(@user.id)
       @total_solved = Solution.total_solved(@user.id)
+
       @data_for_results = {
-          ok: @stadistics.total_ok,
-          wa: @stadistics.total_wa,
-          re: @stadistics.total_re,
-          ce: @stadistics.total_ce,
-          tle: @stadistics.total_tle,
+          ok: @stadistics.try(:total_ok) || 0,
+          wa: @stadistics.try(:total_wa) || 0,
+          re: @stadistics.try(:total_re) || 0,
+          ce: @stadistics.try(:total_ce) || 0,
+          tle: @stadistics.try(:total_tle) || 0,
       }
     else
       redirect_to root_path
