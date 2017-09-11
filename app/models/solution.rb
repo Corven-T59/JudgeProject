@@ -26,11 +26,11 @@ class Solution < ApplicationRecord
   end
 
   def send_response
-    WebNotificationsChannel.broadcast_to(
-        self.user,
-        title: 'Nueva respuesta!',
-        message: "Para su envío #{id} usted obtuvo #{code_to_string(status)}"
-    ) if status != 0
+#    WebNotificationsChannel.broadcast_to(
+#        self.user,
+#        title: 'Nueva respuesta!',
+#        message: "Para su envío #{id} usted obtuvo #{code_to_string(status)}"
+#    ) if status != 0
   end
 
   def code_to_string(code)
