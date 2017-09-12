@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+<title>Administradores</title>
+</head>
+<body>
+
+<h1>Administradores</h1>
+<p>Algunas de las funcionalidades aquí presentes solo son visibles para usuarios administradores.</p>
+<h2>Competencias</h2>
+<h3 id="Admin_CreateContest">Crear competencia</h3>
+<p>Para crear una competencia, seleccione la opción "Competencias" en la barra de navegación:</p>
+<img src="../AuthenticatedUsers/AuthenticatedUsers_ContestSelection_1.png">
+<p>Seleccione la opción "+" que se encuentra en la parte superior derecha</p>
+<img src="Admin_CreateContest_1.png">
+<p>Se visualizará un formulario para la creación de la competencia con los siguientes campos:</p>
+<ol>
+	<li>Título
+		<p>El título que se le dará a la competencia, utilizar palabras clave es recomendado para llamar la atención a los competidores adecuados.</p>
+	</li>
+	<li>Descripción
+		<p>La descripción de la competencia dará a los competidores una idea más clara del propósito de la competencia.</p>
+	</li>
+	<li>Dificultad
+		<p>La dificultad modifica el nivel de realimentación que reciben los competidores al fallar una competencia</p>
+		<ol>
+			<li>Fácil:
+				<p>Indica en cual caso de prueba falló y cuál era la salida esperada de la solución.</p>
+			</li>
+			<li>Intermedio:
+				<p>Indica en cuál caso de prueba falló la solución.</p>
+			</li>
+			<li>Estricto:
+				<p>Indica únicamente el motivo por el cual no ha aprobado la solución.</p>
+			</li>
+		</ol>
+	</li>
+	<li>Duración
+		<p>Fecha de inicio y de finalización de la competencia, el intervalo mínimo de tiempo es de 1 hora.</p>
+	</li>
+	<li>Problemas
+		<p>La lista de los problemas disponibles que se pueden incluír en la competencia.</p>
+	</li>
+</ol>
+<img src="Admin_CreateContest_2.png">
+<h3 id="Admin_UpdateContest">Actualizar competencia</h3>
+<p>Para actualizar una competencia, seleccione la opción "Competencias" en la barra de navegación:</p>
+<img src="../AuthenticatedUsers/AuthenticatedUsers_ContestSelection_1.png">
+<p>Seleccione la opción "Editar" de la competencia deseada. Esta opción solo se encuentra disponible para competencias que no han iniciado.</p>
+<img src="Admin_UpdateContest_1.png">
+<p>Se mostrará el formulario de edición de competencia</p>
+<img src="Admin_UpdateContest_2.png">
+<h3 id="Admin_CloseContest">Cerrar competencia</h3>
+<p>Para cerrar una competencia, seleccione la opción "Competencias" en la barra de navegación:</p>
+<img src="../AuthenticatedUsers/AuthenticatedUsers_ContestSelection_1.png">
+<p>Seleccione la opción "Cerrar" de la competencia deseada. Esta opción solo se encuentra disponible para competencias que no han iniciado.</p>
+<img src="Admin_CloseContest_1.png">
+<h2>Problemas</h2>
+<h3 id="Admin_CreateProblem">Crear problema</h3>
+<p>Para crear un problema, seleccione la opción "Problemas" en la barra de navegación:</p>
+<img src="Admin_CreateProblem_1.png">
+<p>Seleccione la opción "+" que se encuentra en la parte superior derecha</p>
+<img src="Admin_CreateProblem_2.png">
+<p>Se visualizará un formulario para la creación del problema con los siguientes campos:</p>
+<ol>
+	<li>Tipo de problema
+		<p>Permitirá seleccionar entre crear un problema en la plataforma o vincular problema a codeforces.</p>
+	</li>
+	<li>Nombre
+		<p>El nombre del problema.</p>
+	</li>
+	<li>Nombre base
+		<p>El nombre que identificará al problema en la evaluación, este nombre será utilizado al evaluar los nombres de los archivos de solución enviados.</p>
+	</li>
+	<li>Color
+		<p>Color que identificará los problemas en la tabla de puntuaciones.</p>
+	</li>
+	<li>Tiempo límite
+		<p>Tiempo límite de ejecución del que dispondrán las soluciones enviadas.</p>
+	</li>
+	<li>Archivo de descripción
+		<p>Archivo que permitirá a los competidores entender los requerimientos del problema, usualmente contiene el enunciado y los ejemplos de entradas y salidas esperadas</p>
+	</li>
+	<li>Delimitador
+		<p>Caracteres que se utilizarán como separador en los casos de prueba en los archivos de entradas dadas y salidas esperadas. Es requerido para las dificultades diferentes a "Estricto".</p>
+	</li>
+	<li>Archivo de entradas
+		<p>Archivo que contiene las entradas que se entregarán a las soluciones de los competidores.</p>
+	</li>
+	<li>Archivo de salidas
+		<p>Archivo que contiene las salidas esperadas al ingresar las entradas del problema a las soluciones de los competidores.</p>
+	</li>
+	<li>Lista de Tags
+		<p>Tags que facilitarán la búsqueda de los problemas. Se recomienda utilizar tags apropiados al tipo de problema creado.</p>
+	</li>
+</ol>
+<img src="Admin_CreateProblem_3.png">
+<h3 id="Admin_UpdateProblem">Actualizar problema</h3>
+<p>Para actualizar un problema, seleccione la opción "Problemas" en la barra de navegación:</p>
+<img src="Admin_CreateProblem_1.png">
+<p>Seleccione la opción "Editar" del problema deseado.</p>
+<img src="Admin_UpdateProblem_1.png">
+<p>Se mostrará el formulario de edición de problemas</p>
+<img src="Admin_UpdateProblem_2.png">
+<h3 id="Admin_DeleteProblem">Eliminar problema</h3>
+<p>Para eliminar un problema, seleccione la opción "Problemas" en la barra de navegación:</p>
+<img src="Admin_CreateProblem_1.png">
+<p>Seleccione la opción "Eliminar" del problema deseado.</p>
+<img src="Admin_DeleteProblem_1.png">
+
+<h2>Usuarios</h2>
+<h3 id="Admin_ManageUsers">Administrar permisos de usuario</h3>
+<p>Para administrar los permisos de los usuarios, seleccione la opción "Usuarios" en la barra de navegación:</p>
+<img src="Admin_ManageUsers_1.png">
+<p>Los usuarios en el sistema se encontrarán listados, mostrando sus permisos actuales:</p>
+<img src="Admin_ManageUsers_2.png">
+<p>La opción "Editar" permite cambiar los permisos del usuario seleccionado:</p>
+<img src="Admin_ManageUsers_3.png">
+<img src="Admin_ManageUsers_4.png">
+<br>
+<a href="/Manual">Atrás</a>
+</body>
+</html>
