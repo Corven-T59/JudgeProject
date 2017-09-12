@@ -26,11 +26,12 @@ class Solution < ApplicationRecord
   end
 
   def send_response
-    WebNotificationsChannel.broadcast_to(
+=begin    WebNotificationsChannel.broadcast_to(
         self.user,
         title: 'Nueva respuesta!',
         message: "Para su envío #{id} usted obtuvo #{code_to_string(status)}"
     ) if status != 0
+=end
   end
 
   def code_to_string(code)
@@ -59,7 +60,7 @@ class Solution < ApplicationRecord
   end
 
   def contest_is_active
-    if self.contest.status != 1
+    if self.contest.try(:status) != 1
       errors.add(:created_at, 'Solo se pueden enviar soluciones en competencias activas')
     end
   end

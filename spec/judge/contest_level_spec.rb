@@ -6,8 +6,7 @@ RSpec.describe Solution, type: :model do
     describe "Easy level contest" do
       it "Interval Product on #{lang} OK without segmentation" do
         Sidekiq::Testing.inline!
-        contest = FactoryGirl.create(:contest)
-        contest.easy!
+        contest = FactoryGirl.create(:contest, difficulty: 0)
         problem = FactoryGirl.create(:problem_interval, delimiter: "#:)#")
         @ok = FactoryGirl.create("#{lang}_interval".to_sym, problem: problem, contest: contest)
         expect(Solution.last.status.to_i).to eq(4)
@@ -15,8 +14,7 @@ RSpec.describe Solution, type: :model do
 
       it "Interval Product on #{lang} OK with segmentation" do
         Sidekiq::Testing.inline!
-        contest = FactoryGirl.create(:contest)
-        contest.easy!
+        contest = FactoryGirl.create(:contest, difficulty: 0)
         problem = FactoryGirl.create(:problem_interval_custom, delimiter: "#:)#")
         @ok = FactoryGirl.create("#{lang}_interval".to_sym, problem: problem, contest: contest)
         expect(Solution.last.status.to_i).to eq(4)
@@ -24,8 +22,7 @@ RSpec.describe Solution, type: :model do
 
       it "Interval Product on #{lang} WA with segmentation" do
         Sidekiq::Testing.inline!
-        contest = FactoryGirl.create(:contest)
-        contest.easy!
+        contest = FactoryGirl.create(:contest, difficulty: 0)
         problem = FactoryGirl.create(:problem_interval_custom, delimiter: "#:)#")
         @ok = FactoryGirl.create("#{lang}_interval_wa".to_sym, problem: problem, contest: contest)
         expect(Solution.last.status.to_i>5).to be_truthy
