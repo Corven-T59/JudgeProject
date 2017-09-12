@@ -1,4 +1,4 @@
-customConnect = function () {
+/*customConnect = function () {
     App.cable.connect();
 };
 
@@ -24,3 +24,4 @@ App.web_notifications = App.cable.subscriptions.create("WebNotificationsChannel"
     }
 
 });
+*/
