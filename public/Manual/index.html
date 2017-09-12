@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+<style>
+  OL { counter-reset: item; padding-left: 10px; }
+  LI { display: block }
+  LI:before { content: counters(item, ".") " "; counter-increment: item }
+</style>
+<title>CHJudge Manual</title>
+</head>
+<body>
+<img src="logoCHJ_color.png" alt="Code Hammer Judge">
+<h1>Manual del usuario</h1>
+<ol>
+	<li><a href="Introduction/index.html">Introducción</a></li>
+	<li>Página principal
+	<ol>
+		<li><a href="MainPage/index.html#MainPage_Description">Descripción</a></li>
+		<li><a href="MainPage/index.html#MainPage_General">Ubicación General</a></li>
+	</ol>
+	</li>
+	<li>Cuentas de usuario
+	<ol>
+		<li><a href="Useraccounts/index.html#UserAccounts_Register">Crear una cuenta</a></li>
+		<li><a href="Useraccounts/index.html#UserAccounts_Login">Iniciar sesión</a></li>
+		<li><a href="Useraccounts/index.html#UserAccounts_Recover">Recuperar contraseña</a></li>
+	</ol>
+	</li>
+	<li>Usuarios autenticados
+	<ol>
+		<li>Competencias
+			<ol>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_ContestSelection">Selección de competencias</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Subscribe">Suscripción a una competencia</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Unsubscribe">Cancelar suscripción a una competencia</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Scoreboard">Tabla de puntuación</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Problems">Visitar problemas</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Submit">Envío de soluciones</a></li>
+				
+			</ol>
+		</li>
+		<li>Problemas
+			<ol>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_ProblemSearch">Búsqueda de problemas</a></li>
+			</ol>
+		</li>
+		<li>Perfil de usuario
+			<ol>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Profile">Visitar perfil</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_Password">Cambiar contraseña</a></li>
+				<li><a href="AuthenticatedUsers/index.html#AuthenticatedUsers_CancelAccount">Cancelar cuenta</a></li>
+			</ol>
+		</li>
+	</ol>
+	</li>	
+	<li>Administradores
+		<ol>
+			<li>Competencias
+				<ol>
+					<li><a href="Admin/index.html#Admin_CreateContest">Crear competencia</a></li>
+					<li><a href="Admin/index.html#Admin_UpdateContest">Actualizar competencia</a></li>
+					<li><a href="Admin/index.html#Admin_CloseContest">Cerrar competencia</a></li>
+				</ol>
+			</li>
+			<li>Problemas
+				<ol>
+					<li><a href="Admin/index.html#Admin_CreateProblem">Crear problema</a></li>
+					<li><a href="Admin/index.html#Admin_UpdateProblem">Actualizar problema</a></li>
+					<li><a href="Admin/index.html#Admin_DeleteProblem">Eliminar problema</a></li>
+				</ol>
+			</li>
+			<li>Usuarios
+				<ol>
+					<li><a href="Admin/index.html#Admin_ManageUsers">Administrar permisos de usuario</a></li>
+				</ol>
+			</li>
+		</ol>
+	</li>
+</ol>
+
+</body>
+</html>
