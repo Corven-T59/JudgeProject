@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :solutions
   has_and_belongs_to_many :contests
   validates :handle, format: {without: /\s/}
+  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
 
   def load_user_submition_count
     raise "Method not implemented yet"
